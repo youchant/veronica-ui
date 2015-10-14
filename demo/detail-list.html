@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+    </title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link href="../bower_components/tinyui/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/tinyui/dist/css/tiny.css" rel="stylesheet" />
+    <link href="../bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        .fn-expand .fa:before {
+            content: "\f147";
+        }
+
+        .fn-collapse .fa:before {
+            content: "\f196";
+        }
+
+        .fn-expand .fa,
+        .fn-collapse .fa {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="admin admin-min no-padding">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar-content">
+                <div class="scrollbar-macosx">
+                    <a class="logo" href="#">
+                        <span class="logo-mini">
+                            <b>B</b>
+                        </span>
+                    </a>
+                    <div class="example sidebar sidebar-min" id="sidebar-mini">
+                        <ul class="nav nav-list">
+                            <li class="active open">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-desktop"></i>
+                                    <span class="menu-text">菜单项一</span>
+                                </a>
+
+                                <ul class="submenu">
+                                    <li class="active">
+                                        <a href="#">
+                                            子菜单项一
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="dropdown-toggle">
+                                            <span class="menu-text">
+                                                子菜单项二
+                                                <span class="badge badge-transparent">
+                                                    <i class="tiny-icon fa fa-exclamation-triangle red bigger-130"></i>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <!--<b class="arrow"></b>-->
+                                        <ul class="submenu">
+                                            <li class="">
+                                                <a href="#">
+                                                    <i class="menu-icon fa fa-leaf green"></i>
+                                                    三级菜单
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" class="dropdown-toggle">
+                                                    <i class="menu-icon fa fa-pencil orange"></i>
+                                                    <span class="menu-text">
+                                                        四级菜单
+                                                        <span class="badge badge-primary">5</span>
+                                                    </span>
+                                                </a>
+
+                                                <ul class="submenu">
+                                                    <li class="">
+                                                        <a href="#">
+                                                            <i class="menu-icon fa fa-plus purple"></i>
+                                                            四级菜单一
+                                                        </a>
+
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="menu-icon fa fa-phone"></i>
+                                    <span class="menu-text">菜单项二</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                            <i class="tiny-icon fa fa-angle-double-right"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main main-fixed">
+                <div class="panel panel-transparent flexbox" data-ver-role="detail-list">
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left">
+                            预算花费
+                        </h3>
+                        <div class="panel-toolbar pull-right">
+                            <div class="btn-toolbar">
+                                <button class="btn btn-primary">
+                                    新增预算
+                                </button>
+                                <button class="btn btn-default">
+                                    新增花费
+                                </button>
+                                <button class="btn btn-default">
+                                    查询
+                                </button>
+                                <button class="btn btn-default">
+                                    批量删除
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="panel-body no-padding grow">
+                        <div style="position:absolute;top:0;bottom:0;width:100%;">
+                            <div data-role="datatable" class="datatable flexbox"
+                                 data-bind="source: source"
+                                 data-header="tpl_data_detail_list_header"
+                                 data-template="tpl_data_detail_list_item"
+                                 data-widths="[20, 100, 100, 100, 80, 80]"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模板-->
+
+    <script type="text/template" id="tpl_data_detail_list_header">
+        <tr>
+            <th>
+
+            </th>
+            <th>预算编号</th>
+            <th>费用大类</th>
+            <th>费用子类</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>金额</th>
+        </tr>
+    </script>
+    <script type="text/template" id="tpl_data_detail_list_item">
+        <tr class="k-master-row fn-collapse">
+            <td class="k-hierarchy-cell">
+                <i class="fa"></i>
+            </td>
+            <td>#= ysbh #</td>
+            <td>sdf</td>
+            <td>sdf</td>
+            <td>#= dj #</td>
+            <td>#= sl #</td>
+            <td>#= je #</td>
+        </tr>
+    </script>
+
+    <!--脚本-->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/underscore/underscore-min.js"></script>
+    <script src="../bower_components/veronica/dist/veronica.js"></script>
+    <script src="../dist/veronica-ui.js"></script>
+
+    <script>
+        // 创建 app
+        var app = veronica.createApp({
+            extensions: [window.veronicaui]
+        });
+
+
+
+        app.widget.register('detail-list', {
+            staticModel: function (app) {
+                var source = app.data.source({
+                    data: [
+                        { id: 1, ysbh: "Xm-ys-001", dj: 20, sl: 100, je: 2000 },
+                        { id: 1, ysbh: "Xm-ys-001", dj: 20, sl: 100, je: 2000 },
+                        { id: 1, ysbh: "Xm-ys-001", dj: 20, sl: 100, je: 2000 },
+
+                    ]
+                })
+                return {
+                    source: source
+                };
+
+            },
+            initAttr: function () {
+                this.model({}, false);
+            },
+            modelBound: function () {
+                var me = this;
+                var dt = this.instance('.datatable');
+                dt.bind('detailInit', function (e) {
+                    var cell = e.detailCell;
+                    var view = dt.dataSource.view();
+
+                    $('<ul></ul>').kendoListView({
+                        dataSource: [{ text: "1" }, { text: "2" }],
+                        template: '<li>#= text #</li>'
+
+                    }).appendTo(cell);
+                });
+            }
+        });
+
+        app.launch().done(function () {
+            // 解析界面
+            app.parser.parse();
+        });
+
+
+    </script>
+
+</body>
+</html>
