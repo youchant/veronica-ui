@@ -18,7 +18,9 @@ module.exports = function (grunt) {
             dir: './dist',
             paths: {
                 "jquery": "empty:",
-                'kendo-ui': '../bower_components/kendo-ui-core/src/js/kendo.ui.core',
+                //'kendo-ui': '../bower_components/kendo-ui-core/src/js/kendo.ui.core',
+                'kendo-ui': '../assets/kendo-ui-core/dist/js/kendo.custom',
+                'kendo-ui-messages': '../assets/kendo-ui-core/dist/js/kendo.messages.zh-CN.min',
                 //'kendo-ui-pro': 'empty:',
                 //'kendo-ui-pro-culture': 'empty:',
                 //'kendo-ui-pro-messages': 'empty:',
