@@ -7,6 +7,7 @@
     <link href="../bower_components/tinyui/dist/css/tiny.css" rel="stylesheet" />
     <link href="../bower_components/jstree-bootstrap-theme/dist/themes/proton/style.min.css" rel="stylesheet" />
     <link href="../bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="../bower_components/bs-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -317,7 +318,7 @@
             _templates: function () {
                 ListView.fn._templates.call(this);
 
-              //  this.groupTemplate = kendo.template(options.groupTemplate || "");
+                //  this.groupTemplate = kendo.template(options.groupTemplate || "");
             }
         });
 
@@ -373,10 +374,10 @@
                         }
                     });
 
-                    // datetimepicker
-                    //$('#datetimepicker').datetimepicker({
-                    //    autoclose: true
-                    //});
+                    //  datetimepicker
+                    $('#date').datetimepicker({
+                        locale: 'zh-CN'
+                    });
 
                     // placeholder
                     this.$('[placeholder]').placeholder();
