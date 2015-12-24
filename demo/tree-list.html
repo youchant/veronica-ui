@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>simpe page</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link href="../bower_components/tinyui/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/tinyui/dist/css/tiny.css" rel="stylesheet" />
+    <link href="../bower_components/jstree-bootstrap-theme/dist/themes/proton/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <hr />
+    <div id="jstree-proton-1" class="proton-demo">
+        <ul>
+            <li data-jstree='{ "opened" : true }'>
+                Node1
+                <ul>
+                    <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
+                        <a href="#">Node1</a>
+                    </li>
+                    <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
+                        Node1
+                    </li>
+                    <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
+                        Node1
+                    </li>
+                </ul>
+            </li>
+            <li data-jstree='{ "opened" : true }'>
+                Node1
+                <ul>
+                    <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
+                        <a href="#">Node1</a>
+                    </li>
+                    <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
+                        Node1
+                    </li>
+                    <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
+                        Node1
+                    </li>
+                </ul>
+            </li>
+            <li data-jstree='{ "opened" : true }'>
+                Node1
+                <ul>
+                    <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
+                        <a href="#">Node1</a>
+                    </li>
+                    <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
+                        Node1
+                    </li>
+                    <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
+                        Node1
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/underscore/underscore-min.js"></script>
+    <script src="../bower_components/veronica/dist/veronica.js"></script>
+    <script src="../dist/veronica-ui.js"></script>
+    <script src="../bower_components/jstree/dist/jstree.min.js"></script>
+
+    <script>
+        // 创建 app
+        var app = veronica.createApp({
+            extensions: [window.veronicaui]
+        });
+
+        app.widget.register('hello-veronica-ui', function (options) {
+            var app = options.sandbox.app;
+            var View = app.view.define({
+                defaults: {
+                    autoAction: true
+                },
+                initAttr: function () {
+                    this.model({}, false);
+                },
+                enhance: function () {
+
+                    // jstree
+                    this.$('#jstree-proton-1').jstree({
+                        'plugins': ["wholerow"],
+                        'core': {
+                            'themes': {
+                                'name': 'proton',
+                                'responsive': false
+                            }
+                        }
+                    });
+
+                }
+            });
+            var view = new View(options);
+            view.show();
+            return view;
+        });
+        app.launch().done(function () {
+            // 解析界面
+            app.parser.parse();
+        });
+
+
+    </script>
+</body>
+
+</html>

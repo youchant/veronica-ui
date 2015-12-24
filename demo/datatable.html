@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>simpe page</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link href="../bower_components/tinyui/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/tinyui/dist/css/tiny.css" rel="stylesheet" />
+    <link href="../bower_components/jstree-bootstrap-theme/dist/themes/proton/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <hr />
+    <div data-ver-role="hello-veronica-ui">
+
+        <div data-role="datatable" class="datatable" data-bind="source: data"
+             data-header="tpl_project_main_list_header"
+             data-template="tpl_project_main_list_item"></div>
+        <script type="text/template" id="tpl_project_main_list_header">
+            <tr>
+                <th></th>
+                <th>名称</th>
+            </tr>
+        </script>
+        <script type="text/template" id="tpl_project_main_list_item">
+            <tr>
+                <td colspan="2">#= value #</td>
+            </tr>
+            # for(var i = 0, len = items.length; i < len; i ++){ #
+            <tr class="k-master-row">
+                <td class="k-hierarchy-cell">
+                    <i class="glyphicon glyphicon-circle-arrow-right"></i>
+                </td>
+                <td>#= items[i].name #</td>
+            </tr>
+            # } #
+        </script>
+    </div>
+
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/underscore/underscore-min.js"></script>
+    <script src="../bower_components/veronica/dist/veronica.js"></script>
+    <script src="../dist/veronica-ui.js"></script>
+    <script src="../bower_components/jstree/dist/jstree.min.js"></script>
+
+    <script>
+        // 创建 app
+        var app = veronica.createApp({
+            extensions: [window.veronicaui]
+        });
+
+        var ListView = kendo.ui.ListView;
+        var CHANGE = "change",
+        CANCEL = "cancel",
+        DATABOUND = "dataBound",
+        DATABINDING = "dataBinding",
+        Widget = kendo.ui.Widget,
+        keys = kendo.keys,
+        FOCUSSELECTOR = ">*",
+        PROGRESS = "progress",
+        ERROR = "error",
+        FOCUSED = "k-state-focused",
+        SELECTED = "k-state-selected",
+        KEDITITEM = "k-edit-item",
+        EDIT = "edit",
+        REMOVE = "remove",
+        SAVE = "save",
+        CLICK = "click",
+        NS = ".kendoListView",
+        proxy = $.proxy,
+        activeElement = kendo._activeElement;
+        var DataT = ListView.extend({
+            options: {
+                name: 'DataT',
+                header: null,
+                widths: []
+            },
+            init: function (element, options) {
+                var that = this;
+                ListView.fn.init.call(that, element, options);
+
+                this._bindEvents();
+            },
+            _bindEvents: function () {
+                var el = this.element;
+                var me = this;
+                el.on('click', '.k-hierarchy-cell', function (e) {
+                    var $target = $(e.currentTarget);
+                    var $row = $target.closest('tr');
+                    me.switchRow($row);
+                });
+            },
+            switchRow: function ($row) {
+                var detailRow = $row.next('.k-detail-row');
+                var colSpan = $row.children('td').length;
+                var collapseCls = 'fn-collapse';
+                var expandCls = 'fn-expand';
+
+                if (detailRow.length === 0) {
+                    detailRow = $('<tr class="k-detail-row"><td colspan="' + colSpan + '"></td></tr>');
+                    detailRow.insertAfter($row);
+                    this.trigger('detailInit', {
+                        detailCell: detailRow.children('td'),
+                        data: $row.data()
+                    })
+                }
+                if (!$row.hasClass(expandCls)) {
+                    $row.next('.k-detail-row').show();
+                    $row.removeClass(collapseCls).addClass(expandCls);
+                } else {
+                    $row.next('.k-detail-row').hide();
+                    $row.addClass(collapseCls).removeClass(expandCls);
+                }
+            },
+            _element: function () {
+                ListView.fn._element.call(this);
+
+                var element = this.element;
+
+                var tableHtml = '<div class="datatable-header"><table class="table table-bordered no-margin"><colgroup></colgroup><thead></thead></table></div>' +
+                    '<div class="datatable-content grow"><table class="table table-bordered no-margin"><colgroup></colgroup><tbody></tbody></table></div>';
+                element.html(tableHtml);
+
+                var headerHtml = $('#' + this.options.header).html();
+                var len = $(headerHtml).children('th').length;
+                element.find('.datatable-header thead').html(headerHtml);
+                element.find('colgroup').html(this._colgroup(len));
+
+                this.element = this.element.find('.datatable-content tbody');
+
+
+            },
+            // 计算 colgroup 的值
+            _colgroup: function (len) {
+                var widths = this.options.widths;
+                var cols = '';
+                for (var i = 0; i < len; i++) {
+                    var $col = $('<col />');
+                    var width = widths[i];
+                    if (width == null) {
+                        width = (100 / len) + "%";
+                    }
+                    $col.width(width);
+                    cols += $col.prop('outerHTML');
+                }
+                return cols;
+            },
+            _templates: function () {
+                ListView.fn._templates.call(this);
+
+                //  this.groupTemplate = kendo.template(options.groupTemplate || "");
+            }
+        });
+
+        kendo.ui.plugin(DataT);
+
+        var i = 0;
+        app.widget.register('hello-veronica-ui', function (options) {
+            var app = options.sandbox.app;
+            var View = app.view.define({
+                defaults: {
+                    autoAction: true
+                },
+                staticModel: function () {
+                    return {
+                        data: app.data.source({
+                            data: [
+                                { name: "Tea", category: "Beverages" },
+                                { name: "Coffee", category: "Beverages" },
+                                { name: "Ham", category: "Food" }
+                            ],
+                            // group by the "category" field
+                            group: { field: "category" }
+                        })
+                    };
+                },
+                initAttr: function () {
+                    this.model({}, false);
+                },
+                modelBound: function () {
+                    var me = this;
+                    var dt = this.instance('.datatable');
+                    dt.bind('detailInit', function (e) {
+                        var cell = e.detailCell;
+                        var view = dt.dataSource.view();
+
+                        $('<ul></ul>').kendoListView({
+                            dataSource: [{ text: "1" }, { text: "2" }],
+                            template: '<li>#= text #</li>'
+
+                        }).appendTo(cell);
+                    });
+                },
+                enhance: function () {
+
+                    // jstree
+                    this.$('#jstree-proton-1').jstree({
+                        'plugins': ["wholerow"],
+                        'core': {
+                            'themes': {
+                                'name': 'proton',
+                                'responsive': false
+                            }
+                        }
+                    });
+
+                    //  datetimepicker
+                    $('#date').datetimepicker({
+                        locale: 'zh-CN',
+                        format: 'YYYY-MM-DD',
+                        dayViewHeaderFormat: 'YYYY MMMM'
+                    });
+
+                    // placeholder
+                    this.$('[placeholder]').placeholder();
+
+                    // inputmask
+                    app.formUtil.enableInputMask(this.$el);
+                },
+                testHandler: function () {
+                    app.notify.warn('HAHA!!' + (i++));
+                    app.notify.confirm("hhehhhh");
+                    this.htmlWindow('hahahha');
+                },
+                fetchHandler: function () {
+                    alert(JSON.stringify(app.formUtil.toJSON(this.$el)));
+                }
+            });
+            var view = new View(options);
+            view.show();
+            return view;
+        });
+        app.launch().done(function () {
+            // 解析界面
+            app.parser.parse();
+        });
+
+
+    </script>
+</body>
+
+</html>

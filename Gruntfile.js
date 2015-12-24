@@ -29,8 +29,9 @@ module.exports = function (grunt) {
                 'kendo-ui-pro-messages': '../assets/kendo-ui-pro/js/messages/kendo.messages.zh-CN.min',
                 'text': '../bower_components/requirejs-text/text',
                 'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap',
+                'bootstrap-datetimepicker': '../bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker',
+                'bootstrap-datetimepicker-cn': '../bower_components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN',
                 'bs-datetimepicker': '../bower_components/bs-datetimepicker/src/js/bootstrap-datetimepicker',
-                'bs-datetimepicker-cn': '../bower_components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN',
                 'bootstrap-paginator': '../bower_components/bootstrap-paginator/src/bootstrap-paginator',
                 'jquery-form': '../bower_components/jquery-form/jquery.form',
                 'jquery-validation': '../bower_components/jquery-validation/dist/jquery.validate',
@@ -43,7 +44,8 @@ module.exports = function (grunt) {
                 'jquery-validation-bootstrap-tooltip': '../bower_components/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
                 'jstree': '../bower_components/jstree/dist/jstree',
                 'moment': '../bower_components/moment/moment',
-                'moment-locale': '../bower_components/moment/locale/zh-cn'
+                'moment-locale': '../bower_components/moment/locale/zh-cn',
+                'es5-shim': '../bower_components/es5-shim/es5-shim'
             },
             shim: {
                 'jquery-validation-bootstrap-tooltip': {
