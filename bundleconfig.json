@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "dist/veronica-ui-pro.min.js",
+    "inputFiles": [
+      "dist/veronica-ui-pro.js"
+    ]
+  },
+  {
+    "outputFileName": "dist/veronica-ui.min.js",
+    "inputFiles": [
+      "dist/veronica-ui.js"
+    ]
+  }
+]
