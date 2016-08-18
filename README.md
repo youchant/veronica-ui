@@ -3,6 +3,11 @@ veronica-ui
 
 veronica 的一个扩展，集合一些优秀的第三方库，完成前端界面开发的主要任务
 
+## 组件
+
+- 普通文本输入框: 浏览器内置 input
+- 
+
 ## 第三方库
 
 * [jquery.inputmask](http://robinherbots.github.io/jquery.inputmask/)
