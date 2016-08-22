@@ -1,14 +1,38 @@
-veronica-ui
-========
+# veronica-ui
 
 veronica 的一个扩展，集合一些优秀的第三方库，完成前端界面开发的主要任务
 
 ## 组件
 
-- 普通文本输入框: 浏览器内置 input
-- 
+- framework
+  - form validation engine
+  - view engine
+  - template engine
+  - data store
+- ui kit
+  - data table
+  - tree
+  - tree select
+  - select
+  - textbox
+  - numeric
+  - date(time)picker
+  - progress
+  - combobox
+  - multipe select
+  - dialog(window)
+  - comfirm, prompt, alert
+  - tooltip
+  - notification
+    - deps: noty(js), jquery
+  - list
+  - cascade list
+  - tabs
+  - menu
 
 ## 第三方库
+
+
 
 * [jquery.inputmask](http://robinherbots.github.io/jquery.inputmask/)
 * bootstrap（js）
