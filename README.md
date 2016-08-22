@@ -2,15 +2,20 @@
 
 veronica 的一个扩展，集合一些优秀的第三方库，完成前端界面开发的主要任务
 
-## 组件
+## Components
 
 - framework
   - form validation engine
   - view engine
   - template engine
   - data store
+  - view ability
+    - data exchange(ajax)
 - ui kit
   - data table
+    - sortable
+    - group
+    - merge cells
   - tree
   - tree select
   - select

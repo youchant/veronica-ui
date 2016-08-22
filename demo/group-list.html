@@ -22,127 +22,22 @@
         }
     </style>
 </head>
-<body class="admin admin-min no-padding">
+<body>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar-content">
-                <div class="scrollbar-macosx">
-                    <a class="logo" href="#">
-                        <span class="logo-mini">
-                            <b>B</b>
-                        </span>
-                    </a>
-                    <div class="example sidebar sidebar-min" id="sidebar-mini">
-                        <ul class="nav nav-list">
-                            <li class="active open">
-                                <a href="#" class="dropdown-toggle">
-                                    <i class="menu-icon fa fa-desktop"></i>
-                                    <span class="menu-text">菜单项一</span>
-                                </a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th colspan="3">区域</th>
 
-                                <ul class="submenu">
-                                    <li class="active">
-                                        <a href="#">
-                                            子菜单项一
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="dropdown-toggle">
-                                            <span class="menu-text">
-                                                子菜单项二
-                                                <span class="badge badge-transparent">
-                                                    <i class="tiny-icon fa fa-exclamation-triangle red bigger-130"></i>
-                                                </span>
-                                            </span>
-                                        </a>
-                                        <!--<b class="arrow"></b>-->
-                                        <ul class="submenu">
-                                            <li class="">
-                                                <a href="#">
-                                                    <i class="menu-icon fa fa-leaf green"></i>
-                                                    三级菜单
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="dropdown-toggle">
-                                                    <i class="menu-icon fa fa-pencil orange"></i>
-                                                    <span class="menu-text">
-                                                        四级菜单
-                                                        <span class="badge badge-primary">5</span>
-                                                    </span>
-                                                </a>
-
-                                                <ul class="submenu">
-                                                    <li class="">
-                                                        <a href="#">
-                                                            <i class="menu-icon fa fa-plus purple"></i>
-                                                            四级菜单一
-                                                        </a>
-
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="menu-icon fa fa-phone"></i>
-                                    <span class="menu-text">菜单项二</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-                            <i class="tiny-icon fa fa-angle-double-right"></i>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main main-fixed">
-                <div class="panel panel-transparent flexbox">
-                    <div class="panel-heading clearfix">
-                        <h3 class="panel-title pull-left">
-                            业主列表
-                        </h3>
-
-                        <div class="panel-toolbar pull-right">
-                            <div class="btn-toolbar">
-                                <button class="btn btn-primary">
-                                    新增
-                                </button>
-                                <button class="btn btn-default">
-                                    查询
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="panel-body no-padding grow inline" data-ver-role="data-list">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th colspan="3">区域</th>
-
-                                    <th>业主单位全称</th>
-                                    <th>单位地址</th>
-                                    <th width="150">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody data-role="datatable"
-                                   data-bind="source: source"
-                                   data-template="tpl_data_list_item"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+                <th>业主单位全称</th>
+                <th>单位地址</th>
+                <th width="150">操作</th>
+            </tr>
+        </thead>
+        <tbody data-role="datatable"
+               data-bind="source: source"
+               data-template="tpl_data_list_item"></tbody>
+    </table>
 
     <!--模板-->
 
@@ -200,7 +95,7 @@
                         { Sheng: "四川省", Shi: "广安市", Xian: "岳池县", Region: "", YeZhu: "沂南县农业局", DiZhi: "沂南县农业局", DaQu: "北京大区" },
                     ],
                     group: { field: "DaQu" }
-                })
+                });
                 return {
                     source: source
                 };
