@@ -3,11 +3,11 @@
 
 module.exports = function (grunt) {
 
-    function createOptions() {
+    function createOptions(moduleName, startFile, endFile) {
 
-        var moduleName = './veronica-ui';
-        var endFile = 'tools/wrap.end';
-        var startFile = 'tools/wrap.start';
+        //var moduleName = './veronica-ui';
+        //var endFile = 'tools/wrap.end';
+        //var startFile = 'tools/wrap.start';
 
         var options = {
            // appDir: './lib',
@@ -21,17 +21,16 @@ module.exports = function (grunt) {
                 'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap',
                 'bootstrap-datetimepicker': '../bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker',
                 'bootstrap-datetimepicker-cn': '../bower_components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN',
-                'bs-datetimepicker': '../bower_components/bs-datetimepicker/src/js/bootstrap-datetimepicker',
                 //'bootstrap-paginator': '../bower_components/bootstrap-paginator/src/bootstrap-paginator',
                 'jquery-form': '../bower_components/jquery-form/jquery.form',
                 'jquery-validation': '../bower_components/jquery-validation/dist/jquery.validate',
                 'jquery-validation-unobtrusive': '../bower_components/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
+                'jquery-validation-bootstrap-tooltip': '../bower_components/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
                 'noty': '../bower_components/noty/js/noty/packaged/jquery.noty.packaged',
                 'jquery-inputmask': '../bower_components/jquery.inputmask/dist/jquery.inputmask.bundle',
                 'table-to-json': '../bower_components/table-to-json/lib/jquery.tabletojson',
                 'form2js': '../bower_components/form2js/src/form2js',
                 'jquery-placeholder': '../bower_components/jquery-placeholder/jquery.placeholder',
-                'jquery-validation-bootstrap-tooltip': '../bower_components/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
                 'jstree': '../bower_components/jstree/dist/jstree',
                 'moment': '../bower_components/moment/moment',
                 'moment-locale': '../bower_components/moment/locale/zh-cn',
@@ -42,11 +41,11 @@ module.exports = function (grunt) {
                     deps: ['jquery-validation']
                 },
                 'jquery-validation-unobtrusive': {
-                    deps: ['jquery-validation']
+                    deps: ['jquery-validation', 'jquery-validation-bootstrap-tooltip']
                 },
-                //'moment': {
-                //    deps: ['moment-locale']
-                //}
+                'bootstrap-datetimepicker-cn': {
+                    deps: ['bootstrap-datetimepicker']
+                }
             },
             wrapShim: true,
             modules: [{
@@ -62,18 +61,14 @@ module.exports = function (grunt) {
             "optimize": "none"
         };
 
-
-
         return options;
     }
-
-
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         requirejs: {
             main: {
-                options: createOptions()
+                options: createOptions('./veronica-ui', 'tools/wrap.start', 'tools/wrap.end')
             }
         },
         clean: {
