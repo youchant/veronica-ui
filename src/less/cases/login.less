@@ -1,0 +1,20 @@
+@login-margin-top: 50px;
+@login-body-top: 30px;
+@login-input-bottom: 25px;
+
+.enable_login() when(@enable-cases-login = true) {
+
+    .login {
+        margin-top: @login-margin-top;
+
+        .panel-body {
+            padding-top: @login-body-top;
+
+            .input-group {
+                margin-bottom: @login-input-bottom;
+            }
+        }
+    }
+}
+
+.enable_login();

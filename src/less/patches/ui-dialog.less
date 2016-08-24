@@ -1,0 +1,43 @@
+/* 使用 artDialog: ui-dialog 样式补丁 */
+
+.ui-dialog {
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+}
+
+.ui-dialog-header {
+    border-bottom: 1px solid #ccc;
+}
+
+.ui-dialog-close {
+    top: 9px;
+    right: 9px;
+}
+
+.ui-dialog-title {
+    padding: 10px;
+}
+
+.modal-footer {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.ui-dialog-body.with-footer {
+    padding: 0;
+    padding-bottom: @ui-dialog-footer-height;
+}
+
+.ui-dialog-content {
+    position: static;
+    /*padding: 20px;*/
+    overflow-y: auto;
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}

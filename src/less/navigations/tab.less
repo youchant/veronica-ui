@@ -1,0 +1,44 @@
+// 选项卡 Tabs
+//
+// 通常用于类别分组，是常用的布局组件，基于 Bootstrap Tabs
+//
+// Markup: ./markups/tab.hbs
+//
+// .nav-tabs-solid - 该样式中未激活选项卡项都带背景边框
+//
+// Styleguide navigations.tabs
+
+.nav-tabs-solid {
+    position: relative;
+
+    > li {
+        margin-bottom: -@nav-tabs-solid-active-border-width;
+
+        > a {
+            &,
+            &:focus {
+                background-color: @nav-tabs-solid-bg-color;
+                color: @nav-tabs-solid-color;
+                border-color: @nav-tabs-border-color;
+            }
+
+            &:hover {
+                background-color: @nav-tabs-solid-hover-bg-color;
+            }
+        }
+
+        &.active > a {
+            &,
+            &:hover,
+            &:focus {
+                border-top: @nav-tabs-solid-active-border-width solid @nav-tabs-solid-active-border-color;
+                background-color: @nav-tabs-solid-active-bg-color;
+                box-shadow: 0 -2px 3px 0 rgba(0,0,0,0.15);
+            }
+        }
+    }
+}
+
+.nav-sm > li > a {
+    padding: @padding-sm-vertical @padding-sm-horizontal;
+}

@@ -1,0 +1,115 @@
+//--- bootstrap 补丁
+
+@checkbox-radio-margin-top: 4px;
+@checkbox-radio-margin-top-ie-9: 1px;
+
+/* 表格
+---------------------------------------------------------------- */
+
+// 表格标题居中
+.table {
+    > thead {
+        > tr {
+            > th {
+                vertical-align: middle;
+            }
+        }
+    }
+
+    > tbody {
+        > tr {
+            > td {
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+
+/* 表单
+---------------------------------------------------------------- */
+
+// 清除所有表单元素阴影
+input.form-control,
+div.form-control,
+.form-control,
+input {
+    box-shadow: none;
+
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.form-control:focus {
+    .has-warning &,
+    .has-success &,
+    .has-error & {
+        box-shadow: none;
+    }
+}
+
+.btn:active {
+    box-shadow: none;
+}
+
+// 使 radio 和 checkbox 对齐
+input[type="radio"],
+input[type="checkbox"] {
+    margin: @checkbox-radio-margin-top 0 0;
+    margin-top: ~"@{checkbox-radio-margin-top-ie-9} \9"; /* IE8-9 */
+}
+
+// --------
+// 验证相关样式
+/* 隐藏默认的验证标签 */
+.has-feedback .form-control-feedback.field-validation-valid {
+    display: none;
+}
+
+.field-validation-error {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.has-feedback .form-control {
+    padding-right: 25px;
+}
+
+// 覆盖只读样式
+.form-control[readonly] {
+    background-color: #fff;
+}
+
+// 调整默认 legend 样式
+legend {
+    padding: @legend-padding-vertial @legend-padding-horizontal;
+    font-weight: bold;
+    background-color: #eee;
+    border-left: 3px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+
+/* 界面元素
+---------------------------------------------------------------- */
+
+.form-inline .form-group:not(:last-child){
+    margin-right: 1em;
+}
+
+.modal-header .close {
+    margin-top: 2px;
+}
+
+// 重设置标签样式
+.label {
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 0;
+    font-weight: 300;
+}
+
+.badge {
+    font-weight: 300;
+}

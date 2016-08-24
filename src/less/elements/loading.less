@@ -1,0 +1,119 @@
+// 加载进度 Loading
+//
+// 在页面或数据请求时，界面上显示的等待组件
+//
+// Styleguide elements.loading
+
+
+// Dialog Loading
+//
+// 对话框加载显示
+//
+// Markup:
+// <div class="ui-dialog-loading"></div>
+//
+// Styleguide elements.loading.dialog
+
+.ui-dialog-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    text-align: center;
+    z-index: 1000;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    min-width: 2.2585em;
+    padding-top: 2.97278571em;
+
+    &:before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 50%;
+        border-radius: 500rem;
+        border: .2em solid rgba(0,0,0,.1);
+    }
+
+    &:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 50%;
+        -webkit-animation: loader .6s linear;
+        animation: loader .6s linear;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        border-radius: 500rem;
+        border-color: #767676 transparent transparent;
+        border-style: solid;
+        border-width: .2em;
+        box-shadow: 0 0 0 1px transparent;
+    }
+
+
+    &:after,
+    &:before {
+        width: 2.2585em;
+        height: 2.2585em;
+        margin: 0 0 0 -1.12925em;
+    }
+}
+
+@-webkit-keyframes loader {
+    from {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loader {
+    from {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+
+
+// Global Loading
+//
+// 对话框加载显示
+//
+// Markup:
+// <div class="loading-global">加载中...</div>
+//
+// Styleguide elements.loading.global_loading
+
+.loading-global {
+    font-weight: 700;
+    font-size: 1em;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 9997;
+    color: #555;
+    padding: .2em .6em;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    border-color: #f0c36d;
+    background-color: #f9edbe;
+    min-width: 100px;
+}
+
+#glb_loading {
+    .loading-global();
+    position: fixed;
+    top: 8px;
+    left: 47%;
+}

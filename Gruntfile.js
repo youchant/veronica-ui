@@ -3,38 +3,31 @@
 
 module.exports = function (grunt) {
 
-    function createOptions(moduleName, startFile, endFile) {
-
-        //var moduleName = './veronica-ui';
-        //var endFile = 'tools/wrap.end';
-        //var startFile = 'tools/wrap.start';
-
+    var thirdPath = '../../bower_components';
+    var nodeModulePath = './node_modules';
+    function createOptions(moduleName) {
         var options = {
-           // appDir: './lib',
-            baseUrl: './lib',
-            dir: './dist',
+            baseUrl: './src/js',
+            dir: './dist/js',
             paths: {
                 "jquery": "empty:",
-                'kendo-ui': '../assets/kendo-ui-core/dist/js/kendo.custom',
-                'kendo-ui-messages': '../assets/kendo-ui-core/dist/js/kendo.messages.zh-CN.min',
-                'text': '../bower_components/requirejs-text/text',
-                'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap',
-                'bootstrap-datetimepicker': '../bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker',
-                'bootstrap-datetimepicker-cn': '../bower_components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN',
-                //'bootstrap-paginator': '../bower_components/bootstrap-paginator/src/bootstrap-paginator',
-                'jquery-form': '../bower_components/jquery-form/jquery.form',
-                'jquery-validation': '../bower_components/jquery-validation/dist/jquery.validate',
-                'jquery-validation-unobtrusive': '../bower_components/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
-                'jquery-validation-bootstrap-tooltip': '../bower_components/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
-                'noty': '../bower_components/noty/js/noty/packaged/jquery.noty.packaged',
-                'jquery-inputmask': '../bower_components/jquery.inputmask/dist/jquery.inputmask.bundle',
-                'table-to-json': '../bower_components/table-to-json/lib/jquery.tabletojson',
-                'form2js': '../bower_components/form2js/src/form2js',
-                'jquery-placeholder': '../bower_components/jquery-placeholder/jquery.placeholder',
-                'jstree': '../bower_components/jstree/dist/jstree',
-                'moment': '../bower_components/moment/moment',
-                'moment-locale': '../bower_components/moment/locale/zh-cn',
-                'es5-shim': '../bower_components/es5-shim/es5-shim'
+                'kendo-ui': '../assets/kendo-ui-core/kendo.custom',
+                'kendo-ui-messages': '../assets/kendo-ui-core/kendo.messages.zh-CN',
+                'kendo-ui-culture': '../assets/kendo-ui-core/kendo.messages.zh-CN',
+                'text': thirdPath + '/requirejs-text/text',
+                'bootstrap': thirdPath + '/bootstrap/dist/js/bootstrap',
+                'bootstrap-datetimepicker': thirdPath + '/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker',
+                'bootstrap-datetimepicker-cn': thirdPath + '/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN',
+                'jquery-form': thirdPath + '/jquery-form/jquery.form',
+                'jquery-validation': thirdPath + '/jquery-validation/dist/jquery.validate',
+                'jquery-validation-unobtrusive': thirdPath + '/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
+                'jquery-validation-bootstrap-tooltip': thirdPath + '/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
+                'noty': thirdPath + '/noty/js/noty/packaged/jquery.noty.packaged',
+                'jquery-inputmask': thirdPath + '/jquery.inputmask/dist/jquery.inputmask.bundle',
+                'table-to-json': thirdPath + '/table-to-json/lib/jquery.tabletojson',
+                'form2js': thirdPath + '/form2js/src/form2js',
+                'jquery-placeholder': thirdPath + '/jquery-placeholder/jquery.placeholder',
+                'es5-shim': thirdPath + '/es5-shim/es5-shim'
             },
             shim: {
                 'jquery-validation-bootstrap-tooltip': {
@@ -50,15 +43,15 @@ module.exports = function (grunt) {
             wrapShim: true,
             modules: [{
                 name: moduleName,
-                include: ["../bower_components/almond/almond"],
+                include: [thirdPath + "/almond/almond"],
                 exclude: ["jquery", "text"]
             }],
-            "wrap": {
-                "startFile": startFile,
-                "endFile": endFile
+            wrap: {
+                "startFile": 'tools/wrap.start',
+                "endFile": 'tools/wrap.end'
             },
             removeCombined: false,
-            "optimize": "none"
+            optimize: "none"
         };
 
         return options;
@@ -68,29 +61,139 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         requirejs: {
             main: {
-                options: createOptions('./veronica-ui', 'tools/wrap.start', 'tools/wrap.end')
+                options: createOptions('./veronica-ui')
+            }
+        },
+        less: {
+            production: {
+                options: {
+                    modifyVars: {
+                        'font-url': '"../fonts/fonttiny"'
+                    }
+                },
+                files: {
+                    "dist/css/tiny.css": "src/less/tiny.less"
+                }
+            }
+        },
+        concat: {
+            style: {
+                files: [{
+                    src: ['src/assets/bootstrap-flat/variables.less', 'src/less/variables.less'],
+                    dest: 'dist/less/variables.less'
+                }, {
+                    src: ['src/assets/bootstrap-flat/mixins.less', 'src/less/mixins.less'],
+                    dest: 'dist/less/mixins.less'
+                }, {
+                    src: ['src/assets/bootstrap-flat/bootstrap.css',
+                        nodeModulePath + '/font-awesome/css/font-awesome.css',
+                        './dist/css/tiny.css'],
+                    dest: 'dist/css/veronica-ui.css'
+                }]
+            }
+        },
+        copy: {
+            style: {
+                files: [{
+                    expand: true,
+                    src: ['src/assets/bootstrap-flat/bootstrap.css'],
+                    dest: 'dist/css/',
+                    flatten: true
+                }, {
+                    expand: true,
+                    src: ['src/assets/bootstrap-flat/bootstrap.js'],
+                    dest: 'dist/js/', flatten: true
+                }, {
+                    expand: true,
+                    src: [nodeModulePath + '/font-awesome/fonts/*'],
+                    dest: 'dist/fonts/', flatten: true
+                }, {
+                    expand: true,
+                    src: ['src/js/*'],
+                    dest: 'dist/js/',
+                    filter: 'isFile', flatten: true
+                }]
+            },
+            site: {
+                files: [{
+                    expand: true,
+                    cwd: 'bower_components/',
+                    src: [
+                        'font-awesome/**/*',
+                        'jquery.scrollbar/**/*',
+                        'html5shiv/**/*',
+                        'respond/**/*',
+                        'jquery/**/*'
+                    ],
+                    dest: 'site/assets'
+                }, {
+                    expand: true,
+                    cwd: 'dist/',
+                    src: ['**/*'],
+                    dest: 'site/assets/tiny'
+                }, {
+                    expand: true,
+                    cwd: 'src/assets/',
+                    src: ['demo/**/*'],
+                    dest: 'site/assets/'
+                }, {
+                    src: 'src/assets/demo/index.html',
+                    dest: 'site/index.html'
+                }]
             }
         },
         clean: {
-            main: [
-            'dist/**/*',
-            '!dist/veronica-ui.*'
+            script: [
+            'dist/js/**/*',
+            '!dist/js/veronica-ui.*'
             ]
         },
         uglify: {
-            main: {
-                files: {
-                    'dist/veronica-ui.min.js': ['dist/veronica-ui.js']
-                },
+            options: {
+                sourceMap: true,
                 report: 'gzip'
+            },
+            main: {
+                files: [{
+                    expand: true,
+                    cwd: 'dist/js',
+                    src: '**/*.js',
+                    dest: 'dist/js'
+                }]
+            }
+        },
+        kss: {
+            options: {
+                "config": "src/kss-config.json"
+            },
+            dist: {
+            }
+        },
+        pug: {
+            compile: {
+                files: [{
+                    expand: true,
+                    cwd: "./src/examples",
+                    src: "*.pug",
+                    dest: "./site/examples",
+                    ext: ".html"
+                }]
             }
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-kss');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-pug');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('default', ['requirejs', 'clean']);
+    grunt.registerTask('script', ['requirejs', 'clean:script', 'uglify']);
+    grunt.registerTask('style', ['less', 'copy:style', 'concat:style']);
+    grunt.registerTask('styleguide', ['style', 'copy:styleguide', 'pug', 'kss', 'clean:include']);
 
 };

@@ -1,0 +1,37 @@
+﻿
+// 桌面布局，全屏
+.desktop {
+    zoom: 1;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .main-container,
+    .main-content,
+    .page-content,
+    .full {
+        height: 100%;
+    }
+
+    .page-content {
+        padding: 0;
+    }
+}
+
+// 简单两栏布局
+.wrapper {
+    .side {
+        float: left;
+        width: 180px;
+    }
+
+    .content {
+        margin-left: 180px;
+    }
+}

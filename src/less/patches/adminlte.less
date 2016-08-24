@@ -1,0 +1,88 @@
+/* adminlte template patch */
+
+.box {
+    border: 1px solid #ccc;
+    border-top: 2px solid #c1c1c1;
+    border-radius: 2px;
+    box-shadow: none;
+
+    .box-header {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .box-footer {
+        border-top: 1px solid #ccc;
+    }
+
+    &.box-solid {
+        .box-header {
+            border-bottom: 0 solid #ccc;
+        }
+    }
+}
+
+
+.right-side {
+    > .content-header {
+        padding: 10px 10px 10px 15px;
+
+        > h1 {
+            font-size: 18px;
+        }
+    }
+}
+
+.sidebar .sidebar-menu > li > a {
+    padding: 9px 5px 9px 15px;
+}
+
+
+@navbarHeight: 45px;
+
+body > .header .navbar {
+    height: @navbarHeight;
+}
+
+
+body > .header .logo {
+    height: @navbarHeight;
+    line-height: @navbarHeight;
+}
+
+body.fixed .wrapper {
+    margin-top: @navbarHeight;
+}
+
+body > .header .navbar .sidebar-toggle {
+    margin-top: 5px;
+}
+
+.left-side {
+    top: @navbarHeight;
+}
+
+.skin-blue .right-side > .content-header {
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: none;
+}
+
+.skin-blue .left-side {
+    border-right: 1px solid #ccc;
+}
+
+.content {
+    padding: 0;
+}
+
+.box.box-plain {
+    border: 0;
+}
+
+.box .box-header > .fa,
+.box .box-header > .glyphicon,
+.box .box-header > .ion,
+.box .box-header .box-title {
+    padding: 8px 0 0 10px;
+}
+
+

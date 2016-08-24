@@ -1,0 +1,15 @@
+extends _layouts/extend-layout-explain.pug
+
+block body
+  body.admin.admin-min.no-padding
+    .container-fluid
+      .row
+        .col-sm-3.col-md-2.sidebar-content
+          .scrollbar-macosx
+            a.logo(href='#')
+              span.logo-mini
+                b T
+            include ./_includes/tiny/nav/sidebar-mini.html
+        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main.main-fixed
+          include ./_partials/table-content.pug
+      include _partials/scripts.pug

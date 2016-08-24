@@ -1,0 +1,53 @@
+﻿// 横向导航 Navbar
+//
+// 来源于 Bootsrap
+//
+// Markup: markups/navbar.html
+//
+// .navbar-default - 默认的
+// .navbar-inverse - 反色调
+// .navbar-dark - 深色
+//
+// Styleguide navigations.navbar
+
+
+.navbar-dark {
+    background-color: darken(@brand-primary, 10%);
+    border: 0;
+    /*box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);*/
+    margin-bottom: 0;
+
+    .navbar-brand {
+        color: #fff;
+
+        &:hover,
+        &:focus {
+            color: #fff;
+            background-color: transparent;
+        }
+    }
+
+    .navbar-nav,
+    .navbar-text,
+    .nav {
+        color: #fff;
+
+        > li > a {
+            color: #fff;
+
+            &:hover, &:focus {
+                background-color: transparent;
+            }
+        }
+    }
+
+    .nav .open > a {
+        background-color: transparent;
+    }
+}
+
+// fixed 布局的导航条，修正 z-index
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+    z-index: 1000;
+}

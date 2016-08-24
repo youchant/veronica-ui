@@ -1,0 +1,20 @@
+// 因为 bootstrap 写死了该属性，所以这里需要覆盖
+.list-group-item {
+    padding: @padding-base-vertical @padding-base-horizontal;
+}
+
+.list-group-sm {
+    .list-group-item {
+        padding: @padding-sm-vertical @padding-sm-horizontal;
+    }
+}
+
+
+.list-group-simple {
+    margin-top: -1px;
+
+    .list-group-item {
+        border-left-width: 0;
+        border-right-width: 0;
+    }
+}

@@ -1,0 +1,83 @@
+body.admin {
+    padding-top: @navbar-height;
+
+    .sidebar-content {
+        display: none;
+        overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+        .sidebar-content {
+            position: fixed;
+            top: @navbar-height + 1;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            display: block;
+            padding: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+            border-right: 1px solid #ccc;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .main-fixed {
+            width: 100%;
+        }
+    }
+
+    .nav-sidebar {
+        /*margin-right: -21px;
+        margin-left: -20px;*/
+        margin-top: 1px;
+        margin-bottom: 20px;
+    }
+
+    .main {
+        padding: 0;
+        padding-left: 2px;
+    }
+
+    .main-fixed {
+        position: fixed;
+        top: @navbar-height + 1;
+        bottom: 0;
+    }
+    /*.main {
+        padding: 20px;
+    }
+
+    @media (min-width: 768px) {
+        .main {
+            padding-right: 40px;
+            padding-left: 40px;
+        }
+    }*/
+}
+
+// 小菜单布局
+
+.admin.admin-min {
+    .sidebar-content {
+        width: 42px;
+        overflow: visible;
+    }
+
+    .main-fixed {
+        padding-left: 42px;
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.admin.no-padding {
+    .sidebar-content {
+        top: 0;
+    }
+
+    .main-fixed {
+        top: 0;
+    }
+}

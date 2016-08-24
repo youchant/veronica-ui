@@ -1,0 +1,45 @@
+﻿.row-container {
+    padding-left: @grid-gutter-width / 2;
+    padding-right: @grid-gutter-width / 2;
+}
+
+// Wrapper
+//
+// 简单两栏布局
+//
+// Markup: markups/wrapper.html
+//
+// Styleguide layouts.wrapper
+
+.wrapper-2-col {
+    .wrapper-aside {
+        float: left;
+        width: 180px;
+    }
+
+    .wrapper-content {
+        margin-left: 180px;
+    }
+}
+
+// Static Row
+//
+// 固定的栅格布局（常用在 flexbox 内部形成多栏自适应布局）
+//
+// Markup: markups/row-static.html
+//
+// Styleguide layouts.rowstatic
+
+.row-static {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+
+    .col-static {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        overflow: auto;
+    }
+}

@@ -1,0 +1,109 @@
+// tiny ui variables
+//--------------------------------------------------------
+
+@light-blue: #3c8dbc; //Primary
+@red: #dd4b39; //Danger
+@green: #00a65a; //Success
+@aqua: #00c0ef; //Info
+@yellow: #f39c12; //Warning
+@blue: #0073b7;
+@navy: #001F3F;
+@teal: #39CCCC;
+@olive: #3D9970;
+@lime: #01FF70;
+@orange: #FF851B;
+@fuchsia: #F012BE;
+@purple: #605ca8;
+@maroon: #D81B60;
+@black: #111;
+@gray: #d2d6de;
+
+// font
+@font-family-sans-serif: Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+@font-family-base: @font-family-sans-serif;
+
+// ui-dialog
+@ui-dialog-footer-height: 46px;
+
+
+// kendo-ui
+@k-selected-color: #fff;
+@k-selected-bg-color: #428bca;
+@k-selected-border-color: #428bca;
+@k-marquee-bg-color: #00b0ff;
+@k-marquee-color: #3f51b5;
+
+// typeahead
+@tt-hint-color: #999;
+
+@thirdpartyPath: "../../../../vendor/";
+
+@primary-bg-color: @brand-primary;
+@primary-color: #fff;
+
+
+// tab
+@nav-tabs-solid-color: lighten(@text-color, 40%);
+@nav-tabs-solid-bg-color: darken(@primary-color, 5%);
+
+@nav-tabs-solid-hover-bg-color: @primary-color;
+
+@nav-tabs-solid-active-border-width: 2px;
+@nav-tabs-solid-active-border-color: lighten(@primary-bg-color, 10%);
+@nav-tabs-solid-active-bg-color: @primary-color;
+
+
+// badge
+@badge-sm-padding: 2px 5px;
+
+//custom
+@extend_level: 16; // 循环生成样式的初始级别
+
+// Panel
+@panel-heading-height: 40px;
+@panel-heading-nav-top: 10px;
+@panel-lg-heading-padding: 12px 12px;
+@panel-transparent-heading-border-color: #DCE8F1;
+
+// list-group
+@list-group-padding: @nav-link-padding;
+
+// form
+
+@required-label-indicator-color: red;
+
+@table-form-col-padding-left: 110px;
+@table-form-col-padding-right: 30px;
+@table-form-label-width: @table-form-col-padding-left - 10;
+@table-form-label-margin-left: -@table-form-col-padding-left;
+
+
+// panel
+
+@panel-xs-element-padding: 4px;
+
+// progress
+
+@progress-mini-height: @line-height-computed * 0.5;
+@progress-mini-line-height: @progress-mini-height;
+
+
+// patches
+// ------------------------
+
+// bootstrap
+
+@legend-padding-vertial: @padding-base-vertical;
+@legend-padding-horizontal: 1em;
+
+// common
+@padding-base-vertical: 10px;
+@padding-base-horizontal: 15px;
+@padding-sm-vertical: 5px;
+@padding-sm-horizontal: 10px;
+@base-border-color: @panel-inner-border;
+
+@panel-heading-padding-vertical: @padding-base-vertical;
+@panel-heading-padding-horizontal: @padding-base-horizontal;
+@nav-link-padding-vertical: @padding-base-vertical; // 由于bootstrap未单独设置，这里提出来
+@nav-link-padding-horizontal: @padding-base-horizontal;

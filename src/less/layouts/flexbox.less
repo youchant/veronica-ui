@@ -1,0 +1,36 @@
+// Flexbox
+//
+// 使用 flexbox 实现高度自适应的布局
+//
+//  [兼容性](http://caniuse.com/#search=flex)
+//
+// Markup: markups/flexbox.html
+//
+// Styleguide layouts.flexbox
+
+.flexbox {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+
+    .grow {
+        /*display: flex;*/
+        flex-basis: 0;
+        position: relative;
+        flex-grow: 1;
+        overflow-y: auto;
+        min-height: 120px\9;
+
+        > .row-container {
+            width: 100%;
+            position: relative;
+        }
+    }
+}
+
+.grow-inner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}

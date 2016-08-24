@@ -1,0 +1,231 @@
+// 垂直菜单 Vertical Menu
+//
+// 垂直的导航，通常用作整个应用的主菜单
+//
+// Markup: markups/menuVertical.html
+//
+// .menu-vertical-multilevel - 多层级
+// .menu-vertical-min - 迷你型
+//
+// Styleguide navigations.menuVertical
+
+@sidebar-bg-color: #f9fafc;
+@nav-item-color: lighten(@text-color, 40%);
+
+@nav-item-active-color: @text-color; // 项活动颜色
+@nav-item-hover-color: @nav-item-active-color; // 项悬停颜色
+@nav-item-hover-border-color: @nav-tabs-border-color; // 项悬停边框颜色
+@nav-item-hover-bg-color: @sidebar-bg-color; // 项悬停背景颜色
+@nav-item-active-bg-color: @nav-item-hover-bg-color; // 项活动背景颜色
+
+
+@nav-list-active-indicator-color: @brand-primary;
+@nav-line-color: @input-border;
+
+@submenu-border-color: @nav-item-hover-border-color;
+
+
+// 主导航项高度
+@nav-item-height: round(@line-height-base * @font-size-base + @nav-link-padding-vertical * 2);
+@sidebar-min-width: @nav-item-height;
+@sidebar-width: 190px;
+@submenu-item-icon-size: 14px;
+@nav-item-line-height: @nav-item-height; // 导航项行高，要减去内边距高
+
+// 子菜单项高度（只为计算不能更改，需要根据padding的实际情况）
+@submenu-height: @nav-item-height;
+@main-icon-width: 20px;
+
+@nav-item-icon-size: 1.2em;
+
+
+.menu-vertical {
+    // 覆盖默认的 Bootstrap 样式
+    a {
+        color: @nav-item-color;
+    }
+
+    .nav > li > a:focus {
+        background-color: transparent;
+    }
+
+    .nav .open > a {
+        background-color: transparent;
+    }
+
+    .nav .open > a:hover {
+        background-color: @nav-link-hover-bg;
+    }
+
+    .menu-submenu {
+        display: none;
+        // 子菜单下三角
+        .menu-child_indicator {
+            font-size: @submenu-item-icon-size;
+        }
+    }
+    //.active > .menu-submenu,
+    .open > .menu-submenu {
+        display: block;
+    }
+    // 下三角
+    .menu-child_indicator {
+        float: right;
+        font-size: @nav-item-icon-size;
+        line-height: inherit;
+    }
+
+    .menu-icon {
+        min-width: @main-icon-width;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .menu-text {
+        font-weight: normal;
+        padding-left: 0;
+        border-color: transparent;
+    }
+
+    .menu-nav {
+        // 通用菜单项
+        li {
+
+            &.active:not(.open) > a {
+                border-left: 2px solid @nav-list-active-indicator-color;
+                color: @nav-item-active-color;
+            }
+        }
+    }
+}
+
+.menu-vertical-multilevel {
+    .menu-child_indicator:before {
+        content: "\f104";
+    }
+
+    .open > .dropdown-toggle > .menu-child_indicator:before {
+        content: "\f107";
+    }
+    // 通用子菜单
+    .menu-submenu > li > a {
+        padding-left: 3em;
+    }
+    // 二级子菜单
+    .menu-submenu > li > .menu-submenu > li > a {
+        padding-left: 4.5em;
+    }
+    // 三级子菜单
+    .menu-submenu > li > .menu-submenu > li > .menu-submenu > li > a {
+        padding-left: 6em;
+    }
+    // 四级子菜单
+    .menu-submenu > li > .menu-submenu > li > .menu-submenu > li > .menu-submenu > li > a {
+        padding-left: 7.5em;
+    }
+}
+
+.menu-toggle {
+    position: fixed;
+    bottom: 5px;
+    left: 15px;
+    color: #999;
+}
+
+.menu-vertical-min {
+    width: @sidebar-min-width;
+
+    .open > .menu-submenu {
+        display: none;
+    }
+
+    .menu-child_indicator:before {
+        content: "\f105";
+    }
+
+    .menu-submenu {
+        position: absolute;
+        left: 100%;
+        top: -10px;
+        width: @sidebar-width;
+        border: 1px solid @submenu-border-color;
+        display: none;
+        box-shadow: 2px 1px 2px 0 rgba(0,0,0,.1);
+        background-color: @sidebar-bg-color;
+    }
+
+    .menu-nav > li {
+        // 一级菜单项
+        > a {
+            position: relative;
+            padding: 0;
+
+            > .menu-icon {
+                width: 100%;
+                height: @nav-item-height;
+                line-height: @nav-item-line-height;
+                vertical-align: initial;
+                border: 1px solid transparent;
+                background-color: @nav-item-hover-bg-color;
+            }
+
+            > .menu-text {
+                position: absolute;
+                display: none;
+                top: 0;
+                left: 100%;
+                width: @sidebar-width;
+                height: @nav-item-height;
+                line-height: @nav-item-line-height;
+                border: 1px solid @nav-item-hover-border-color;
+                border-left-width: 0;
+                background-color: @nav-item-hover-bg-color;
+                box-shadow: 2px 1px 2px 0 rgba(0,0,0,.1);
+            }
+
+            .menu-child_indicator {
+                display: none;
+            }
+        }
+
+        &:hover,
+        &.hover-show {
+            > a {
+                > .menu-text {
+                    display: block;
+                }
+
+                > .menu-icon {
+                    border-color: @nav-item-hover-border-color;
+                    border-right-color: transparent;
+                }
+            }
+        }
+        // 一级子菜单
+        > .menu-submenu {
+            top: 100%;
+            margin-top: -1px;
+            border-top-color: transparent;
+        }
+    }
+
+    li:hover > .menu-submenu {
+        display: block;
+    }
+}
+
+// logo 和 usermenu
+
+@logo-bg-color: #00a65a;
+
+.sidebar-content {
+
+    .logo-mini {
+        font-size: 22px;
+        display: block;
+        padding: 5px;
+        text-align: center;
+        color: white;
+        background-color: @logo-bg-color;
+    }
+}

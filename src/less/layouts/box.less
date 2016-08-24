@@ -1,0 +1,37 @@
+// Box（废弃）
+//
+// 使用表格布局（display: table），实现界面高度的自适应。`.box`元素（即父元素）要有高度，否则无法自动计算
+// **注意：** 这种方法在高版本的浏览器中有兼容性问题
+//
+// 由于 table-row 的百分比高度规范未定义，在IE10及以下的IE浏览器实现中，其内部元素无法应用父元素百分比高度
+// 需要引入 tiny.js 修复此问题
+//
+// Markup: markups/box.html
+//
+// Styleguide layouts.box
+
+.box {
+    display: table;
+    width: 100%;
+    height: 100%;
+
+    .box-row {
+        display: table-row;
+        height: 100%;
+
+        .box-cell {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .box-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+}

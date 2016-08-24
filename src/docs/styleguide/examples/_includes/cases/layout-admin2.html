@@ -1,0 +1,111 @@
+<style>
+    .treeview .list-group-item {
+        cursor: pointer;
+    }
+
+    .treeview span.indent {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .treeview span.icon {
+        width: 12px;
+        margin-right: 5px;
+    }
+
+    .treeview .node-disabled {
+        color: silver;
+        cursor: not-allowed;
+    }
+
+    .node-treeview7 {
+        color: #428bca;
+        border: none;
+    }
+
+        .node-treeview7:not(.node-disabled):hover {
+            background-color: #F5F5F5;
+        }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar-content">
+            <div class="scrollbar-macosx">
+                <a class="logo" href="#">
+                    <span class="logo-mini">
+                        <b>B</b>
+                    </span>
+                </a>
+                include "../sidebar/sidebar-mini.html"
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main main-fixed">
+            <div class="panel panel-transparent flexbox">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title pull-left">
+                        User List
+                    </h3>
+
+                    <div class="panel-toolbar pull-right form-inline">
+                        <div class="form-group">
+                            类别：
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked="">
+                                    Type1
+                                </label>
+                                <label class="btn btn-default">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">
+                                    Type2
+                                </label>
+                                <label class="btn btn-default">
+                                    <input type="radio" name="options" id="option3" autocomplete="off">
+                                    Type3
+                                </label>
+                                <label class="btn btn-default">
+                                    <input type="radio" name="options" id="option3" autocomplete="off">
+                                    Type4
+                                </label>
+                                <label class="btn btn-default">
+                                    <input type="radio" name="options" id="option3" autocomplete="off">
+                                    Type5
+                                </label>
+                            </div>
+                        </div>
+                        <div class="space-10"></div>
+                        <div class="form-group btn-toolbar">
+                            <button class="btn btn-primary">
+                                新增
+                            </button>
+                            <button class="btn btn-default">
+                                导出
+                            </button>
+                            <button class="btn btn-default">
+                                删除
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="panel-body row-container grow">
+                    <div class="row row-static">
+                        <div class="col-static col-xs-3 no-padding border-r">
+                            include "../list/treeview.html"
+                        </div>
+                        <div class="col-static col-xs-9 col-xs-offset-3 no-padding ">
+                            <div class="panel no-margin flexbox">
+                                include "../table/fixed-header-table.html"
+                                <div class="panel-footer">
+                                    include "../nav/pagination-sm.html"
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,172 @@
+
+// 布局 Layout
+//
+// 表单布局
+//
+// Styleguide forms.layout
+
+// Normal Layout
+//
+// 普通表单布局
+//
+// Markup: markups/form-layout-normal.html
+//
+// Styleguide forms.layout.normal
+
+
+// Horizontal Layout
+//
+// 横向表单布局
+//
+// .form-horizontal-lg    - 更大的表单间隔
+//
+// Markup: markups/form-horizontal.html
+//
+// Styleguide forms.layout.horizontal
+
+.form-horizontal.form-horizontal-lg .form-group {
+    margin-bottom: 15px;
+}
+
+label.required {
+    &:before {
+        content: "\2a";
+        color: @required-label-indicator-color;
+        padding-right: 2px;
+        font-family: sans-serif;
+    }
+}
+
+
+// datatimepicker（修复与 smalot-bootstrap-datetimepicker 的样式冲突）
+input.datetimepicker {
+    padding: 3px 6px;
+    margin-top: 0;
+    border-radius: 1px;
+}
+
+// 内联 checkbox 的外部分组
+.checkbox-group {
+    /*padding: @padding-base-vertical @padding-base-horizontal;*/
+}
+
+
+
+// Table Layout
+//
+// 使用表格布局表单
+//
+// Markup: markups/form-layout-table.html
+//
+// Styleguide forms.layout.table
+
+.table-form {
+    .table-form-col {
+        padding: 0;
+        vertical-align: middle;
+        text-align: center;
+
+        &.editable {
+            background: #eef5f5;
+        }
+
+        label {
+            padding: 0 5px;
+            margin: 0;
+            font-weight: normal;
+        }
+    }
+
+    .form-control {
+        padding: 2px 6px;
+        border: 2px solid transparent;
+        background: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+
+        &:focus {
+            border: 2px solid #66afe9;
+        }
+    }
+}
+
+
+
+// Table Horizontal Layout
+//
+// 横向表格布局表单
+//
+// Markup: markups/form-layout-horizontal-table.html
+//
+// Styleguide forms.layout.table-horizontal
+
+.table-form-horizontal {
+    table-layout: fixed; // 阻止后续表单控件撑开布局
+    .table-form-col {
+        position: relative; // 确定内部元素绝对定位的相对位置
+        padding-left: @table-form-col-padding-left;
+        padding-right: @table-form-col-padding-right;
+
+        .control-label {
+            float: left;
+            width: @table-form-label-width;
+            line-height: @input-height-base;
+            margin-left: @table-form-label-margin-left;
+            margin-bottom: 0;
+            text-align: right;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    //
+    // 静态文本
+    //
+    &.static {
+        .tr-header {
+            font-size: 1.2em;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+
+            > td {
+                padding-left: 0;
+                padding: 5px 10px;
+                background-color: #eee;
+            }
+        }
+
+        td .control-label {
+            text-align: left;
+            font-weight: normal;
+            line-height: normal;
+            padding: 3px 0 3px 5px;
+            white-space: normal;
+        }
+
+        &.no-border {
+
+            > tbody > tr > td {
+                border: 0;
+            }
+        }
+
+        .form-control {
+            border: 1px solid transparent;
+        }
+    }
+    //
+    // patches
+    //
+    &:not(.table-bordered) {
+        > tbody > tr > td {
+            border-top: none;
+        }
+    }
+
+    .checkbox {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 5px;
+    }
+}

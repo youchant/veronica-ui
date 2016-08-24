@@ -5,14 +5,23 @@
   "description": "",
   "url": "https://github.com/gochant/veronica-ui",
   "devDependencies": {
-    "underscore": "latest",
     "chai": "~1.5.0",
-    "mocha": "1.9.0",
-    "sinon": "~1.9.x",
+    "font-awesome": "^4.6.3",
     "grunt": "^0.4.3",
-    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-jade": "^0.14.1",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-pug": "^1.0.0",
     "grunt-contrib-requirejs": "^0.4.3",
     "grunt-contrib-uglify": "^0.6.0",
-    "grunt-contrib-copy": "^0.8.0"
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-kss": "^4.0.0",
+    "mocha": "1.9.0",
+    "sinon": "~1.9.x",
+    "underscore": "latest"
   }
 }

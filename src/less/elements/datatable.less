@@ -1,0 +1,156 @@
+.fixed-table-header {
+    padding-right: 17px;
+}
+
+.fixed-table-header table,
+.fixed-table-body table {
+    margin: 0;
+}
+
+.table.form-inline {
+    margin-bottom: 0;
+
+    > tbody > tr > td {
+        border: 0;
+        padding: 0;
+    }
+}
+
+// 数据表 DataTable
+//
+// 用表格展示数据
+//
+// Markup: markups/datatable.html
+//
+// Styleguide elements.datatable
+
+// datatable
+
+.datatable td {
+    .text-ellipsis();
+    word-break: break-all;
+    vertical-align: middle;
+}
+
+.datatable-header > .table,
+.datatable-content > .table {
+    table-layout: fixed;
+    margin: 0;
+}
+
+.datatable-header,
+.datatable-content {
+
+    .table-bordered {
+        border: 0;
+    }
+
+
+
+    thead > tr > th,
+    tbody > tr > td {
+        &:first-child, &:last-child {
+            border-left: 0;
+        }
+    }
+}
+
+.datatable-header {
+    padding-right: 17px; // 滚动条宽度
+    thead > tr > th {
+        border-bottom: 0;
+    }
+
+    border-bottom: 2px solid @table-border-color;
+}
+
+.datatable-content {
+    &.grow {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    overflow-y: scroll;
+
+    tbody > tr:first-child > td {
+        border-top-width: 0;
+    }
+
+    tbody > tr:last-child > td {
+        border-bottom-width: 0;
+    }
+}
+
+.table-bordered > tbody > tr.k-state-selected > td {
+    border: 1px solid transparent;
+}
+
+// 表格 sortable
+th.sortable {
+    position: relative;
+    cursor: pointer;
+
+    &:after {
+        float: right;
+        font-family: 'Glyphicons Halflings';
+        opacity: 0.5;
+        content: "\e150";
+        opacity: 0.2;
+        font-weight: normal;
+    }
+
+    &.desc:after,
+    &.asc:after {
+        opacity: 1;
+    }
+
+
+    &.string {
+        &.asc:after {
+            /*content: "\e151";*/
+            content: "\e155";
+        }
+
+        &.desc:after {
+            /*content: "\e152";*/
+            content: "\e156";
+        }
+    }
+
+    &.number {
+        &.asc:after {
+            content: "\e153";
+        }
+
+        &.desc:after {
+            content: "\e154";
+        }
+    }
+
+    &.date {
+        &.asc:after {
+            content: "\e155";
+        }
+
+        &.desc:after {
+            content: "\e156";
+        }
+    }
+}
+
+// 分组的表格样式
+
+.tr-group {
+    background-color: #eee;
+    font-weight: bold;
+}
+
+// 列表（带悬停样式）
+
+.list-group-hover {
+    .list-group-item:not(.k-state-selected):hover {
+        color: #555;
+        text-decoration: none;
+        background-color: #f5f5f5;
+    }
+}

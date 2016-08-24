@@ -1,0 +1,16 @@
+﻿extends extend-layout.pug
+
+block title
+  title Tiny:Form Layout
+
+block styles
+  link(href="../assets/bootswatch.css", rel="stylesheet")
+
+block content
+  .container
+    .bs-docs-section
+      +header('form', 'Form Layout')
+      +subheader('Form Normal')
+      include components/form-layout-normal.html
+      +subheader('Form Horizontal Table')
+      include components/form-layout-horizontal-table.html

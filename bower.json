@@ -25,7 +25,6 @@
     "almond": "latest",
     "es5-shim": "latest",
     "smalot-bootstrap-datetimepicker": "latest",
-    "bs-datetimepicker": "latest",
     "form2js": "latest",
     "jquery.inputmask": "latest",
     "jquery-form": "latest",
@@ -35,8 +34,6 @@
     "jquery-placeholder": "latest",
     "noty": "latest",
     "table-to-json": "latest",
-    "jstree-bootstrap-theme": "latest",
-    "tinyui": "latest",
     "veronica": "latest",
     "font-awesome": "latest"
   }

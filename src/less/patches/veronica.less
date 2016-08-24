@@ -1,0 +1,68 @@
+// artDialog ÑùÊ½
+.modal-dialog.ui-dialog {
+    margin: 0 auto;
+    width: auto;
+}
+.ui-dialog-loading {
+    margin: 0 auto;
+}
+
+textarea {
+    resize: vertical;
+    max-height: 100px;
+}
+
+.fn-wnd,
+.ver-view,
+.body,
+.tabs-left {
+    height: 100%;
+}
+.fn-wnd {
+    min-width: 300px;
+    min-height: 100px;
+}
+
+
+.side-bordered {
+    border: 1px solid #E5E5E5;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.nav-tabs-custom {
+    box-shadow: none;
+    margin-bottom: 0;
+
+    > .tab-content {
+        padding: 0;
+    }
+}
+
+
+
+.nodata {
+    line-height: 70px;
+}
+
+// À©Õ¹ box£º box-table-like
+.box-table-like {
+    border: 0;
+    border-top: 1px solid #E5E5E5;
+
+    .box-header {
+        border-bottom: 2px solid #dddddd;
+        color: #707070;
+        background: #F2F2F2;
+        padding: 3px 0 4px 10px;
+        font-weight: bold;
+    }
+}
+
+// jquery validation
+
+.form-control.input-validation-error,
+.input-validation-error {
+    border-color: @state-danger-text;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}

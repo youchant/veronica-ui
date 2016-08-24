@@ -1,0 +1,151 @@
+
+.page-content {
+    padding: 8px 0 24px;
+}
+
+@media (min-width: 992px) {
+    .breadcrumbs-fixed + .page-content {
+        padding-top: 41px;
+    }
+}
+
+
+.box {
+    &.box-plain {
+        margin: 0;
+    }
+
+    > .box-header {
+        padding: 5px 0 5px 10px;
+        min-height: 0;
+    }
+
+    &.transparent > .widget-header {
+        border-bottom: 1px solid #ccc;
+        padding-left: 15px;
+    }
+
+    .box-body {
+        .box-toolbox {
+            &:first-child {
+                border-bottom: 1px solid #CCC;
+            }
+
+            .form-inline {
+                label {
+                    font-weight: normal;
+                }
+
+                .form-group {
+                    margin-right: 8px;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            padding: 3px 0;
+        }
+
+        .table {
+            margin-bottom: 0;
+
+            thead:first-child tr {
+                color: #707070;
+                background: #F2F2F2;
+            }
+        }
+    }
+}
+
+.box-toolbar,
+.box-header > .box-title {
+    line-height: inherit;
+}
+
+.box-toolbar{
+    padding: 0 0 0 10px;
+}
+
+h3.box-title {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.box-footer {
+    background-color: white;
+}
+
+
+
+.sidebar.sidebar-fixed {
+    top: 45px;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.sidebar.sidebar-fixed.menu-min {
+    overflow: visible;
+}
+
+.sidebar.sidebar-fixed:before {
+    height: 0;
+}
+
+.basic-sidebar-menu {
+    height: auto;
+}
+
+.sidebar-shortcuts-large {
+    /*letter-spacing: -3px;*/
+}
+
+.breadcrumb {
+    margin: 0;
+}
+
+.tabs-left {
+    position: relative;
+    margin-left: 1px;
+
+    .nav {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100px;
+    }
+
+    > .nav-tabs {
+        border-bottom: 0;
+        border-right: 1px solid #c5d0dc;
+
+        li:first-child a {
+            border-top: 0;
+        }
+    }
+
+    .nav-pills {
+        border-right: 1px solid #ddd;
+    }
+
+    .tab-content {
+        margin-left: 100px;
+        border: 0;
+    }
+}
+
+.modal-footer {
+    margin-top: 0;
+}
+
+/* 修复顶部条遮盖对话框的bug */
+.navbar-fixed-top,
+.navbar-fixed-bottom,
+.sidebar.sidebar-fixed {
+    z-index: 10;
+}
+
+.breadcrumbs-fixed {
+    z-index: 8;
+}

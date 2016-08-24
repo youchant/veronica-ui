@@ -1,0 +1,89 @@
+// 盒模型 Box Model
+//
+// 与盒模型相关的原子类
+//
+// .no-padding - 无内边距
+// .no-margin - 无外边距
+// .no-border - 无边框
+// .no-radius - 无内边距
+// .no-text-shadow - 无内边距
+//
+// Markup: <div class="{{modifier_class}}">test</div>
+//
+// Styleguide helper.boxModel
+
+.enable_utility_box_model() when(@enable-utility-box-model = true) {
+    .no-padding {
+        padding: 0 !important;
+    }
+
+    .no-padding-bottom {
+        padding-bottom: 0 !important;
+    }
+
+    .no-padding-top {
+        padding-top: 0 !important;
+    }
+
+    .no-padding-left {
+        padding-left: 0 !important;
+    }
+
+    .no-padding-right {
+        padding-right: 0 !important;
+    }
+
+    .no-margin {
+        margin: 0 !important;
+    }
+
+    .no-margin-bottom {
+        margin-bottom: 0 !important;
+    }
+
+    .no-margin-top {
+        margin-top: 0 !important;
+    }
+
+    .no-margin-left {
+        margin-left: 0 !important;
+    }
+
+    .no-margin-right {
+        margin-right: 0 !important;
+    }
+
+    .no-border {
+        border-width: 0;
+    }
+
+    .no-border-bottom {
+        border-bottom-width: 0;
+    }
+
+    .no-border-top {
+        border-top-width: 0;
+    }
+
+    .no-border-left {
+        border-left-width: 0;
+    }
+
+    .no-border-right {
+        border-right-width: 0;
+    }
+
+    .no-radius {
+        .border-radius(0) !important;
+    }
+
+    .no-text-shadow {
+        text-shadow: none !important;
+    }
+
+    .border-r {
+        border-right: 1px solid @base-border-color;
+    }
+}
+
+.enable_utility_box_model();

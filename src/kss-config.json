@@ -1,0 +1,17 @@
+{
+  "title": "Tiny'",
+  "source": [ "./less" ],
+  "destination": "../docs/styleguide",
+  "template": "../bower_components/kss-node-template-tiny",
+  "css": [
+    "../assets/tiny/css/bootstrap.css",
+    "../assets/tiny/css/tiny.css"
+  ],
+  "js": [
+    "../assets/jquery/dist/jquery.min.js",
+    "../assets/tiny/js/bootstrap.js",
+    "../assets/tiny/js/tiny.js",
+    "../assets/demo/demo.js"
+  ],
+  "xdemo": false
+}

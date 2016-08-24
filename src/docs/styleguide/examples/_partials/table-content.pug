@@ -1,0 +1,36 @@
+.panel.panel-transparent.no-border.flexbox
+  .panel-heading
+    h3.panel-title User List
+    .panel-tools.form-inline
+      .form-group
+        label 类别：
+        .btn-group.btn-group-sm(data-toggle='buttons')
+          label.btn.btn-default
+            input(type='radio', name='options')
+            | 类型一
+          label.btn.btn-default.active
+            input(type='radio', name='options')
+            | 类型二
+          label.btn.btn-default
+            input(type='radio', name='options')
+            | 类型三
+          label.btn.btn-default
+            input(type='radio', name='options')
+            | 类型四
+          label.btn.btn-default
+            input(type='radio', name='options')
+            | 类型五
+      .form-group.btn-toolbar
+        button.btn.btn-primary.btn-sm 新增
+        button.btn.btn-default.btn-sm 修改
+        button.btn.btn-default.btn-sm 删除
+  .panel-body.row-container.grow
+    .row.row-static
+      .col-static.col-xs-3.no-padding.border-r
+        include ../_includes/tiny/list/treeview.html
+      .col-static.col-xs-9.col-xs-offset-3.no-padding
+        .panel.no-margin.flexbox
+          include ../_includes/tiny/table/fixed-header-table.html
+          .panel-footer.panel-footer-sm
+            include ../_includes/bs3/nav/pagination-sm.html
+    
