@@ -1,17 +1,15 @@
 {
-  "title": "Tiny'",
+  "title": "Ver'",
   "source": [ "./less" ],
   "destination": "../docs/styleguide",
   "template": "../bower_components/kss-node-template-tiny",
   "css": [
-    "../assets/tiny/css/bootstrap.css",
-    "../assets/tiny/css/tiny.css"
+    "assets/veronica-ui/css/veronica-ui.css"
   ],
   "js": [
-    "../assets/jquery/dist/jquery.min.js",
-    "../assets/tiny/js/bootstrap.js",
-    "../assets/tiny/js/tiny.js",
-    "../assets/demo/demo.js"
+    "assets/jquery/dist/jquery.min.js",
+    "assets/veronica-ui/js/veronica-ui.js",
+    "assets/index.js"
   ],
   "xdemo": false
 }

@@ -61,5 +61,4 @@ veronica 的一个扩展，集合一些优秀的第三方库，完成前端界�
  cd src
 npm install -g grunt
 npm install
-grunt custom:core,data,binder,listview
-```
+grunt custom:core,data,binder,listview,numerictextbox

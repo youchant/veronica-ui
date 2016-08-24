@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<!--[if lte IE 6]>            <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IEMobile 7]>          <html class="no-js iem7" lang="en"> <![endif]-->
+<!--[if (IE 7)&(!IEMobile)]>  <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>                <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+    <title>VerUI&#x27; Styleguide</title>
+
+  <meta name="description" content="">
+  <meta name="generator" content="kss-node">
+  <meta name="viewport" content="width=device-width">
+  <link href="public/vs.css" rel="stylesheet" />
+  <link rel="stylesheet" href="public/kss.css">
+  <link rel="stylesheet" href="assets/veronica-ui/css/veronica-ui.css">
+
+  <!--[if lte IE 8]>
+    <script src="public/html5shiv.js"></script>
+    <script src="public/respond.js"></script>
+    <script src="public/es5-shim.js"></script>
+  <![endif]-->
+
+</head>
+<body id="kss-node" class="no-skin">
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+      <h1 class="kss-doc-title">
+          <span style="color:green;font-size: 140%;font-weight:bold;">VerUI&#x27;</span>
+            Styleguide
+          <i class="fa fa-leaf" style="color:green;vertical-align: super;"></i>
+      </h1>
+  </header>
+  <nav class="kss-nav">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a href="section-containers.html">
+          <span class="kss-nav__ref">1</span
+          ><span class="kss-nav__name">容器 Containers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a href="section-elements.html">
+          <span class="kss-nav__ref">2</span
+          ><span class="kss-nav__name">界面元素 Elements</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a href="section-forms.html">
+          <span class="kss-nav__ref">3</span
+          ><span class="kss-nav__name">表单 Forms</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a href="section-helper.html">
+          <span class="kss-nav__ref">4</span
+          ><span class="kss-nav__name">帮助类 Helper</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a href="section-icon.html">
+          <span class="kss-nav__ref">5</span
+          ><span class="kss-nav__name">字体图标 Font Icons</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a href="section-layouts.html">
+          <span class="kss-nav__ref">6</span
+          ><span class="kss-nav__name">布局 Layouts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a href="section-navigations.html">
+          <span class="kss-nav__ref">7</span
+          ><span class="kss-nav__name">导航 Navigations</span>
+        </a>
+        <ul class="kss-nav__menu-child">
+            <li class="kss-nav__menu-item">
+              <a href="section-navigations.html#kssref-navigations-menuvertical">
+                <span class="kss-nav__ref">7.1</span
+                ><span class="kss-nav__name">垂直菜单 Vertical Menu</span>
+              </a>
+            </li>
+            <li class="kss-nav__menu-item">
+              <a href="section-navigations.html#kssref-navigations-navbar">
+                <span class="kss-nav__ref">7.2</span
+                ><span class="kss-nav__name">横向导航 Navbar</span>
+              </a>
+            </li>
+            <li class="kss-nav__menu-item">
+              <a href="section-navigations.html#kssref-navigations-tabs">
+                <span class="kss-nav__ref">7.3</span
+                ><span class="kss-nav__name">选项卡 Tabs</span>
+              </a>
+            </li>
+        </ul>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a href="section-patches.html">
+          <span class="kss-nav__ref">8</span
+          ><span class="kss-nav__name">第三方库补丁 Patches</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<article role="main" class="kss-main">
+
+      <div     id="kssref-navigations" class="kss-section kss-section--depth-1">
+
+    <div class="kss-style">
+      <h1 class="kss-title kss-title--level-1">
+        <a class="kss-title__permalink" href="#kssref-navigations">
+          <span class="kss-title__ref">7</span
+          >导航 Navigations
+          <span class="kss-title__permalink-hash"><i class="fa fa-link"></i></span>
+        </a>
+      </h1>
+
+
+      <div class="kss-description">
+        <p>导航</p>
+
+      </div>
+    </div>
+
+
+      </div>
+      <section id="kssref-navigations-menuvertical" class="kss-section kss-section--depth-2">
+
+    <div class="kss-style">
+      <h2 class="kss-title kss-title--level-2">
+        <a class="kss-title__permalink" href="#kssref-navigations-menuvertical">
+          <span class="kss-title__ref">7.1</span
+          >垂直菜单 Vertical Menu
+          <span class="kss-title__permalink-hash"><i class="fa fa-link"></i></span>
+        </a>
+      </h2>
+
+
+      <div class="kss-description">
+        <p>垂直的导航，通常用作整个应用的主菜单</p>
+
+      </div>
+    </div>
+
+      <div class="kss-modifier__wrapper">
+        <div class="kss-modifier__heading kss-style">
+          Examples
+        </div>
+          <div class="kss-modifier__item">
+        <!--<div class="kss-modifier__default-name kss-style">
+          (default)
+        </div>-->
+        <div class="kss-modifier__example">
+          <div class="menu-vertical [modifier class]">
+    <ul class="nav menu-nav">
+        <li class="active open">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-desktop"></i>
+                <span class="menu-text">菜单项一</span>
+            </a>
+            <ul class="nav menu-submenu">
+                <li class="active">
+                    <a href="#">
+                        子菜单项一
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <span class="menu-text">
+                            子菜单项二
+                        </span>
+                    </a>
+                    <ul class="menu-submenu nav">
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon fa fa-circle-o"></i>
+                                三级菜单
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="menu-icon fa fa-circle-o"></i>
+                                <span class="menu-text">
+                                    三级菜单
+                                    <span class="badge badge-primary">5</span>
+                                </span>
+                            </a>
+                            <ul class="menu-submenu nav">
+                                <li class="">
+                                    <a href="#">
+                                        <i class="menu-icon fa fa-circle-o"></i>
+                                        四级菜单
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="menu-icon fa fa-pencil orange"></i>
+                                <span class="menu-text">
+                                    三级菜单
+                                    <span class="badge badge-primary">5</span>
+                                </span>
+                            </a>
+                            <ul class="menu-submenu nav">
+                                <li class="">
+                                    <a href="#">
+                                        <i class="menu-icon fa fa-plus purple"></i>
+                                        四级菜单
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <span class="menu-text">
+                            子菜单项三
+                        </span>
+                    </a>
+                    <ul class="menu-submenu nav">
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon fa fa-leaf green"></i>
+                                三级菜单
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="menu-icon fa fa-phone"></i>
+                <span class="menu-text">菜单项二</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+        </div>
+          </div>
+          <div class="kss-modifier__item">
+              <div class="kss-modifier__name kss-style">
+                  .menu-vertical-multilevel
+              </div>
+              <div class="kss-modifier__description kss-style">
+                  多层级
+              </div>
+              <div class="kss-modifier__example">
+                  <div class="menu-vertical menu-vertical-multilevel">
+    <ul class="nav menu-nav">
+        <li class="active open">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-desktop"></i>
+                <span class="menu-text">菜单项一</span>
+            </a>
+            <ul class="nav menu-submenu">
+                <li class="active">
+                    <a href="#">
+                        子菜单项一
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <span class="menu-text">
+                            子菜单项二
+                        </span>
+                    </a>
+                    <ul class="menu-submenu nav">
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon fa fa-circle-o"></i>
+                                三级菜单
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="menu-icon fa fa-circle-o"></i>
+                                <span class="menu-text">
+                                    三级菜单
+                                    <span class="badge badge-primary">5</span>
+                                </span>
+                            </a>
+                            <ul class="menu-submenu nav">
+                                <li class="">
+                                    <a href="#">
+                                        <i class="menu-icon fa fa-circle-o"></i>
+                                        四级菜单
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="menu-icon fa fa-pencil orange"></i>
+                                <span class="menu-text">
+                                    三级菜单
+                                    <span class="badge badge-primary">5</span>
+                                </span>
+                            </a>
+                            <ul class="menu-submenu nav">
+                                <li class="">
+                                    <a href="#">
+                                        <i class="menu-icon fa fa-plus purple"></i>
+                                        四级菜单
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <span class="menu-text">
+                            子菜单项三
+                        </span>
+                    </a>
+                    <ul class="menu-submenu nav">
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon fa fa-leaf green"></i>
+                                三级菜单
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="menu-icon fa fa-phone"></i>
+                <span class="menu-text">菜单项二</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+              </div>
+          </div>
+
+          <div class="kss-modifier__item">
+              <div class="kss-modifier__name kss-style">
+                  .menu-vertical-min
+              </div>
+              <div class="kss-modifier__description kss-style">
+                  迷你型
+              </div>
+              <div class="kss-modifier__example">
+                  <div class="menu-vertical menu-vertical-min">
+    <ul class="nav menu-nav">
+        <li class="active open">
+            <a href="#" class="dropdown-toggle">
+                <i class="menu-icon fa fa-desktop"></i>
+                <span class="menu-text">菜单项一</span>
+            </a>
+            <ul class="nav menu-submenu">
+                <li class="active">
+                    <a href="#">
+                        子菜单项一
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <span class="menu-text">
+                            子菜单项二
+                        </span>
+                    </a>
+                    <ul class="menu-submenu nav">
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon fa fa-circle-o"></i>
+                                三级菜单
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="menu-icon fa fa-circle-o"></i>
+                                <span class="menu-text">
+                                    三级菜单
+                                    <span class="badge badge-primary">5</span>
+                                </span>
+                            </a>
+                            <ul class="menu-submenu nav">
+                                <li class="">
+                                    <a href="#">
+                                        <i class="menu-icon fa fa-circle-o"></i>
+                                        四级菜单
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="menu-icon fa fa-pencil orange"></i>
+                                <span class="menu-text">
+                                    三级菜单
+                                    <span class="badge badge-primary">5</span>
+                                </span>
+                            </a>
+                            <ul class="menu-submenu nav">
+                                <li class="">
+                                    <a href="#">
+                                        <i class="menu-icon fa fa-plus purple"></i>
+                                        四级菜单
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <span class="menu-text">
+                            子菜单项三
+                        </span>
+                    </a>
+                    <ul class="menu-submenu nav">
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon fa fa-leaf green"></i>
+                                三级菜单
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="menu-icon fa fa-phone"></i>
+                <span class="menu-text">菜单项二</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+              </div>
+          </div>
+
+      </div>
+
+      <div class="kss-markup kss-style">
+        <pre class="lang-html html"><code data-language="html" class="html">&lt;div class=&quot;menu-vertical [modifier class]&quot;&gt;
+    &lt;ul class=&quot;nav menu-nav&quot;&gt;
+        &lt;li class=&quot;active open&quot;&gt;
+            &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot;&gt;
+                &lt;i class=&quot;menu-icon fa fa-desktop&quot;&gt;&lt;/i&gt;
+                &lt;span class=&quot;menu-text&quot;&gt;菜单项一&lt;/span&gt;
+            &lt;/a&gt;
+            &lt;ul class=&quot;nav menu-submenu&quot;&gt;
+                &lt;li class=&quot;active&quot;&gt;
+                    &lt;a href=&quot;#&quot;&gt;
+                        子菜单项一
+                    &lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot;&gt;
+                        &lt;span class=&quot;menu-text&quot;&gt;
+                            子菜单项二
+                        &lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;ul class=&quot;menu-submenu nav&quot;&gt;
+                        &lt;li&gt;
+                            &lt;a href=&quot;#&quot;&gt;
+                                &lt;i class=&quot;menu-icon fa fa-circle-o&quot;&gt;&lt;/i&gt;
+                                三级菜单
+                            &lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                            &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot;&gt;
+                                &lt;i class=&quot;menu-icon fa fa-circle-o&quot;&gt;&lt;/i&gt;
+                                &lt;span class=&quot;menu-text&quot;&gt;
+                                    三级菜单
+                                    &lt;span class=&quot;badge badge-primary&quot;&gt;5&lt;/span&gt;
+                                &lt;/span&gt;
+                            &lt;/a&gt;
+                            &lt;ul class=&quot;menu-submenu nav&quot;&gt;
+                                &lt;li class=&quot;&quot;&gt;
+                                    &lt;a href=&quot;#&quot;&gt;
+                                        &lt;i class=&quot;menu-icon fa fa-circle-o&quot;&gt;&lt;/i&gt;
+                                        四级菜单
+                                    &lt;/a&gt;
+                                &lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                            &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot;&gt;
+                                &lt;i class=&quot;menu-icon fa fa-pencil orange&quot;&gt;&lt;/i&gt;
+                                &lt;span class=&quot;menu-text&quot;&gt;
+                                    三级菜单
+                                    &lt;span class=&quot;badge badge-primary&quot;&gt;5&lt;/span&gt;
+                                &lt;/span&gt;
+                            &lt;/a&gt;
+                            &lt;ul class=&quot;menu-submenu nav&quot;&gt;
+                                &lt;li class=&quot;&quot;&gt;
+                                    &lt;a href=&quot;#&quot;&gt;
+                                        &lt;i class=&quot;menu-icon fa fa-plus purple&quot;&gt;&lt;/i&gt;
+                                        四级菜单
+                                    &lt;/a&gt;
+                                &lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot;&gt;
+                        &lt;span class=&quot;menu-text&quot;&gt;
+                            子菜单项三
+                        &lt;/span&gt;
+                    &lt;/a&gt;
+                    &lt;ul class=&quot;menu-submenu nav&quot;&gt;
+                        &lt;li&gt;
+                            &lt;a href=&quot;#&quot;&gt;
+                                &lt;i class=&quot;menu-icon fa fa-leaf green&quot;&gt;&lt;/i&gt;
+                                三级菜单
+                            &lt;/a&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;a href=&quot;#&quot;&gt;
+                &lt;i class=&quot;menu-icon fa fa-phone&quot;&gt;&lt;/i&gt;
+                &lt;span class=&quot;menu-text&quot;&gt;菜单项二&lt;/span&gt;
+            &lt;/a&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+      </div>
+
+      </section>
+      <section id="kssref-navigations-navbar" class="kss-section kss-section--depth-2">
+
+    <div class="kss-style">
+      <h2 class="kss-title kss-title--level-2">
+        <a class="kss-title__permalink" href="#kssref-navigations-navbar">
+          <span class="kss-title__ref">7.2</span
+          >横向导航 Navbar
+          <span class="kss-title__permalink-hash"><i class="fa fa-link"></i></span>
+        </a>
+      </h2>
+
+
+      <div class="kss-description">
+        <p>来源于 Bootsrap</p>
+
+      </div>
+    </div>
+
+      <div class="kss-modifier__wrapper">
+        <div class="kss-modifier__heading kss-style">
+          Examples
+        </div>
+          <div class="kss-modifier__item">
+        <!--<div class="kss-modifier__default-name kss-style">
+          (default)
+        </div>-->
+        <div class="kss-modifier__example">
+          ﻿
+<nav class="navbar [modifier class]">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+        </div>
+          </div>
+          <div class="kss-modifier__item">
+              <div class="kss-modifier__name kss-style">
+                  .navbar-default
+              </div>
+              <div class="kss-modifier__description kss-style">
+                  默认的
+              </div>
+              <div class="kss-modifier__example">
+                  ﻿
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+              </div>
+          </div>
+
+          <div class="kss-modifier__item">
+              <div class="kss-modifier__name kss-style">
+                  .navbar-inverse
+              </div>
+              <div class="kss-modifier__description kss-style">
+                  反色调
+              </div>
+              <div class="kss-modifier__example">
+                  ﻿
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+              </div>
+          </div>
+
+          <div class="kss-modifier__item">
+              <div class="kss-modifier__name kss-style">
+                  .navbar-dark
+              </div>
+              <div class="kss-modifier__description kss-style">
+                  深色
+              </div>
+              <div class="kss-modifier__example">
+                  ﻿
+<nav class="navbar navbar-dark">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+              </div>
+          </div>
+
+      </div>
+
+      <div class="kss-markup kss-style">
+        <pre class="lang-html html"><code data-language="html" class="html">﻿
+&lt;nav class=&quot;navbar [modifier class]&quot;&gt;
+    &lt;div class=&quot;container-fluid&quot;&gt;
+        &lt;div class=&quot;navbar-header&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;navbar-toggle collapsed&quot; data-toggle=&quot;collapse&quot; data-target=&quot;#bs-example-navbar-collapse-1&quot;&gt;
+                &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
+                &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&gt;Brand&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;
+            &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+                &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Link &lt;span class=&quot;sr-only&quot;&gt;(current)&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+                &lt;li class=&quot;dropdown&quot;&gt;
+                    &lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot; role=&quot;button&quot; aria-expanded=&quot;false&quot;&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/a&gt;
+                    &lt;ul class=&quot;dropdown-menu&quot; role=&quot;menu&quot;&gt;
+                        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Action&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                        &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+                        &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;One more separated link&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;form class=&quot;navbar-form navbar-left&quot; role=&quot;search&quot;&gt;
+                &lt;div class=&quot;form-group&quot;&gt;
+                    &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;Search&quot;&gt;
+                &lt;/div&gt;
+                &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Submit&lt;/button&gt;
+            &lt;/form&gt;
+            &lt;ul class=&quot;nav navbar-nav navbar-right&quot;&gt;
+                &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+</code></pre>
+      </div>
+
+      </section>
+      <section id="kssref-navigations-tabs" class="kss-section kss-section--depth-2">
+
+    <div class="kss-style">
+      <h2 class="kss-title kss-title--level-2">
+        <a class="kss-title__permalink" href="#kssref-navigations-tabs">
+          <span class="kss-title__ref">7.3</span
+          >选项卡 Tabs
+          <span class="kss-title__permalink-hash"><i class="fa fa-link"></i></span>
+        </a>
+      </h2>
+
+
+      <div class="kss-description">
+        <p>通常用于类别分组，是常用的布局组件，基于 Bootstrap Tabs</p>
+
+      </div>
+    </div>
+
+      <div class="kss-modifier__wrapper">
+        <div class="kss-modifier__heading kss-style">
+          Examples
+        </div>
+          <div class="kss-modifier__item">
+        <!--<div class="kss-modifier__default-name kss-style">
+          (default)
+        </div>-->
+        <div class="kss-modifier__example">
+          <div class="">
+    <ul class="nav nav-tabs [modifier class]" id="myTab">
+        <li class="active">
+            <a data-toggle="tab" href="#home">
+                <i class="green tiny-icon fa fa-home bigger-120"></i>
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a data-toggle="tab" href="#messages">
+                Messages
+                <span class="badge badge-danger">4</span>
+            </a>
+        </li>
+
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                Dropdown &nbsp;
+                <i class="tiny-icon fa fa-caret-down bigger-110 width-auto"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-info">
+                <li>
+                    <a data-toggle="tab" href="#dropdown1">@fat</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#dropdown2">@mdo</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+        </div>
+
+        <div id="messages" class="tab-pane fade">
+            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+        </div>
+
+        <div id="dropdown1" class="tab-pane fade">
+            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
+        </div>
+
+        <div id="dropdown2" class="tab-pane fade">
+            <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.</p>
+        </div>
+    </div>
+</div>
+
+        </div>
+          </div>
+          <div class="kss-modifier__item">
+              <div class="kss-modifier__name kss-style">
+                  .nav-tabs-solid
+              </div>
+              <div class="kss-modifier__description kss-style">
+                  该样式中未激活选项卡项都带背景边框
+              </div>
+              <div class="kss-modifier__example">
+                  <div class="">
+    <ul class="nav nav-tabs nav-tabs-solid" id="myTab">
+        <li class="active">
+            <a data-toggle="tab" href="#home">
+                <i class="green tiny-icon fa fa-home bigger-120"></i>
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a data-toggle="tab" href="#messages">
+                Messages
+                <span class="badge badge-danger">4</span>
+            </a>
+        </li>
+
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                Dropdown &nbsp;
+                <i class="tiny-icon fa fa-caret-down bigger-110 width-auto"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-info">
+                <li>
+                    <a data-toggle="tab" href="#dropdown1">@fat</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#dropdown2">@mdo</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+        </div>
+
+        <div id="messages" class="tab-pane fade">
+            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+        </div>
+
+        <div id="dropdown1" class="tab-pane fade">
+            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
+        </div>
+
+        <div id="dropdown2" class="tab-pane fade">
+            <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.</p>
+        </div>
+    </div>
+</div>
+
+              </div>
+          </div>
+
+      </div>
+
+      <div class="kss-markup kss-style">
+        <pre class="lang-html html"><code data-language="html" class="html">&lt;div class=&quot;&quot;&gt;
+    &lt;ul class=&quot;nav nav-tabs [modifier class]&quot; id=&quot;myTab&quot;&gt;
+        &lt;li class=&quot;active&quot;&gt;
+            &lt;a data-toggle=&quot;tab&quot; href=&quot;#home&quot;&gt;
+                &lt;i class=&quot;green tiny-icon fa fa-home bigger-120&quot;&gt;&lt;/i&gt;
+                Home
+            &lt;/a&gt;
+        &lt;/li&gt;
+
+        &lt;li&gt;
+            &lt;a data-toggle=&quot;tab&quot; href=&quot;#messages&quot;&gt;
+                Messages
+                &lt;span class=&quot;badge badge-danger&quot;&gt;4&lt;/span&gt;
+            &lt;/a&gt;
+        &lt;/li&gt;
+
+        &lt;li class=&quot;dropdown&quot;&gt;
+            &lt;a data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle&quot; href=&quot;#&quot;&gt;
+                Dropdown &amp;nbsp;
+                &lt;i class=&quot;tiny-icon fa fa-caret-down bigger-110 width-auto&quot;&gt;&lt;/i&gt;
+            &lt;/a&gt;
+
+            &lt;ul class=&quot;dropdown-menu dropdown-info&quot;&gt;
+                &lt;li&gt;
+                    &lt;a data-toggle=&quot;tab&quot; href=&quot;#dropdown1&quot;&gt;@fat&lt;/a&gt;
+                &lt;/li&gt;
+
+                &lt;li&gt;
+                    &lt;a data-toggle=&quot;tab&quot; href=&quot;#dropdown2&quot;&gt;@mdo&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;tab-content&quot;&gt;
+        &lt;div id=&quot;home&quot; class=&quot;tab-pane fade in active&quot;&gt;
+            &lt;p&gt;Raw denim you probably haven&#x27;t heard of them jean shorts Austin.&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;messages&quot; class=&quot;tab-pane fade&quot;&gt;
+            &lt;p&gt;Food truck fixie locavore, accusamus mcsweeney&#x27;s marfa nulla single-origin coffee squid.&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;dropdown1&quot; class=&quot;tab-pane fade&quot;&gt;
+            &lt;p&gt;Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney&#x27;s organic lomo retro fanny pack lo-fi farm-to-table readymade.&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div id=&quot;dropdown2&quot; class=&quot;tab-pane fade&quot;&gt;
+            &lt;p&gt;Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+      </div>
+
+      </section>
+</article>
+
+<!-- SCRIPTS -->
+<script src="public/kss.js"></script>
+<script src="public/highlight.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<script src="assets/jquery/dist/jquery.min.js"></script>
+<script src="assets/veronica-ui/js/veronica-ui.js"></script>
+<script src="assets/index.js"></script>
+
+
+
+<!-- Automatically generated using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>

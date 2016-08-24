@@ -3,7 +3,9 @@ define([
     './base/binders',
     './base/validation',
     './ui/dataTable',
+    './ui/tree',
     './ui/dynamicTab',
+    './ui/submenu',
     './ui/notify'
 ], function (store) {
     return {

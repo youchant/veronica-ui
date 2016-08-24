@@ -1,0 +1,664 @@
+// ------------------------------------------------------------------------------
+//   @group Variables - Colors, Fonts, etc.
+// ------------------------------------------------------------------------------
+@kss-colors-background: #fff;
+
+@kss-colors-foreground: #444;
+@kss-colors-heading: #111;
+@kss-colors-quotes: #999;
+
+@kss-colors-link: #0645ad;
+@kss-colors-link-visited: #0645ad;
+@kss-colors-link-hover: lighten(@kss-colors-link, 20%);
+@kss-colors-link-active: #faa700;
+
+@kss-font-body: Avenir, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+@kss-font-blockquote: Avenir, 'Helvetica Neue', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
+@kss-font-code: Consolas, Courier, 'Courier New', monospace;
+
+@kss-font-size: 14px;
+@kss-vertical-rhythm: @kss-font-size * 1.5;
+@kss-section-border: #ccc;
+@kss-group-border: #ddd;
+
+// ------------------------------------------------------------------------------
+// Wrap all of this template's base HTML styling inside a .kss-style selector.
+// ------------------------------------------------------------------------------
+
+.kss-style {
+    color: @kss-colors-foreground;
+    font-family: @kss-font-body;
+    font-size: @kss-font-size;
+    line-height: @kss-vertical-rhythm;
+
+    &body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form,
+    fieldset, legend, input, textarea, p, blockquote, th, td, hr,
+    button, article, aside, details, figcaption, figure, footer, header, menu, nav, section {
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        color: @kss-colors-link;
+        text-decoration: none;
+        transition-property: color;
+        transition-duration: 0.5s;
+
+        &:visited {
+            color: @kss-colors-link-visited;
+        }
+
+        &:hover,
+        &:focus {
+            color: @kss-colors-link-hover;
+        }
+
+        &:active {
+            color: @kss-colors-link-active;
+        }
+
+        &:hover,
+        &:active {
+            outline: 0;
+        }
+    }
+
+    p,
+    pre,
+    ul,
+    ol,
+    dl,
+    form,
+    hr,
+    table {
+        margin-bottom: 16px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Helvetica Neue', 'Microsoft Yahei', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
+        font-weight: 200;
+        color: #000;
+        margin-bottom: 0.4em;
+        line-height: 1.5;
+    }
+
+    h4, h5, h6 {
+        font-weight: bold;
+    }
+
+    h1 {
+        font-size: @kss-font-size * 2;
+    }
+
+    h2 {
+        font-size: @kss-font-size * 1.8;
+    }
+
+    h3 {
+        font-size: @kss-font-size * 1.6;
+    }
+
+    h4 {
+        font-size: @kss-font-size * 1.4;
+    }
+
+    h5 {
+        font-size: @kss-font-size * 1.2;
+    }
+
+    h6 {
+        font-size: @kss-font-size * 1.2;
+    }
+
+    blockquote {
+        position: relative;
+        font-weight: 300;
+        font-size: 1em;
+        font-family: @kss-font-blockquote;
+        border-left: 1px solid #1abc9c;
+        padding: 0;
+        padding-left: 1em;
+        margin: 1em 3em 1em 2em;
+        color: @kss-colors-quotes;
+    }
+
+
+    @media only screen and ( max-width:640px ) {
+        blockquote {
+            margin: 1em 0;
+        }
+    }
+
+    acronym, abbr {
+        border-bottom: 1px dotted;
+        font-variant: normal;
+    }
+
+    abbr {
+        cursor: help;
+    }
+
+    del {
+        text-decoration: line-through;
+    }
+
+    address, caption, cite, code, dfn, em, th, var {
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    ul, ol {
+        list-style: none;
+    }
+
+    caption, th {
+        text-align: left;
+    }
+
+    q:before, q:after {
+        content: '';
+    }
+
+    sub, sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+    }
+
+    :root sub, :root sup {
+        vertical-align: baseline; /* for ie9 and other modern browsers */
+    }
+
+    sup {
+        top: -0.5em;
+    }
+
+    sub {
+        bottom: -0.25em;
+    }
+    //----------
+    hr {
+        border: none;
+        border-bottom: 1px solid #cfcfcf;
+        margin-bottom: 10px;
+        *color: pink;
+        *filter: chroma(color=pink);
+        height: 10px;
+        *margin: -7px 0 2px;
+    }
+
+    pre, code, kbd, samp {
+        font-family: @kss-font-code;
+        font-size: 0.9em;
+    }
+
+    pre {
+        white-space: pre;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        border: 0;
+    }
+
+    ins {
+        color: @kss-colors-heading;
+        background: #ff9;
+        text-decoration: none;
+    }
+
+    li ul, li ol {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 2em;
+    }
+
+    ul {
+        margin-left: 1.3em;
+        list-style: disc;
+    }
+
+    ol {
+        list-style: decimal;
+        margin-left: 1.9em;
+    }
+
+    img {
+        max-width: 100%;
+        border: 0;
+        -ms-interpolation-mode: bicubic;
+        vertical-align: middle;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+
+        th, td, caption {
+            border: 1px solid #ddd;
+            padding: 0.5em 1em;
+            color: #666;
+        }
+
+        th {
+            background: #fbfbfb;
+        }
+
+        thead th {
+            background: #f1f1f1;
+        }
+
+        caption {
+            border-bottom: none;
+        }
+    }
+
+    .hljs {
+        padding: 8px;
+    }
+
+    @media print {
+        a, a:visited {
+            text-decoration: underline;
+        }
+
+        hr {
+            height: 1px;
+            border: 0;
+            border-bottom: 1px solid black;
+        }
+
+        a[href]:after {
+            content: " (" attr(href) ")";
+        }
+
+        a[href^="javascript:"]:after, a[href^="#"]:after {
+            content: "";
+        }
+
+        abbr[title]:after {
+            content: " (" attr(title) ")";
+        }
+
+        pre, blockquote {
+            border: 1px solid #999;
+            padding-right: 1em;
+            page-break-inside: avoid;
+        }
+
+        tr, img {
+            page-break-inside: avoid;
+        }
+
+        img {
+            max-width: 100% !important;
+        }
+
+        p, h2, h3 {
+            orphans: 3;
+            widows: 3;
+        }
+
+        h2, h3 {
+            page-break-after: avoid;
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------
+// Layout and page background
+// ------------------------------------------------------------------------------
+
+#kss-node {
+    margin: 0;
+    padding: 20px;
+    background: #fff;
+
+    @media screen and (min-width: 769px) {
+        padding: 0;
+
+        .kss-main,
+        .kss-sidebar {
+            float: left;
+            margin-right: -100%;
+            box-sizing: border-box;
+        }
+    }
+
+    .kss-main {
+        width: 100%;
+        margin: 0 auto;
+
+        @media screen and (min-width: 769px) {
+            width: 80%;
+            margin-top: 20px;
+            margin-left: 20%;
+            padding: 0 20px 0 30px;
+        }
+    }
+
+    .kss-sidebar {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+
+        @media screen and (min-width: 769px) {
+            position: fixed;
+            width: 20%;
+            padding: 0 10px 0 20px;
+            border-bottom: 0;
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------
+// Sidebar-area components
+// ------------------------------------------------------------------------------
+
+#kss-node {
+
+    .kss-doc-title {
+        /*margin: 0 0 20px;*/
+        @media screen and (min-width: 769px) {
+            font-size: 1.5em;
+        }
+    }
+
+    .kss-header,
+    .kss-nav {
+        @media screen and (min-width: 769px) {
+            margin-top: 2em;
+            padding: 3px;
+        }
+    }
+
+    .kss-nav {
+        background: #efefef;
+        border-radius: 2px;
+    }
+
+    .kss-nav__menu {
+        background: #fafafb;
+        border: 1px solid #d8d8d8;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-size: 0;
+    }
+
+    .kss-nav__menu-item {
+        display: inline-block;
+        padding-right: @kss-vertical-rhythm;
+        line-height: 1.3;
+        color: #222;
+        font-size: 13px;
+        font-weight: bold;
+
+        &:hover {
+            background: #fdfdfe;
+            text-decoration: none;
+        }
+
+        > a {
+            display: block;
+            padding: 7px 7px 7px 5px;
+            text-decoration: none;
+            color: #888;
+        }
+
+        @media screen and (min-width: 769px) {
+            display: list-item;
+            padding-right: 0;
+
+            > a {
+                border-bottom: 1px solid #e3e3e3;
+            }
+        }
+    }
+
+    .kss-nav__menu-child {
+        display: none;
+
+        @media screen and (min-width: 769px) {
+            display: block;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            border-bottom: 1px solid #e3e3e3;
+            list-style-type: none;
+
+            .kss-nav__menu-item {
+                line-height: 1.3;
+                font-size: 12px;
+
+                > a {
+                    display: block;
+                    padding: 7px 7px 7px 25px;
+                    text-decoration: none;
+                    border-bottom: 0;
+                    color: #888;
+                }
+            }
+        }
+    }
+
+    .kss-nav__ref {
+        float: left;
+        margin-right: 10px;
+
+        &:after {
+            content: ' ';
+        }
+    }
+
+    .kss-nav__name {
+        color: #333;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        /*text-align: right;*/
+    }
+
+    .kss-nav__menu-child .kss-nav__ref {
+        /*font-weight: normal;*/
+    }
+}
+
+// ------------------------------------------------------------------------------
+// Content-area components
+// ------------------------------------------------------------------------------
+
+#kss-node {
+
+    .kss-section {
+        /*max-width: 48em;*/
+        margin-bottom: (@kss-vertical-rhythm * 2);
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid @kss-section-border;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .kss-overview {
+        padding: 10px;
+    }
+
+    .kss-description {
+        padding: 10px 15px 0;
+        background-color: #fafafa;
+        border-bottom: 1px solid @kss-group-border;
+
+        pre {
+            border: 1px solid #cccccc;
+        }
+    }
+
+    .kss-title {
+        margin: -1px -1px 0;
+        padding: 15px;
+        color: #fff;
+        font-size: 14px;
+        text-transform: uppercase;
+        background: #333;
+        border-top: 1px solid #000;
+        border-radius: 3px 3px 0 0;
+    }
+
+    .kss-title__ref {
+        display: inline-block;
+        margin-right: 5px;
+        line-height: @kss-font-size;
+
+        &:before {
+            content: ' ';
+        }
+    }
+
+    .kss-title__permalink {
+        display: block;
+        color: white;
+        text-decoration: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: white;
+
+            @media screen and (min-width: 607px) {
+                .kss-title__permalink-hash {
+                    display: inline;
+                }
+            }
+        }
+    }
+
+    .kss-title__permalink-hash {
+        display: none;
+        font-size: 80%;
+        line-height: 1;
+        color: #ccc;
+    }
+
+    .kss-parameters {
+        display: table;
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 15px;
+        padding-top: 10px;
+    }
+
+    .kss-parameters__item {
+        display: table-row;
+    }
+
+    .kss-parameters__name {
+        display: table-cell;
+        padding-right: 20px;
+    }
+
+    .kss-parameters__description {
+        display: table-cell;
+    }
+
+
+    .kss-modifier__wrapper {
+        border: 0 solid #ccc;
+        padding: 0;
+    }
+
+    .kss-modifier__heading {
+        margin: 0;
+        padding: 5px 10px;
+        border-bottom: 1px solid @kss-group-border;
+        background-color: #eee;
+        font-weight: bold;
+    }
+
+    .kss-modifier__default-name {
+        /*font-weight: bold;
+        margin-bottom: (@kss-vertical-rhythm / 2);*/
+    }
+
+    .kss-modifier__item {
+        border-top: 1px solid #eee;
+        position: relative;
+    }
+
+    .kss-modifier__heading + .kss-modifier__item {
+        border-top: 1px solid transparent;
+    }
+
+    .kss-modifier__name,
+    .kss-modifier__default-name {
+        /*float: left;
+        padding-right: 10px;*/
+        font-weight: bold;
+        display: block;
+        /*position: absolute;
+        top: 0;
+        right: 0;*/
+        padding: 5px 15px;
+        margin: 0;
+        background: #f9f9f9;
+        border: 1px solid #eee;
+        border-top: 0;
+        border-left: 2px solid green;
+    }
+
+    .kss-modifier__description {
+        color: #999;
+        margin-bottom: 10.5px;
+        padding: 10px 10px 0 10px;
+        margin-bottom: (@kss-vertical-rhythm / 2);
+    }
+
+    .kss-modifier__example {
+        clear: left;
+        padding: 1px 0; // Contain the example's margins.
+        margin: 20px 10px (@kss-vertical-rhythm - 1px) 10px;
+        position: relative; // 包裹绝对定位的元素
+        &:last-child {
+            /*margin: 0;*/
+        }
+    }
+
+    .kss-markup {
+        margin: 0;
+        border-top: 1px solid @kss-group-border;
+        max-height: 400px;
+        overflow: auto;
+    }
+
+    .kss-markup pre {
+        margin: 0;
+    }
+
+    .kss-color {
+        line-height: 50px;
+    }
+
+    .kss-color__swatch {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        border: 2px solid #000;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+
+    .kss-color__variable {
+        margin-right: 10px;
+    }
+
+    .kss-github {
+        display: none;
+
+        @media screen and (min-width: 501px) {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        img {
+            border: 0;
+        }
+    }
+}

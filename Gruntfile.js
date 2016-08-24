@@ -114,28 +114,24 @@ module.exports = function (grunt) {
                     filter: 'isFile', flatten: true
                 }]
             },
-            site: {
+            styleguide: {
                 files: [{
                     expand: true,
                     cwd: 'bower_components/',
                     src: [
-                        'font-awesome/**/*',
-                        'jquery.scrollbar/**/*',
-                        'html5shiv/**/*',
-                        'respond/**/*',
                         'jquery/**/*'
                     ],
-                    dest: 'site/assets'
+                    dest: 'docs/styleguide/assets'
                 }, {
                     expand: true,
                     cwd: 'dist/',
                     src: ['**/*'],
-                    dest: 'site/assets/tiny'
+                    dest: 'docs/styleguide/assets/veronica-ui'
                 }, {
                     expand: true,
-                    cwd: 'src/assets/',
-                    src: ['demo/**/*'],
-                    dest: 'site/assets/'
+                    cwd: 'src/styleguide/',
+                    src: ['**/*.js'],
+                    dest: 'docs/styleguide/assets'
                 }, {
                     src: 'src/assets/demo/index.html',
                     dest: 'site/index.html'
@@ -154,12 +150,9 @@ module.exports = function (grunt) {
                 report: 'gzip'
             },
             main: {
-                files: [{
-                    expand: true,
-                    cwd: 'dist/js',
-                    src: '**/*.js',
-                    dest: 'dist/js'
-                }]
+                files: {
+                    'dist/js/veronica-ui.min.js': ['dist/js/veronica-ui.js']
+                }
             }
         },
         kss: {
@@ -173,9 +166,9 @@ module.exports = function (grunt) {
             compile: {
                 files: [{
                     expand: true,
-                    cwd: "./src/examples",
+                    cwd: "./src/styleguide/examples",
                     src: "*.pug",
-                    dest: "./site/examples",
+                    dest: "./docs/styleguide/examples",
                     ext: ".html"
                 }]
             }
@@ -194,6 +187,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('script', ['requirejs', 'clean:script', 'uglify']);
     grunt.registerTask('style', ['less', 'copy:style', 'concat:style']);
-    grunt.registerTask('styleguide', ['style', 'copy:styleguide', 'pug', 'kss', 'clean:include']);
+    grunt.registerTask('release', ['style', 'script']);
+    grunt.registerTask('styleguide', ['copy:styleguide', 'pug', 'kss']);
 
 };
