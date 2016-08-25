@@ -9,7 +9,7 @@ define([
                 uiKit: ''
             },
             methods: {
-                _uiKit: function() {
+                _uiKit: function () {
                     return app.uiKit.get(this.options.uiKit);
                 },
                 /**
@@ -22,7 +22,7 @@ define([
                  *   }
                  */
                 instance: function (el) {
-                    this._uiKit().getInstance(this, this.$(el));
+                    return this._uiKit().getInstance(this, this.$(el));
                 }
             }
         });
@@ -31,7 +31,7 @@ define([
             this._uiKit().init(this, this.$el);
         });
 
-        base._extendMethod('_destroy', function() {
+        base._extendMethod('_destroy', function () {
             this._uiKit().destroy(this);
         });
     }
