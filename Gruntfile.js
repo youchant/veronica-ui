@@ -3,7 +3,7 @@
 
 module.exports = function (grunt) {
 
-    var thirdPath = '../../bower_components';
+    var thirdPath = '../../node_modules'; // '../../bower_components';
     var nodeModulePath = './node_modules';
     function createOptions(moduleName) {
         var options = {
@@ -11,23 +11,24 @@ module.exports = function (grunt) {
             dir: './dist/js',
             paths: {
                 "jquery": "empty:",
+                'bootstrap': '../assets/bootstrap-flat/bootstrap',
                 'kendo-ui': '../assets/kendo-ui-core/kendo.custom',
                 'kendo-ui-messages': '../assets/kendo-ui-core/kendo.messages.zh-CN',
-                'kendo-ui-culture': '../assets/kendo-ui-core/kendo.messages.zh-CN',
+                'kendo-ui-culture': '../assets/kendo-ui-core/kendo.culture.zh-CN',
                 'text': thirdPath + '/requirejs-text/text',
-                'bootstrap': thirdPath + '/bootstrap/dist/js/bootstrap',
-                'bootstrap-datetimepicker': thirdPath + '/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker',
-                'bootstrap-datetimepicker-cn': thirdPath + '/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN',
-                'jquery-form': thirdPath + '/jquery-form/jquery.form',
+                'bootstrap-datetimepicker': thirdPath + '/bootstrap-datetime-picker/js/bootstrap-datetimepicker',
+                'bootstrap-datetimepicker-cn': thirdPath + '/bootstrap-datetime-picker/js/locales/bootstrap-datetimepicker.zh-CN',
                 'jquery-validation': thirdPath + '/jquery-validation/dist/jquery.validate',
                 'jquery-validation-unobtrusive': thirdPath + '/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
-                'jquery-validation-bootstrap-tooltip': thirdPath + '/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
-                'noty': thirdPath + '/noty/js/noty/packaged/jquery.noty.packaged',
-                'jquery-inputmask': thirdPath + '/jquery.inputmask/dist/jquery.inputmask.bundle',
-                'table-to-json': thirdPath + '/table-to-json/lib/jquery.tabletojson',
-                'form2js': thirdPath + '/form2js/src/form2js',
-                'jquery-placeholder': thirdPath + '/jquery-placeholder/jquery.placeholder',
-                'es5-shim': thirdPath + '/es5-shim/es5-shim'
+                'jquery-validation-bootstrap-tooltip': '../assets/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
+                'noty': thirdPath + '/noty/js/noty/packaged/jquery.noty.packaged'
+                //,
+                //'jquery-form': thirdPath + '/jquery-form/jquery.form',
+                //'jquery-inputmask': thirdPath + '/jquery.inputmask/dist/jquery.inputmask.bundle',
+                //'table-to-json': thirdPath + '/table-to-json/lib/jquery.tabletojson',
+                //'form2js': thirdPath + '/form2js/src/form2js',
+                //'jquery-placeholder': thirdPath + '/jquery-placeholder/jquery.placeholder',
+                //'es5-shim': thirdPath + '/es5-shim/es5-shim'
             },
             shim: {
                 'jquery-validation-bootstrap-tooltip': {
@@ -38,6 +39,12 @@ module.exports = function (grunt) {
                 },
                 'bootstrap-datetimepicker-cn': {
                     deps: ['bootstrap-datetimepicker']
+                },
+                'kendo-ui-messages': {
+                    deps: ['kendo-ui']
+                },
+                'kendo-ui-culture': {
+                    deps: ['kendo-ui', 'kendo-ui-messages']
                 }
             },
             wrapShim: true,
