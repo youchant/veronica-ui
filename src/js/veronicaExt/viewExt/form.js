@@ -43,7 +43,8 @@ define([
 
         base._extend(ext);
 
-        base._extendMethod('_rendered', function() {
+        base._extendMethod('_rendered', function () {
+            var me = this;
             if (this.options.enableValidation) {
                 this.$('[data-validate-form]').each(function (i, form) {
                     me._validateEngine().init($(form));

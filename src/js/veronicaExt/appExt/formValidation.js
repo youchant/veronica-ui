@@ -1,6 +1,7 @@
 define(function () {
 
     return function (app) {
+        var $ = app.core.$;
         app.formValidation || (app.formValidation = app.provider.create());
         
         // html5 default data form validation
@@ -9,6 +10,9 @@ define(function () {
             getValidator: function () { },
             onValidate: function ($form, errors, e) {
                 var formName = $form.attr('data-validate-form');
+                if (formName === '' || formName == null) {
+                    return;
+                }
                 var $tag = $('.form-invalid-tag[data-for=' + formName + ']');
                 if (errors === 0) {
                     $tag.text(errors).removeClass('fadeInRight').addClass('animated fadeOutRight');
@@ -27,8 +31,13 @@ define(function () {
         app.formValidation.add('jqv', {
             init: function ($form) {
                 var me = this;
+                //$.validator.unobtrusive.parse($form);
+
                 $form.validate({
                     ignore: ".ignore",
+                    onfocusout: function (element) {
+                        $(element).valid();
+                    },
                     invalidHandler: function (e, validator) {
                         var errors = validator.numberOfInvalids();
                         me.onValidate($form, errors, e);
@@ -40,7 +49,10 @@ define(function () {
             },
             validate: function ($form) {
                 var validator = this.getValidator($form);
-                var result = validator.valid();
+                if (validator == null) {
+                    this.init($form);
+                }
+                var result = $form.valid();
                 if (result === true) {
                     this.onValidate($form, 0, {});
                 }

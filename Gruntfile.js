@@ -19,6 +19,7 @@ module.exports = function (grunt) {
                 'bootstrap-datetimepicker': thirdPath + '/bootstrap-datetime-picker/js/bootstrap-datetimepicker',
                 'bootstrap-datetimepicker-cn': thirdPath + '/bootstrap-datetime-picker/js/locales/bootstrap-datetimepicker.zh-CN',
                 'jquery-validation': thirdPath + '/jquery-validation/dist/jquery.validate',
+                'jquery-validation-zh': thirdPath + '/jquery-validation/dist/localization/messages_zh',
                 'jquery-validation-unobtrusive': thirdPath + '/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
                 'jquery-validation-bootstrap-tooltip': '../assets/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
                 'noty': thirdPath + '/noty/js/noty/packaged/jquery.noty.packaged'
@@ -30,12 +31,20 @@ module.exports = function (grunt) {
                 //'jquery-placeholder': thirdPath + '/jquery-placeholder/jquery.placeholder',
                 //'es5-shim': thirdPath + '/es5-shim/es5-shim'
             },
+            map: {
+                '*': {
+                    '../jquery.validate': 'jquery-validation'
+                }
+            },
             shim: {
                 'jquery-validation-bootstrap-tooltip': {
                     deps: ['jquery-validation']
                 },
+                'jquery-validation-zh': {
+                    deps: ['jquery-validation']
+                },
                 'jquery-validation-unobtrusive': {
-                    deps: ['jquery-validation', 'jquery-validation-bootstrap-tooltip']
+                    deps: ['jquery-validation-zh', 'jquery-validation-bootstrap-tooltip']
                 },
                 'bootstrap-datetimepicker-cn': {
                     deps: ['bootstrap-datetimepicker']
@@ -58,7 +67,12 @@ module.exports = function (grunt) {
                 "endFile": 'tools/wrap.end'
             },
             removeCombined: false,
-            optimize: "none"
+            optimize: "none",
+            onBuildWrite: function (moduleName, path, contents) {
+                //Always return a value.
+                //This is just a contrived example.
+                return contents.replace(/"\.\.\/jquery\.validate"/g, '"jquery-validation"');
+            }
         };
 
         return options;
@@ -79,23 +93,15 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    "dist/css/tiny.css": "src/less/tiny.less"
+                    "dist/css/default.css": "src/less/themes/default/default.less"
                 }
             }
         },
         concat: {
             style: {
                 files: [{
-                    src: ['src/assets/bootstrap-flat/variables.less', 'src/less/variables.less'],
-                    dest: 'dist/less/variables.less'
-                }, {
-                    src: ['src/assets/bootstrap-flat/mixins.less', 'src/less/mixins.less'],
-                    dest: 'dist/less/mixins.less'
-                }, {
-                    src: ['src/assets/bootstrap-flat/bootstrap.css',
-                        nodeModulePath + '/font-awesome/css/font-awesome.css',
-                        './dist/css/tiny.css'],
-                    dest: 'dist/css/veronica-ui.css'
+                    src: ['src/less/themes/default/bs-variables.less', 'src/less/themes/default/variables.less'],
+                    dest: 'dist/less/default/variables.less'
                 }]
             }
         },
@@ -103,22 +109,12 @@ module.exports = function (grunt) {
             style: {
                 files: [{
                     expand: true,
-                    src: ['src/assets/bootstrap-flat/bootstrap.css'],
-                    dest: 'dist/css/',
-                    flatten: true
-                }, {
-                    expand: true,
-                    src: ['src/assets/bootstrap-flat/bootstrap.js'],
-                    dest: 'dist/js/', flatten: true
-                }, {
-                    expand: true,
                     src: [nodeModulePath + '/font-awesome/fonts/*'],
                     dest: 'dist/fonts/', flatten: true
                 }, {
                     expand: true,
-                    src: ['src/js/*'],
-                    dest: 'dist/js/',
-                    filter: 'isFile', flatten: true
+                    src: [nodeModulePath + '/bootstrap/fonts/*'],
+                    dest: 'dist/fonts/', flatten: true
                 }]
             },
             styleguide: {
@@ -148,6 +144,7 @@ module.exports = function (grunt) {
         clean: {
             script: [
             'dist/js/**/*',
+            'dist/*.*.js',
             '!dist/js/veronica-ui.*'
             ]
         },
@@ -196,5 +193,5 @@ module.exports = function (grunt) {
     grunt.registerTask('style', ['less', 'copy:style', 'concat:style']);
     grunt.registerTask('release', ['style', 'script']);
     grunt.registerTask('styleguide', ['copy:styleguide', 'pug', 'kss']);
-
+    grunt.registerTask('default', ['release']);
 };

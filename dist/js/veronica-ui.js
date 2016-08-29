@@ -443,6 +443,7 @@ define("../../node_modules/almond/almond", function(){});
 define('veronicaExt/appExt/formValidation',[],function () {
 
     return function (app) {
+        var $ = app.core.$;
         app.formValidation || (app.formValidation = app.provider.create());
         
         // html5 default data form validation
@@ -451,6 +452,9 @@ define('veronicaExt/appExt/formValidation',[],function () {
             getValidator: function () { },
             onValidate: function ($form, errors, e) {
                 var formName = $form.attr('data-validate-form');
+                if (formName === '' || formName == null) {
+                    return;
+                }
                 var $tag = $('.form-invalid-tag[data-for=' + formName + ']');
                 if (errors === 0) {
                     $tag.text(errors).removeClass('fadeInRight').addClass('animated fadeOutRight');
@@ -469,8 +473,13 @@ define('veronicaExt/appExt/formValidation',[],function () {
         app.formValidation.add('jqv', {
             init: function ($form) {
                 var me = this;
+                //$.validator.unobtrusive.parse($form);
+
                 $form.validate({
                     ignore: ".ignore",
+                    onfocusout: function (element) {
+                        $(element).valid();
+                    },
                     invalidHandler: function (e, validator) {
                         var errors = validator.numberOfInvalids();
                         me.onValidate($form, errors, e);
@@ -482,7 +491,10 @@ define('veronicaExt/appExt/formValidation',[],function () {
             },
             validate: function ($form) {
                 var validator = this.getValidator($form);
-                var result = validator.valid();
+                if (validator == null) {
+                    this.init($form);
+                }
+                var result = $form.valid();
                 if (result === true) {
                     this.onValidate($form, 0, {});
                 }
@@ -19766,6 +19778,41 @@ if ( $.ajaxPrefilter ) {
 }
 
 }));
+(function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+		define( 'jquery-validation-zh',["jquery", "jquery-validation"], factory );
+	} else if (typeof module === "object" && module.exports) {
+		module.exports = factory( require( "jquery" ) );
+	} else {
+		factory( jQuery );
+	}
+}(function( $ ) {
+
+/*
+ * Translated default messages for the jQuery validation plugin.
+ * Locale: ZH (Chinese, 中文 (Zhōngwén), 汉语, 漢語)
+ */
+$.extend( $.validator.messages, {
+	required: "这是必填字段",
+	remote: "请修正此字段",
+	email: "请输入有效的电子邮件地址",
+	url: "请输入有效的网址",
+	date: "请输入有效的日期",
+	dateISO: "请输入有效的日期 (YYYY-MM-DD)",
+	number: "请输入有效的数字",
+	digits: "只能输入数字",
+	creditcard: "请输入有效的信用卡号码",
+	equalTo: "你的输入不相同",
+	extension: "请输入有效的后缀",
+	maxlength: $.validator.format( "最多可以输入 {0} 个字符" ),
+	minlength: $.validator.format( "最少要输入 {0} 个字符" ),
+	rangelength: $.validator.format( "请输入长度在 {0} 到 {1} 之间的字符串" ),
+	range: $.validator.format( "请输入范围在 {0} 到 {1} 之间的数值" ),
+	max: $.validator.format( "请输入不大于 {0} 的数值" ),
+	min: $.validator.format( "请输入不小于 {0} 的数值" )
+} );
+
+}));
 (function(root) {
 define("jquery-validation-bootstrap-tooltip", ["jquery-validation"], function() {
   return (function() {
@@ -19877,7 +19924,7 @@ define("jquery-validation-bootstrap-tooltip", ["jquery-validation"], function() 
 }(this));
 
 (function(root) {
-define("jquery-validation-unobtrusive", ["jquery-validation","jquery-validation-bootstrap-tooltip"], function() {
+define("jquery-validation-unobtrusive", ["jquery-validation-zh","jquery-validation-bootstrap-tooltip"], function() {
   return (function() {
 /*!
 ** Unobtrusive validation support library for jQuery and jQuery Validate
@@ -27615,7 +27662,8 @@ define('veronicaExt/viewExt/form',[
 
         base._extend(ext);
 
-        base._extendMethod('_rendered', function() {
+        base._extendMethod('_rendered', function () {
+            var me = this;
             if (this.options.enableValidation) {
                 this.$('[data-validate-form]').each(function (i, form) {
                     me._validateEngine().init($(form));
