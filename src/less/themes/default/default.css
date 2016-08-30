@@ -9173,7 +9173,6 @@ body {
 }
 .panel-transparent > .panel-heading {
   border-bottom: 1px solid #DCE8F1;
-  padding-left: 3px;
 }
 .panel-body.no-padding {
   padding: 1px\9 !important;
