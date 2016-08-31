@@ -10,7 +10,7 @@
     "demo",
     "assets",
     "docs",
-    "src",
+    "src/styleguide",
     "tools"
   ],
   "repository": {
@@ -18,9 +18,9 @@
     "url": "https://github.com/gochant/veronica-ui.git"
   },
   "dependencies": {
-    "jquery": "~1.11.x"
   },
   "devDependencies": {
+    "jquery": "~1.11.x",
     "es5-shim": "latest",
     "form2js": "latest",
     "jquery.inputmask": "latest",

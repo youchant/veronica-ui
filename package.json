@@ -23,6 +23,7 @@
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-kss": "^4.0.0",
+    "jquery-validation": "^1.15.1",
     "jquery-validation-unobtrusive": "^3.2.6",
     "mocha": "1.9.0",
     "noty": "^2.3.8",
