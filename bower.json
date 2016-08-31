@@ -9,6 +9,8 @@
   "ignore": [
     "demo",
     "assets",
+    "docs",
+    "src",
     "tools"
   ],
   "repository": {
@@ -19,22 +21,12 @@
     "jquery": "~1.11.x"
   },
   "devDependencies": {
-    "requirejs": "latest",
-    "require-css": "latest",
-    "requirejs-text": "latest",
-    "almond": "latest",
     "es5-shim": "latest",
-    "smalot-bootstrap-datetimepicker": "latest",
     "form2js": "latest",
     "jquery.inputmask": "latest",
     "jquery-form": "latest",
-    "jquery-validation": "latest",
-    "jquery-validation-unobtrusive": "latest",
-    "jquery-validation-bootstrap-tooltip": "latest",
     "jquery-placeholder": "latest",
-    "noty": "latest",
     "table-to-json": "latest",
-    "veronica": "latest",
-    "font-awesome": "latest"
+    "veronica": "latest"
   }
 }
