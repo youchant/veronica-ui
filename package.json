@@ -14,7 +14,6 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^0.8.0",
-    "grunt-contrib-jade": "^0.14.1",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-nodeunit": "~0.4.1",
@@ -23,13 +22,13 @@
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-kss": "^4.0.0",
+    "jquery-validation": "^1.15.1",
     "jquery-validation-unobtrusive": "^3.2.6",
     "mocha": "1.9.0",
     "noty": "^2.3.8",
     "require-css": "^0.1.8",
     "requirejs": "^2.2.0",
     "requirejs-text": "^2.0.12",
-    "sinon": "~1.9.x",
-    "underscore": "latest"
+    "sinon": "~1.9.x"
   }
 }

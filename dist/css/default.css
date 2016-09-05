@@ -9975,11 +9975,11 @@ legend {
 }
 .k-loading,
 .k-state-hover .k-loading {
-  background-image: url('Office365/loading.gif');
+  background-image: url('../img/default/loading.gif');
   background-position: 50% 50%;
 }
 .k-loading-image {
-  background-image: url('Office365/loading-image.gif');
+  background-image: url('../img/default/loading-image.gif');
 }
 .k-loading-color {
   background-color: #fff;

@@ -19,7 +19,7 @@ module.exports = function (grunt) {
                 'bootstrap-datetimepicker': thirdPath + '/bootstrap-datetime-picker/js/bootstrap-datetimepicker',
                 'bootstrap-datetimepicker-cn': thirdPath + '/bootstrap-datetime-picker/js/locales/bootstrap-datetimepicker.zh-CN',
                 'jquery-validation': thirdPath + '/jquery-validation/dist/jquery.validate',
-                'jquery-validation-zh': thirdPath + '/jquery-validation/dist/localization/messages_zh',
+                'jquery-validation-additional': thirdPath + '/jquery-validation/dist/additional-methods',
                 'jquery-validation-unobtrusive': thirdPath + '/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
                 'jquery-validation-bootstrap-tooltip': '../assets/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
                 'noty': thirdPath + '/noty/js/noty/packaged/jquery.noty.packaged'
@@ -33,18 +33,18 @@ module.exports = function (grunt) {
             },
             map: {
                 '*': {
-                    '../jquery.validate': 'jquery-validation'
+                    './jquery.validate': 'jquery-validation'
                 }
             },
             shim: {
                 'jquery-validation-bootstrap-tooltip': {
                     deps: ['jquery-validation']
                 },
-                'jquery-validation-zh': {
+                'jquery-validation-additional': {
                     deps: ['jquery-validation']
                 },
                 'jquery-validation-unobtrusive': {
-                    deps: ['jquery-validation-zh', 'jquery-validation-bootstrap-tooltip']
+                    deps: ['jquery-validation-bootstrap-tooltip', 'jquery-validation-additional']
                 },
                 'bootstrap-datetimepicker-cn': {
                     deps: ['bootstrap-datetimepicker']
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    "dist/css/default.css": "src/less/themes/default/default.less"
+                    "dist/css/default.css": "src/less/themes/default/index.less"
                 }
             }
         },
@@ -102,6 +102,9 @@ module.exports = function (grunt) {
                 files: [{
                     src: ['src/less/themes/default/bs-variables.less', 'src/less/themes/default/variables.less'],
                     dest: 'dist/less/default/variables.less'
+                }, {
+                    src: ['src/less/basic/bs-mixins.less', 'src/less/mixins.less'],
+                    dest: 'dist/less/mixins.less'
                 }]
             }
         },
@@ -115,6 +118,11 @@ module.exports = function (grunt) {
                     expand: true,
                     src: [nodeModulePath + '/bootstrap/fonts/*'],
                     dest: 'dist/fonts/', flatten: true
+                }, {
+                    expand: true,
+                    cwd: './src/img/',
+                    src: ['**/*'],
+                    dest: './dist/img/', flatten: false
                 }]
             },
             styleguide: {
