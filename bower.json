@@ -18,7 +18,7 @@
     "url": "https://github.com/gochant/veronica-ui.git"
   },
   "dependencies": {
-    "jquery": "~1.11.x"
+    "jquery": "^1.11.x"
   },
   "devDependencies": {
     "es5-shim": "latest",
