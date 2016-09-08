@@ -27,6 +27,6 @@
     "jquery-form": "latest",
     "jquery-placeholder": "latest",
     "table-to-json": "latest",
-    "veronica": "latest"
+    "veronica": "veronica-inner#develop"
   }
 }
