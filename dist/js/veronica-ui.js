@@ -22291,7 +22291,7 @@ define("kendo-ui-culture", ["kendo-ui","kendo-ui-messages"], function() {
     var Tree = ListView.extend({
         options: {
             name: 'Tree',
-            focusSelector: '.k-tree-item',
+            focusSelector: '.k-tree-item > .k-tree-inner',
             isSubtree: false,
             dataTextField: ''
         },
@@ -22326,7 +22326,7 @@ define("kendo-ui-culture", ["kendo-ui","kendo-ui-messages"], function() {
                                 '<span class="k-tree-switcher-noop"></span>' +
                             '# } #' +
                             '<span class="k-tree-text">' +
-                                ' #: level() #  #: ' + options.dataTextField + ' #' +
+                                '#: ' + options.dataTextField + ' #' +
                             '</span>' +
                         '</div>' +
                         '# if(hasChildren){ #' +
@@ -22384,8 +22384,8 @@ define("kendo-ui-culture", ["kendo-ui","kendo-ui-messages"], function() {
                     filter: this.options.focusSelector,
                     change: function (e) {
 
-                        return false;
-                        // that.trigger(CHANGE);
+                        // return false;
+                        that.trigger(CHANGE);
                     }
                 });
 
@@ -22417,8 +22417,8 @@ define("kendo-ui-culture", ["kendo-ui","kendo-ui-messages"], function() {
             ListView.fn.refresh.call(this, e);
 
         },
-        select: function () {
-
+        select: function (items) {
+            return ListView.fn.select.call(this, items);
         }
     });
 

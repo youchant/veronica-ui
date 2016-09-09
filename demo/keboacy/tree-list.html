@@ -1,179 +1,122 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-  <title>simpe page</title>
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>simpe page</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../../dist/css/default.css">
+    <style>
+        .k-tree-indent {
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+        }
 
-  <link href="../../bower_components/tinyui/dist/css/bootstrap.css" rel="stylesheet" />
-  <link href="../../bower_components/tinyui/dist/css/tiny.css" rel="stylesheet" />
-  <link href="../../bower_components/jstree-bootstrap-theme/dist/themes/proton/style.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../../dist/css/default.css">
+        .k-tree-switcher,
+        .k-tree-switcher-noop {
+            display: inline-block;
+            width: 20px;
+            height: auto;
+            font-weight: bold;
+        }
+
+        .k-tree-switcher:before {
+            content: "+";
+        }
+
+        .k-tree-subtree{
+            display:none;
+        }
+        .k-tree-item.open > .k-tree-subtree{
+            display:block;
+        }
+
+        .k-tree-item.open > .k-tree-inner > .k-tree-switcher:before {
+            content: "-";
+        }
+    </style>
 </head>
 
 <body>
-  <hr />
-  <div data-ver-role="hello-veronica-ui">
-    <div id="jstree-proton-1" class="proton-demo">
-      <ul>
-        <li data-jstree='{ "opened" : true }'>
-          Node1
-          <ul>
-            <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
-              <a href="#">Node1</a>
-            </li>
-            <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
-              Node1
-            </li>
-            <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
-              Node1
-            </li>
-          </ul>
-        </li>
-        <li data-jstree='{ "opened" : true }'>
-          Node1
-          <ul>
-            <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
-              <a href="#">Node1</a>
-            </li>
-            <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
-              Node1
-            </li>
-            <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
-              Node1
-            </li>
-          </ul>
-        </li>
-        <li data-jstree='{ "opened" : true }'>
-          Node1
-          <ul>
-            <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
-              <a href="#">Node1</a>
-            </li>
-            <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
-              Node1
-            </li>
-            <li data-jstree='{ "icon" : "fa fa-arrow-circle-right" }'>
-              Node1
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div id="jstree_demo" class="demo" style="margin-top:1em; min-height:200px;"></div>
-  </div>
-
-  <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="../../bower_components/underscore/underscore-min.js"></script>
-  <script src="../../bower_components/veronica/dist/veronica.js"></script>
-  <script src="../dist/veronica-ui.js"></script>
-  <script src="../assets/jstree.js"></script>
-  <script src="../assets/jstree-plugin.js"></script>
-  <script>
-    // jstree
-    //$('#jstree-proton-1').jstree({
-    //  'plugins': ["wholerow"],
-    //  'core': {
-    //    'themes': {
-    //      'name': 'proton',
-    //      'responsive': false
-    //    }
-    //  }
-    //});
+<div id="tree" data-role="tree" data-bind="source: tree" data-text-field="title" data-selectable="true"
+     data-auto-bind="false"></div>
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../dist/js/veronica-ui.js"></script>
+<script>
 
     var datasource = new kendo.data.HierarchicalDataSource({
-      data: [
-        {
-          categoryName: "SciFi",
-          movies: [
+        data: [
             {
-              title: "Star Wars: A New Hope", year: 1977, cast: [
-                {
-                  actor: "Mark Hamill", character: "Luke Skywalker", cast: [
-                  { actor: "Mark Hamill", character: "Luke Skywalker" },
-                  { actor: "Harrison Ford", character: "Han Solo" },
-                  { actor: "Carrie Fisher", character: "Princess Leia Organa" },
-                  { actor: "Billy Dee Williams", character: "Lando Calrissian" }
-                  ]
-                },
-                { actor: "Harrison Ford", character: "Han Solo" },
-                { actor: "Carrie Fisher", character: "Princess Leia Organa" }
-              ]
-            },
-            {
-              title: "Star Wars: The Empire Strikes Back", year: 1980, cast: [
-                { actor: "Mark Hamill", character: "Luke Skywalker" },
-                { actor: "Harrison Ford", character: "Han Solo" },
-                { actor: "Carrie Fisher", character: "Princess Leia Organa" },
-                { actor: "Billy Dee Williams", character: "Lando Calrissian" }
-              ]
-            }
-          ]
-        },
-                {
-                  categoryName: "SciFi",
-                  movies: [
+                title: "SciFi",
+                movies: [
                     {
-                      title: "Star Wars: A New Hope", year: 1977, cast: [
-                        { actor: "Mark Hamill", character: "Luke Skywalker" },
-                        { actor: "Harrison Ford", character: "Han Solo" },
-                        { actor: "Carrie Fisher", character: "Princess Leia Organa" }
-                      ]
+                        title: "Star Wars: A New Hope", year: 1977, cast: [
+                        {
+                            title: "Mark Hamill", character: "Luke Skywalker", cast: [
+                            {title: "Mark Hamill", character: "Luke Skywalker"},
+                            {title: "Harrison Ford", character: "Han Solo"},
+                            {title: "Carrie Fisher", character: "Princess Leia Organa"},
+                            {title: "Billy Dee Williams", character: "Lando Calrissian"}
+                        ]
+                        },
+                        {title: "Harrison Ford", character: "Han Solo"},
+                        {title: "Carrie Fisher", character: "Princess Leia Organa"}
+                    ]
                     },
                     {
-                      title: "Star Wars: The Empire Strikes Back", year: 1980, cast: [
-                        { actor: "Mark Hamill", character: "Luke Skywalker" },
-                        { actor: "Harrison Ford", character: "Han Solo" },
-                        { actor: "Carrie Fisher", character: "Princess Leia Organa" },
-                        { actor: "Billy Dee Williams", character: "Lando Calrissian" }
-                      ]
+                        title: "Star Wars: The Empire Strikes Back", year: 1980, cast: [
+                        {title: "Mark Hamill", character: "Luke Skywalker"},
+                        {title: "Harrison Ford", character: "Han Solo"},
+                        {title: "Carrie Fisher", character: "Princess Leia Organa"},
+                        {title: "Billy Dee Williams", character: "Lando Calrissian"}
+                    ]
                     }
-                  ]
-                }
-      ],
-      schema: {
-        model: {
-          children: { // define options for second level
-            schema: {
-              data: "movies",
-              model: {
-                children: "cast" // third level is defined by the field "cast"
-              }
+                ]
+            },
+            {
+                title: "SciFi",
+                movies: [
+                    {
+                        title: "Star Wars: A New Hope", year: 1977, cast: [
+                        {title: "Mark Hamill", character: "Luke Skywalker"},
+                        {title: "Harrison Ford", character: "Han Solo"},
+                        {title: "Carrie Fisher", character: "Princess Leia Organa"}
+                    ]
+                    },
+                    {
+                        title: "Star Wars: The Empire Strikes Back", year: 1980, cast: [
+                        {title: "Mark Hamill", character: "Luke Skywalker"},
+                        {title: "Harrison Ford", character: "Han Solo"},
+                        {title: "Carrie Fisher", character: "Princess Leia Organa"},
+                        {title: "Billy Dee Williams", character: "Lando Calrissian"}
+                    ]
+                    }
+                ]
             }
-          }
+        ],
+        schema: {
+            model: {
+                children: { // define options for second level
+                    schema: {
+                        data: "movies",
+                        model: {
+                            children: "cast" // third level is defined by the field "cast"
+                        }
+                    }
+                }
+            }
         }
-      }
     });
 
-    $('#jstree_demo').jstree({
-      'plugins': ["kendoSource"],
-      kendoSource: {
-        source: datasource,
-        map: function (data) {
-          return data;
-        }
-      },
-      "core": {
-        "animation": 0,
-        'themes': {
-          'name': 'proton',
-          'responsive': false
-        },
-        'data': [{
-          'text': 'Root',
-          'children': true
-        }]
-      }
+    kendo.bind($('body'), {
+        tree: datasource
+    })
+
+    var tree = kendo.widgetInstance($('#tree'))
+    tree.bind('change', function (e) {
+        console.log(e);
     });
-
-
     datasource.read();
-
-    var scifi = datasource.data()[0];
-    scifi.load();
-    var sw5 = scifi.children.data()[1];
-    sw5.load();
-    console.log(sw5.children.data().length); // logs 4
-  </script>
+</script>
 </body>
 
 </html>
