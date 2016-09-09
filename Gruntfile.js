@@ -22,7 +22,8 @@ module.exports = function (grunt) {
                 'jquery-validation-additional': thirdPath + '/jquery-validation/dist/additional-methods',
                 'jquery-validation-unobtrusive': thirdPath + '/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
                 'jquery-validation-bootstrap-tooltip': '../assets/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
-                'noty': thirdPath + '/noty/js/noty/packaged/jquery.noty.packaged'
+                'noty': thirdPath + '/noty/js/noty/packaged/jquery.noty.packaged',
+                'qtip2': thirdPath + '/qtip2/dist/jquery.qtip'
                 //,
                 //'jquery-form': thirdPath + '/jquery-form/jquery.form',
                 //'jquery-inputmask': thirdPath + '/jquery.inputmask/dist/jquery.inputmask.bundle',

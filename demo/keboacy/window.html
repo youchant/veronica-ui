@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>simpe page</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../../dist/css/default.css">
+    <style>
+        .v-confirm-content {
+            padding: 20px 40px;
+        }
+
+        .v-confirm-icon {
+            color: #fa0;
+            font-size: 30px;
+        }
+
+        .v-confirm-footer {
+            border-top-color: transparent;
+        }
+
+        .v-confirm-body {
+            padding: 30px 10px 0;
+        }
+
+        .v-confirm-msg {
+            line-height: 30px;
+            display: inline-block;
+            font-size: 16px;
+            padding-left: 10px;
+            vertical-align: top;
+        }
+    </style>
+    <link rel="stylesheet" href="../../node_modules/qtip2/dist/jquery.qtip.css">
+</head>
+
+<body>
+<div data-ver-role="test">
+    <button data-action="openWnd">Open Window</button>
+    <button data-action="openViewWnd">Open View Window</button>
+    <button data-action="openConfirm">Open Confirm</button>
+</div>
+<a href="" title="testtttt">xxsdf</a>
+<a href="" title="testtttt" class="pull-right">xxsdf</a>
+<div class="modal fade modal-confirm" id="k-modal-confirm" tabindex="-1">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content v-confirm-content">
+            <div class="modal-body v-confirm-body">
+                <span class="glyphicon glyphicon-question-sign v-confirm-icon"></span>
+                <span class="v-confirm-msg"></span>
+            </div>
+            <div class="modal-footer v-confirm-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">确 定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../bower_components/lodash/dist/lodash.js"></script>
+<script src="../../bower_components/veronica/dist/veronica.js"></script>
+<script src="../../dist/js/veronica-ui.js"></script>
+<script>
+    $('[title]').qtip({
+        style: {
+            classes: 'qtip-bootstrap qtip-shadow'
+        }
+    });
+    var app = veronica.createApp();
+    app.use(veronicaui);
+
+    app.windowProvider.add('qtip', {
+        create: function ($el, options, view) {
+            var tipOptions = options.options;
+            var initializing = true;
+            if (options.destroyedOnClose) {
+                tipOptions.events || (tipOptions.events = {});
+                tipOptions.events.hidden = function (e) {
+                    if (!initializing) {
+                        view._destroyWindow(options.name);
+                    }
+                }
+            }
+            tipOptions = $.extend(true, {
+                content: {
+                    text: '加载中...'
+                },
+                position: {
+                    my: 'top center',
+                    at: 'bottom center'
+                },
+                style: {
+                    classes: 'qtip-light qtip-shadow'
+                },
+                show: {
+                    delay: '5',
+                    event: 'click'
+                },
+                hide: {
+                    event: 'unfocus'
+                }
+            }, tipOptions);
+
+            // 初始化 qtip
+            var core = $el.qtip(tipOptions).qtip('api');
+
+            core.show();
+            core.elements.tooltip.hide();
+            core.elements.tooltip.append($el);
+
+            var wnd = {
+                core: core,
+                element: $el,
+                config: options,
+                open: function () {
+                    core.show();
+                },
+                close: function () {
+                    core.hide();
+                },
+                destroy: function () {
+                    core.destroy();
+                },
+                rendered: function () {
+                    this.removeLoading();
+                },
+                center: function () {
+                },
+                removeLoading: function(){
+                    this.element.find('.fn-s-loading').remove();
+                }
+            };
+
+            initializing = false;
+            return wnd;
+        },
+
+    });
+    app.windowProvider.setDefault('qtip');
+
+    app.widget.register('test', {
+        defaults: {
+            autoAction: true
+        },
+        openWndHandler: function (e) {
+            this.htmlWindow('xxdfsdf');
+        },
+        openViewWndHandler: function (e) {
+            this.viewWindow('sub', 'sub', null, {
+                destroyedOnClose: false,
+                options: {
+                    position: {
+                        target: $(e.target)
+                    }
+                }
+
+            }).open();
+        },
+        openConfirmHandler: function (e) {
+            $.modalConfirm('确认删除该条数据？').done(function (e) {
+                console.log('ok')
+            }).fail(function () {
+                console.log('cancel')
+            })
+        }
+    });
+
+    app.widget.register('sub', {
+        template: '<div>Hello</div>'
+    });
+
+    app.parser.parse('body');
+</script>
+</body>
+
+</html>

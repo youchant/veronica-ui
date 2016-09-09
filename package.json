@@ -26,6 +26,7 @@
     "jquery-validation-unobtrusive": "^3.2.6",
     "mocha": "1.9.0",
     "noty": "^2.3.8",
+    "qtip2": "^3.0.3",
     "require-css": "^0.1.8",
     "requirejs": "^2.2.0",
     "requirejs-text": "^2.0.12",

@@ -7,7 +7,8 @@ define([
     './ui/tree',
     './ui/dynamicTab',
     './ui/submenu',
-    './ui/notify'
+    './ui/notify',
+    './ui/confirm'
 ], function (store) {
     return {
         store: store

@@ -21,12 +21,7 @@
     "jquery": "^1.11.x"
   },
   "devDependencies": {
-    "es5-shim": "latest",
-    "form2js": "latest",
-    "jquery.inputmask": "latest",
-    "jquery-form": "latest",
-    "jquery-placeholder": "latest",
-    "table-to-json": "latest",
-    "veronica": "veronica-inner#develop"
+    "veronica": "veronica-inner#develop",
+    "lodash": "^4.15.0"
   }
 }
