@@ -5,6 +5,7 @@ module.exports = function (grunt) {
 
     var thirdPath = '../../node_modules'; // '../../bower_components';
     var nodeModulePath = './node_modules';
+    var bowerPath = '../../bower_components';
     function createOptions(moduleName) {
         var options = {
             baseUrl: './src/js',
@@ -16,14 +17,14 @@ module.exports = function (grunt) {
                 'kendo-ui-messages': '../assets/kendo-ui-core/kendo.messages.zh-CN',
                 'kendo-ui-culture': '../assets/kendo-ui-core/kendo.culture.zh-CN',
                 'text': thirdPath + '/requirejs-text/text',
-                'bootstrap-datetimepicker': thirdPath + '/bootstrap-datetime-picker/js/bootstrap-datetimepicker',
-                'bootstrap-datetimepicker-cn': thirdPath + '/bootstrap-datetime-picker/js/locales/bootstrap-datetimepicker.zh-CN',
                 'jquery-validation': thirdPath + '/jquery-validation/dist/jquery.validate',
                 'jquery-validation-additional': thirdPath + '/jquery-validation/dist/additional-methods',
                 'jquery-validation-unobtrusive': thirdPath + '/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
                 'jquery-validation-bootstrap-tooltip': '../assets/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip',
                 'noty': thirdPath + '/noty/js/noty/packaged/jquery.noty.packaged',
-                'qtip2': thirdPath + '/qtip2/dist/jquery.qtip'
+                'qtip2': thirdPath + '/qtip2/dist/jquery.qtip',
+                'bootstrap-datetimepicker': bowerPath + '/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker',
+                'moment': bowerPath + '/moment/moment'
                 //,
                 //'jquery-form': thirdPath + '/jquery-form/jquery.form',
                 //'jquery-inputmask': thirdPath + '/jquery.inputmask/dist/jquery.inputmask.bundle',
@@ -47,8 +48,11 @@ module.exports = function (grunt) {
                 'jquery-validation-unobtrusive': {
                     deps: ['jquery-validation-bootstrap-tooltip', 'jquery-validation-additional']
                 },
-                'bootstrap-datetimepicker-cn': {
-                    deps: ['bootstrap-datetimepicker']
+                // 'moment-cn': {
+                //   deps: ['moment']
+                // },
+                'bootstrap-datetimepicker': {
+                    deps: ['moment']
                 },
                 'kendo-ui-messages': {
                     deps: ['kendo-ui']
@@ -198,7 +202,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('script', ['requirejs', 'clean:script', 'uglify']);
+    grunt.registerTask('script', ['requirejs', 'clean:script']);
     grunt.registerTask('style', ['less', 'copy:style', 'concat:style']);
     grunt.registerTask('release', ['style', 'script']);
     grunt.registerTask('styleguide', ['copy:styleguide', 'pug', 'kss']);
