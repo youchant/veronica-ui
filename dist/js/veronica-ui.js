@@ -32023,10 +32023,18 @@ define('veronicaExt/appExt/uiKit',[
 
         app.uiKit.add('keboacy', {
             init: function (view, $el) {
-
+                // 日期
+                view.$('input.date').datetimepicker({
+                    format: 'yyyy/mm/dd',
+                    todayBtn: 'linked',
+                    startView: 'month',
+                    language: 'zh-CN',
+                    minView: 2,
+                    autoclose: true
+                });
             },
             destroy: function (view) {
-                // ���ٸ������µ�kendo�ؼ�
+                // 销毁该组件下的kendo控件
                 if (window.kendo) {
                     _.each(view.$('[data-role]'), function (el) {
                         var inst = kendo.widgetInstance($(el));
@@ -32110,7 +32118,7 @@ define('veronicaExt/appExt/windowProvider',[], function () {
                 // init
                 $el.modal();
 
-                if (options.destroyedOnClose) {
+                if (options.destroyOnClose) {
                     $el.on('hidden.bs.modal', function () {
                         view._destroyWindow(options.name);
                     });
@@ -32437,7 +32445,7 @@ define('veronicaExt/viewExt/ui',[
                     return app.uiKit.get(this.options.uiKit);
                 },
                 /**
-                 * ����Ԫ�ػ�ȡ��Ԫ���ϴ����Ľ����ؼ���ʵ��
+                 * 根据元素获取该元素上创建的界面控件的实例
                  * @type {function}
                  * @returns {object}
                  * @example

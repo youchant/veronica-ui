@@ -29,12 +29,126 @@
             padding-left: 10px;
             vertical-align: top;
         }
+
+        .qtip{
+            position: absolute;
+            left: -28000px;
+            top: -28000px;
+            display: none;
+
+            max-width: 280px;
+            min-width: 50px;
+
+            line-height: 12px;
+
+            direction: ltr;
+
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .qtip .qtip-tip{
+            position:absolute;
+        }
+
+        .qtip-content{
+            position: relative;
+            padding: 5px 9px;
+            overflow: hidden;
+
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        .qtip-titlebar{
+            position: relative;
+            padding: 5px 35px 5px 10px;
+            overflow: hidden;
+
+            border-width: 0 0 1px;
+            font-weight: bold;
+        }
+
+        .qtip-titlebar + .qtip-content{ border-top-width: 0 !important; }
+
+        /* Default close button class */
+        .qtip-close{
+            position: absolute;
+            right: -9px; top: -9px;
+            z-index: 11; /* Overlap .qtip-tip */
+
+            cursor: pointer;
+            outline: medium none;
+
+            border: 1px solid transparent;
+        }
+
+        .qtip-titlebar .qtip-close{
+            right: 4px; top: 50%;
+            margin-top: -9px;
+        }
+
+        * html .qtip-titlebar .qtip-close{ top: 16px; } /* IE fix */
+
+        .qtip-titlebar .ui-icon,
+        .qtip-icon .ui-icon{
+            display: block;
+            text-indent: -1000em;
+            direction: ltr;
+        }
+
+        .qtip-icon, .qtip-icon .ui-icon{
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+
+        .qtip-icon .ui-icon{
+            width: 18px;
+            height: 14px;
+
+            line-height: 14px;
+            text-align: center;
+            text-indent: 0;
+            font: normal bold 10px/13px Tahoma,sans-serif;
+
+            color: inherit;
+            background: transparent none no-repeat -100em -100em;
+        }
+
+        /* Applied to 'focused' tooltips e.g. most recently displayed/interacted with */
+        .qtip-focus{}
+
+        /* Applied on hover of tooltips i.e. added/removed on mouseenter/mouseleave respectively */
+        .qtip-hover{}
+
+        /* Default tooltip style */
+        .qtip-default{
+            color: #666;
+            background-color: #fff;
+            border: 1px solid rgba(200,200,200,0.4);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        .qtip-default .qtip-titlebar{
+        }
+
+        .qtip-default .qtip-icon{
+        }
+
+        .qtip-default .qtip-titlebar .qtip-close{
+            border-color: #AAA;
+            color: #111;
+        }
     </style>
-    <link rel="stylesheet" href="../../node_modules/qtip2/dist/jquery.qtip.css">
+    <!--<link rel="stylesheet" href="../../bower_components/qtip2/dist/jquery.qtip.css">-->
+
 </head>
 
 <body>
 <div data-ver-role="test">
+    <input type="text" class="date">
     <button data-action="openWnd">Open Window</button>
     <button data-action="openViewWnd">Open View Window</button>
     <button data-action="openConfirm">Open Confirm</button>
@@ -72,7 +186,7 @@
         create: function ($el, options, view) {
             var tipOptions = options.options;
             var initializing = true;
-            if (options.destroyedOnClose) {
+            if (options.destroyOnClose) {
                 tipOptions.events || (tipOptions.events = {});
                 tipOptions.events.hidden = function (e) {
                     if (!initializing) {
@@ -135,8 +249,8 @@
         },
 
     });
-    app.windowProvider.setDefault('qtip');
-
+    app.windowProvider.setDefault('bs-modal');
+    app.uiKit.setDefault('keboacy');
     app.widget.register('test', {
         defaults: {
             autoAction: true
@@ -146,10 +260,23 @@
         },
         openViewWndHandler: function (e) {
             this.viewWindow('sub', 'sub', null, {
-                destroyedOnClose: false,
+                type: 'qtip',
+                destroyOnClose: true,
                 options: {
                     position: {
-                        target: $(e.target)
+                        my: 'top left',
+                        at: 'bottom left',
+                        target: $(e.target),
+                        adjust:{
+                            y: 4
+                        }
+                    },
+                    style: {
+                        tip: {
+                            corner: false,
+                            width: 15,
+                            height: 10
+                        }
                     }
                 }
 

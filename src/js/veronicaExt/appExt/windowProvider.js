@@ -42,7 +42,7 @@ define([], function () {
                 // init
                 $el.modal();
 
-                if (options.destroyedOnClose) {
+                if (options.destroyOnClose) {
                     $el.on('hidden.bs.modal', function () {
                         view._destroyWindow(options.name);
                     });

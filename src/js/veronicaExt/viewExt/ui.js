@@ -13,7 +13,7 @@ define([
                     return app.uiKit.get(this.options.uiKit);
                 },
                 /**
-                 * 根据元素获取该元素上创建的界面控件的实例
+                 * 鏍规嵁鍏冪礌鑾峰彇璇ュ厓绱犱笂鍒涘缓鐨勭晫闈㈡帶浠剁殑瀹炰緥
                  * @type {function}
                  * @returns {object}
                  * @example
