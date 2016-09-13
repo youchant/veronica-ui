@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title></title>
@@ -9,7 +9,7 @@
             margin: 0 auto;
         }
     </style>
-    <link rel="stylesheet" href="../bower_components/kendo-ui/styles/kendo.common-bootstrap.core.min.css">
+    <link href="../src/less/kendo/common.css" rel="stylesheet" />
     <link href="../src/less/kendo/kendo.bootstrap.css" rel="stylesheet"/>
     <link href="../src/less/themes/default/index.css" rel="stylesheet" />
 </head>
@@ -61,7 +61,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class='col-sm-6'>
-                        <input type='text' class="form-control" id='datetimepicker4'/>
+                        <input type="text" class="form-control" />
                         <select class="form-control"></select>
                     </div>
                 </div>
@@ -78,35 +78,32 @@
             <ul class="fieldlist">
                 <li>
                     <h4>AutoComplete</h4>
-                    <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue" />
+                    <input data-role="autocomplete" class="form-control input-sm" data-text-field="name" data-bind="source: colors, value: autoCompleteValue" />
+                    <input type="text" class="form-control" />
                 </li>
                 <li>
                     <h4>ComboBox:</h4>
-                    <select data-role="combobox" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
+                    <select data-role="combobox" class="form-control input-sm" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
                 </li>
                 <li>
                     <h4>DropDownList:</h4>
-                    <select data-role="dropdownlist" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
+                    <select data-role="dropdownlist"  class="form-control" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
                 </li>
                 <li>
                     <h4>DatePicker:</h4>
-                    <input data-role="datepicker" data-bind="value: datePickerValue" />
+                    <input data-role="datepicker" class="form-control"  data-bind="value: datePickerValue" />
                 </li>
                 <li>
                     <h4>TimePicker:</h4>
-                    <input data-role="timepicker" data-bind="value: timePickerValue" />
+                    <input data-role="timepicker" class="form-control"  data-bind="value: timePickerValue" />
                 </li>
                 <li>
                     <h4>NumericTextBox:</h4>
-                    <input data-role="numerictextbox" data-format="c" data-bind="value: numericTextBoxValue" />
+                    <input data-role="numerictextbox" class="form-control"  data-format="c" data-bind="value: numericTextBoxValue" />
                 </li>
                 <li>
                     <h4>Slider:</h4>
                     <input data-role="slider" data-bind="value: sliderValue" />
-                </li>
-                <li>
-                    <h4>TreeView</h4>
-                    <div data-role="treeview" data-drag-and-drop="true" data-bind="source: treeviewSource"></div>
                 </li>
             </ul>
             <ul class="fieldlist">
@@ -128,9 +125,13 @@
                 <li>
                     <h4>TabStrip</h4>
                     <div data-role="tabstrip" data-animation="false">
-                        <ul>
-                            <li class="k-state-active">First</li>
-                            <li>Second</li>
+                        <ul class="nav nav-tabs">
+                            <li class="k-state-active active">
+                                <a>First</a>
+                            </li>
+                            <li>
+                                <a>Second</a>
+                            </li>
                         </ul>
                         <div>
                             <h4>First page:</h4>

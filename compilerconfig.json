@@ -10,5 +10,13 @@
   {
     "outputFile": "src/less/themes/default/index.css",
     "inputFile": "src/less/themes/default/index.less"
+  },
+  {
+    "outputFile": "src/less/kendo/kendo.common-bootstrap.core.css",
+    "inputFile": "src/less/kendo/kendo.common-bootstrap.core.less"
+  },
+  {
+    "outputFile": "src/less/kendo/common.css",
+    "inputFile": "src/less/kendo/common.less"
   }
 ]

@@ -61,6 +61,14 @@
 
 @default-icon-opacity: .7;
 
+/* textboxes */
+
+@input-background-color: @input-bg;
+@input-text-color: @input-color;
+@form-widget-color: @normal-text-color;
+@form-widgets-border-color: darken(@base, 12%);
+@form-widgets-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+
 /* popups */
 
 @group-background-color: @dropdown-bg;
@@ -116,3 +124,71 @@
 @radio-disabled-color: darken(@background, 27%);
 @radio-disabled-box-shadow: none;
 @radio-disabled-background-color-before: @background;
+
+/* Calendar */
+
+@calendar-content-text-color: @normal-text-color;
+@calendar-footer-background: lighten(@base, 4%);
+@calendar-footer-text-decoration: none;
+@calendar-footer-hover-text-decoration: underline;
+@calendar-footer-hover-background: @background;
+@calendar-header-hover-text-decoration: none;
+@calendar-header-hover-background: @base;
+@calendar-footer-active-background: @background;
+@calendar-group-background-color: lighten(@base, 4%);
+@calendar-border-radius: @border-radius;
+
+/* drag handle */
+
+@draghandle-border-radius: 13px;
+@draghandle-border-color: @background;
+@draghandle-background-color: @background;
+@draghandle-shadow: 0 0 0 1px darken(@background, 23%);
+@draghandle-hover-border-color: darken(@base, 24%);
+@draghandle-hover-background-color: @base;
+@draghandle-hover-shadow: none;
+
+/* buttons */
+
+@button-border-color: @btn-default-border;
+@button-text-color: @btn-default-color;
+@button-background-color: @background;
+
+@primary-button-text-color: @btn-primary-color;
+@primary-button-background-color: @btn-primary-bg;
+@primary-button-border-color: @btn-primary-border;
+@primary-gradient: none;
+@primary-shadow: none;
+
+@primary-hover-text-color: @background;
+@primary-hover-background-color: darken(@accent, 8%);
+@primary-hover-border-color: darken(@accent, 17%);
+@primary-hover-gradient: none;
+@primary-hover-shadow: none;
+
+@primary-focused-color: @background;
+@primary-focused-border-color: lighten(@info, 2%);
+@primary-focused-gradient: none;
+@primary-focused-active-item-shadow: 0 0 8px 0 darken(@info, 6%);
+
+@primary-active-text-color: @background;
+@primary-active-background-color: darken(@accent, 8%);
+@primary-active-gradient: none;
+@primary-active-border-color: darken(@accent, 17%);
+@primary-active-shadow: inset 0 0 8px 0 lighten(@accent, 13%);
+
+@primary-disabled-text-color: @background;
+@primary-disabled-background-color: lighten(@accent, 16%);
+@primary-disabled-border-color: lighten(@accent, 14%);
+@primary-disabled-gradient: none;
+
+@button-hover-text-color: @normal-text-color;
+@button-hover-background-color: @base;
+@button-hover-border-color: darken(@base, 24%);
+
+@button-active-background: @base;
+@button-active-border-color: @accent;
+
+@button-focused-border-color: lighten(@accent, 13%);
+@button-focused-shadow: 0 0 7px 0 lighten(@accent, 13%);
+@button-focused-active-shadow: inset 0 0 5px 3px darken(@base, 9%);
