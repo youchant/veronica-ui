@@ -1,0 +1,46 @@
+
+.k-list > .k-state-hover {
+  border-color: @hover-background-color;
+}
+
+.k-menu .k-group,
+.k-grid .k-filter-options,
+.k-time-popup,
+.k-datepicker-calendar,
+.k-autocomplete.k-state-border-down,
+.k-autocomplete.k-state-border-up,
+.k-dropdown-wrap.k-state-active,
+.k-picker-wrap.k-state-active,
+.k-multiselect.k-state-focused,
+.k-filebrowser .k-image,
+.k-tooltip {
+  .box-shadow(none);
+}
+
+
+
+.k-state-focused,
+.k-button:focus,
+.k-button.k-state-focused,
+.k-button:focus:active {
+  .box-shadow(@focused-shadow);
+}
+
+.k-list > .k-state-focused {
+  .box-shadow(none);
+}
+
+
+
+.k-flatcolorpicker .k-hue-slider .k-draghandle {
+  .box-shadow(@draghandle-shadow);
+  background: transparent;
+  border: 5px solid @draghandle-border-color;
+
+  &:hover, &:focus {
+    border-color: @draghandle-border-color;
+    .box-shadow(0 0 8px 0 rgba(102,175,233,0.75));
+    border-width: 5px;
+    padding: 0;
+  }
+}

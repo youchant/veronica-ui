@@ -1,80 +1,227 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <title></title>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-    <link rel="stylesheet" href="../dist/css/default.css">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <style>
         #test {
             max-width: 960px;
             margin: 0 auto;
         }
     </style>
+    <link rel="stylesheet" href="../bower_components/kendo-ui/styles/kendo.common-bootstrap.core.min.css">
+    <link href="../src/less/kendo/kendo.bootstrap.css" rel="stylesheet"/>
+    <link href="../src/less/themes/default/index.css" rel="stylesheet" />
 </head>
 <body>
-<div id="test" data-ver-role="test">
-    <div class="panel">
+    <div id="test" data-ver-role="test">
+        <div class="panel">
+            <div class="page-header">
+                <h2>Dynamic Tab</h2>
+            </div>
+            <div class="panel-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" data-dynamic-tab="main">
+                    <li role="presentation" class="active">
+                        <a href="#" aria-controls="home" role="tab"
+                           data-toggle="tab">Home</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#" aria-controls="profile" role="tab" data-toggle="tab">
+                            Profile
+                            <span class="form-invalid-tag">2</span>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content" data-dynamic-tab="main">
+                    <div role="tabpanel" class="tab-pane active" id="">
+                        1
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="">
+                        2
+                        <form data-validate-form></form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="">3</div>
+                    <div role="tabpanel" class="tab-pane" id="">4</div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="page-header">
+                <h2>Controls</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class='col-sm-6'>
+                        <input type='text' class="form-control" id='datetimepicker4'/>
+                        <select class="form-control"></select>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
         <div class="page-header">
-            <h2>Dynamic Tab</h2>
+            <h2>Binders</h2>
         </div>
         <div class="panel-body">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist" data-dynamic-tab="main">
-                <li role="presentation" class="active"><a href="#" aria-controls="home" role="tab"
-                                                          data-toggle="tab">Home</a></li>
-                <li role="presentation">
-                    <a href="#" aria-controls="profile" role="tab" data-toggle="tab">
-                        Profile
-                        <span class="form-invalid-tag">2</span>
-                    </a>
+            <span data-bind='date: startDate' data-format='yyyy-MM-dd'></span>
+        </div>
+        <div class="demo-section k-content wide">
+            <ul class="fieldlist">
+                <li>
+                    <h4>AutoComplete</h4>
+                    <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue" />
                 </li>
-                <li role="presentation"><a href="#" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+                <li>
+                    <h4>ComboBox:</h4>
+                    <select data-role="combobox" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
                 </li>
-                <li role="presentation"><a href="#" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+                <li>
+                    <h4>DropDownList:</h4>
+                    <select data-role="dropdownlist" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
+                </li>
+                <li>
+                    <h4>DatePicker:</h4>
+                    <input data-role="datepicker" data-bind="value: datePickerValue" />
+                </li>
+                <li>
+                    <h4>TimePicker:</h4>
+                    <input data-role="timepicker" data-bind="value: timePickerValue" />
+                </li>
+                <li>
+                    <h4>NumericTextBox:</h4>
+                    <input data-role="numerictextbox" data-format="c" data-bind="value: numericTextBoxValue" />
+                </li>
+                <li>
+                    <h4>Slider:</h4>
+                    <input data-role="slider" data-bind="value: sliderValue" />
+                </li>
+                <li>
+                    <h4>TreeView</h4>
+                    <div data-role="treeview" data-drag-and-drop="true" data-bind="source: treeviewSource"></div>
                 </li>
             </ul>
-            <!-- Tab panes -->
-            <div class="tab-content" data-dynamic-tab="main">
-                <div role="tabpanel" class="tab-pane active" id="">
-                    1
+            <ul class="fieldlist">
+                <li>
+                    <h4>MultiSelect:</h4>
+                    <select multiple="multiple" data-role="multiselect" data-text-field="name" data-value-field="value" data-bind="source: colors, value: multiSelectValue"></select>
+                </li>
+                <li>
+                    <h4>Grid</h4>
+                    <div data-role="grid" data-sortable="true" data-editable="true" data-columns='["Name", "Price", "UnitsInStock", {"command": "destroy"}]' data-bind="source: gridSource"></div>
+                </li>
+                <li>
+                    <h4>Splitter</h4>
+                    <div data-role="splitter" data-panes="[{size:'30%', collapsible:true},{size:'70%'}]">
+                        <div>Pane 1</div>
+                        <div>Pane 2</div>
+                    </div>
+                </li>
+                <li>
+                    <h4>TabStrip</h4>
+                    <div data-role="tabstrip" data-animation="false">
+                        <ul>
+                            <li class="k-state-active">First</li>
+                            <li>Second</li>
+                        </ul>
+                        <div>
+                            <h4>First page:</h4>
+                            Pick a time: <input data-role="timepicker" data-bind="value: timePickerValue" />
+                        </div>
+                        <div>
+                            <h4>Second page:</h4>
+                            Time is: <span data-bind="text: displayTimePickerValue"></span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/lodash/dist/lodash.js"></script>
+    <script src="../bower_components/veronica/dist/veronica.js"></script>
+    <script src="../dist/js/veronica-ui.js"></script>
+    <script>
+        var app = veronica.createApp();
+        app.use(veronicaui);
+        app.uiKit.setDefault('keboacy');
+        app.viewEngine.setDefault('kendo');
+        app.widget.register('test', {
+            initAttr: function () {
+                this.model({
+                    autoCompleteValue: null,
+                    colors: [
+                        { name: "Red", value: "#f00" },
+                        { name: "Green", value: "#0f0" },
+                        { name: "Blue", value: "#00f" }
+                    ],
+                    displayAutoCompleteValue: function () {
+                        var autoCompleteValue = this.get("autoCompleteValue");
+                        return kendo.stringify(autoCompleteValue);
+                    },
+                    comboBoxValue: null,
+                    displayComboBoxValue: function () {
+                        var comboBoxValue = this.get("comboBoxValue");
+                        return kendo.stringify(comboBoxValue);
+                    },
+                    dropDownListValue: null,
+                    displayDropDownListValue: function () {
+                        var dropDownListValue = this.get("dropDownListValue");
+                        return kendo.stringify(dropDownListValue);
+                    },
+                    numericTextBoxValue: 10,
+                    displayNumericTextBoxValue: function () {
+                        var numericTextBoxValue = this.get("numericTextBoxValue");
 
-                </div>
-                <div role="tabpanel" class="tab-pane" id="">
-                    2
-                    <form data-validate-form></form>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="">3</div>
-                <div role="tabpanel" class="tab-pane" id="">4</div>
-            </div>
-        </div>
-    </div>
-    <div class="panel">
-        <div class="page-header">
-            <h2>Controls</h2>
-        </div>
-        <div class="panel-body">
-            <div class='col-sm-6'>
-                <input type='text' class="form-control date" id='datetimepicker4' />
-            </div>
-        </div>
-    </div>
-    <div class="page-header">
-        <h2>Binders</h2>
-    </div>
-    <div class="panel-body">
-        <span data-bind='date: startDate' data-format='yyyy-MM-dd'></span>
-    </div>
-</div>
-<script src="../bower_components/jquery/dist/jquery.js"></script>
-<script src="../bower_components/lodash/dist/lodash.js"></script>
-<script src="../bower_components/veronica/dist/veronica.js"></script>
-<script src="../dist/js/veronica-ui.js"></script>
-<script>
-    var app = veronica.createApp();
-    app.use(veronicaui);
-    app.uiKit.setDefault('keboacy');
-    app.widget.register('test', {});
-    app.parser.parse();
-</script>
+                        return kendo.toString(numericTextBoxValue, "c");
+                    },
+                    datePickerValue: new Date(),
+                    displayDatePickerValue: function () {
+                        var datePickerValue = this.get("datePickerValue");
+                        return kendo.toString(datePickerValue, "yyyy-MM-dd");
+                    },
+                    timePickerValue: new Date(),
+                    displayTimePickerValue: function () {
+                        var timePickerValue = this.get("timePickerValue");
+
+                        return kendo.toString(timePickerValue, "hh:mm:ss");
+                    },
+                    multiSelectValue: [],
+                    displayMultiSelectValue: function () {
+                        var multiSelectValue = this.get("multiSelectValue");
+                        return kendo.stringify(multiSelectValue);
+                    },
+                    gridSource: [
+                        { Name: "Chai", Price: 18.00, UnitsInStock: 39 },
+                        { Name: "Chang", Price: 19.00, UnitsInStock: 17 },
+                        { Name: "Mishi Kobe Niku", Price: 97.00, UnitsInStock: 29 }
+                    ],
+                    displayGridSource: function () {
+                        return stringify(this.get("gridSource"));
+                    },
+                    treeviewSource: kendo.observableHierarchy([
+                        {
+                            text: "Andrew", expanded: true, items: [
+                            { text: "Nancy" },
+                            { text: "Steve" }
+                            ]
+                        }
+                    ]),
+                    displayTreeviewSource: function () {
+                        return stringify(this.get("treeviewSource").toJSON());
+                    }
+                });
+            }
+        });
+        app.parser.parse();
+    </script>
 </body>
 </html>

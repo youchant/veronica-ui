@@ -1,0 +1,322 @@
+/* Border radius */
+.k-block,
+.k-button,
+.k-textbox,
+.k-drag-clue,
+.k-touch-scrollbar,
+.k-window,
+.k-window-titleless .k-window-content,
+.k-window-action,
+.k-inline-block,
+.k-grid .k-filter-options,
+.k-grouping-header .k-group-indicator,
+.k-autocomplete,
+.k-multiselect,
+.k-combobox,
+.k-dropdown,
+.k-dropdown-wrap,
+.k-datepicker,
+.k-timepicker,
+.k-colorpicker,
+.k-datetimepicker,
+.k-notification,
+.k-numerictextbox,
+.k-picker-wrap,
+.k-numeric-wrap,
+.k-colorpicker,
+.k-list-container,
+.k-calendar-container,
+.k-calendar td,
+.k-calendar .k-link,
+.k-treeview .k-in,
+.k-editor-inline,
+.k-tooltip,
+.k-tile,
+.k-slider-track,
+.k-slider-selection,
+.k-upload,
+.k-split-button
+{
+  border-radius: @main-border-radius;
+}
+
+.k-tool.k-group-start,
+.k-toolbar .k-split-button .k-button,
+.k-toolbar .k-button-group .k-group-start
+{
+  border-radius: @main-border-radius 0 0 @main-border-radius;
+}
+
+.k-rtl .k-tool.k-group-start,
+.k-rtl .k-toolbar .k-split-button .k-button,
+.k-rtl .k-toolbar .k-button-group .k-group-start
+{
+  border-radius: 0 @main-border-radius @main-border-radius 0;
+}
+
+.k-tool.k-group-end,
+.k-toolbar .k-button-group .k-group-end,
+.k-toolbar .k-split-button .k-split-button-arrow
+{
+  border-radius: 0 @main-border-radius @main-border-radius 0;
+}
+
+.k-rtl .k-tool.k-group-end,
+.k-rtl .k-toolbar .k-button-group .k-group-end,
+.k-rtl .k-toolbar .k-split-button .k-split-button-arrow
+{
+  border-radius: @main-border-radius 0 0 @main-border-radius;
+}
+
+.k-toolbar:not(.k-spreadsheet-toolbar) .k-button-group {
+  .k-button {
+    border-left-color: transparent;
+  }
+
+  .k-group-start {
+    border-left-color: @button-border-color;
+  }
+
+  .k-button:focus {
+    border-left-color: @button-focused-border-color;
+  }
+}
+
+.k-group-start.k-group-end.k-tool
+{
+  border-radius: @main-border-radius;
+}
+
+.k-calendar-container.k-state-border-up,
+.k-list-container.k-state-border-up,
+.k-autocomplete.k-state-border-up,
+.k-multiselect.k-state-border-up,
+.k-dropdown-wrap.k-state-border-up,
+.k-picker-wrap.k-state-border-up,
+.k-numeric-wrap.k-state-border-up,
+.k-window-content,
+.k-filter-menu
+{
+  border-radius: 0 0 @main-border-radius @main-border-radius;
+}
+
+.k-autocomplete.k-state-border-up .k-input,
+.k-dropdown-wrap.k-state-border-up .k-input,
+.k-picker-wrap.k-state-border-up .k-input,
+.k-picker-wrap.k-state-border-up .k-selected-color,
+.k-numeric-wrap.k-state-border-up .k-input
+{
+  border-radius: 0 0 0 @main-border-radius;
+}
+
+.k-multiselect.k-state-border-up .k-multiselect-wrap
+{
+  border-radius: 0 0 @main-border-radius @main-border-radius;
+}
+
+.k-window-titlebar,
+.k-block > .k-header,
+.k-tabstrip-items .k-item,
+.k-panelbar .k-tabstrip-items .k-item,
+.k-tabstrip-items .k-link,
+.k-calendar-container.k-state-border-down,
+.k-list-container.k-state-border-down,
+.k-autocomplete.k-state-border-down,
+.k-multiselect.k-state-border-down,
+.k-dropdown-wrap.k-state-border-down,
+.k-picker-wrap.k-state-border-down,
+.k-numeric-wrap.k-state-border-down
+{
+  border-radius: @main-border-radius @main-border-radius 0 0;
+}
+
+.k-split-button.k-state-border-down > .k-button
+{
+  border-radius: @main-border-radius 0 0 0;
+}
+
+.k-split-button.k-state-border-up > .k-button
+{
+  border-radius: 0 0 0 @main-border-radius;
+}
+
+.k-split-button.k-state-border-down > .k-split-button-arrow
+{
+  border-radius: 0 @main-border-radius 0 0;
+}
+
+.k-split-button.k-state-border-up > .k-split-button-arrow
+{
+  border-radius: 0 0 @main-border-radius 0;
+}
+
+.k-dropdown-wrap .k-input,
+.k-picker-wrap .k-input,
+.k-numeric-wrap .k-input
+{
+  border-radius: @inner-border-radius 0 0 @inner-border-radius;
+}
+
+.k-rtl .k-dropdown-wrap .k-input,
+.k-rtl .k-picker-wrap .k-input,
+.k-rtl .k-numeric-wrap .k-input
+{
+  border-radius: 0 @inner-border-radius @inner-border-radius 0;
+}
+
+.k-numeric-wrap .k-link
+{
+  border-radius: 0 @inner-border-radius 0 0;
+}
+
+.k-numeric-wrap .k-link + .k-link
+{
+  border-radius: 0 0 @inner-border-radius 0;
+}
+
+.k-colorpicker .k-selected-color
+{
+  border-radius: @inner-border-radius 0 0 @inner-border-radius;
+}
+
+.k-rtl .k-colorpicker .k-selected-color
+{
+  border-radius: 0 @inner-border-radius @inner-border-radius 0;
+}
+
+.k-autocomplete.k-state-border-down .k-input
+{
+  border-radius: @main-border-radius @main-border-radius 0 0;
+}
+
+.k-dropdown-wrap.k-state-border-down .k-input,
+.k-picker-wrap.k-state-border-down .k-input,
+.k-picker-wrap.k-state-border-down .k-selected-color,
+.k-numeric-wrap.k-state-border-down .k-input
+{
+  border-radius: @main-border-radius 0 0 0;
+}
+
+.k-numeric-wrap .k-link.k-state-selected
+{
+  background-color: @numeric-selected-background;
+}
+
+.k-multiselect.k-state-border-down .k-multiselect-wrap
+{
+  border-radius: @inner-border-radius @inner-border-radius 0 0;
+}
+
+.k-dropdown-wrap .k-select,
+.k-picker-wrap .k-select,
+.k-numeric-wrap .k-select,
+.k-datetimepicker .k-select+.k-select,
+.k-list-container.k-state-border-right
+{
+  border-radius: 0 @main-border-radius @main-border-radius 0;
+}
+
+.k-rtl .k-dropdown-wrap .k-select,
+.k-rtl .k-picker-wrap .k-select,
+.k-rtl .k-numeric-wrap .k-select,
+.k-rtl .k-datetimepicker .k-select+.k-select,
+.k-rtl .k-list-container.k-state-border-right
+{
+  border-radius: @main-border-radius 0 0 @main-border-radius;
+}
+
+.k-numeric-wrap.k-expand-padding .k-input
+{
+  .guarded-border-radius(@main-border-radius);
+}
+
+.k-textbox > input,
+.k-autocomplete .k-input,
+.k-multiselect-wrap
+{
+  .guarded-border-radius(@inner-border-radius);
+}
+
+.k-list .k-state-hover,
+.k-list .k-state-focused,
+.k-list .k-state-highlight,
+.k-list .k-state-selected,
+.k-fieldselector .k-list .k-item,
+.k-list-optionlabel,
+.k-dropzone
+{
+  .guarded-border-radius(@list-border-radius);
+}
+
+.k-slider .k-button,
+.k-grid .k-slider .k-button
+{
+  border-radius: @slider-border-radius;
+}
+
+.k-draghandle
+{
+  border-radius: @draghandle-border-radius;
+}
+
+.k-scheduler-toolbar > ul li:first-child,
+.k-scheduler-toolbar > ul li:first-child .k-link,
+.k-scheduler-toolbar > ul.k-scheduler-views li:first-child + li,
+.k-scheduler-toolbar > ul.k-scheduler-views li:first-child + li .k-link
+{
+  border-radius: @main-border-radius 0 0 @main-border-radius;
+}
+
+.k-rtl .k-scheduler-toolbar > ul li:first-child,
+.k-rtl .k-scheduler-toolbar > ul li:first-child .k-link,
+.k-rtl .k-scheduler-toolbar > ul.k-scheduler-views li:first-child + li,
+.k-rtl .k-scheduler-toolbar > ul.k-scheduler-views li:first-child + li .k-link,
+.km-view.k-popup-edit-form .k-scheduler-toolbar > ul li:last-child,
+.km-view.k-popup-edit-form .k-scheduler-toolbar > ul li:last-child .k-link
+{
+  border-radius: 0 @main-border-radius @main-border-radius 0;
+}
+
+.k-scheduler-phone .k-scheduler-toolbar > ul li.k-nav-today,
+.k-scheduler-phone .k-scheduler-toolbar > ul li.k-nav-today .k-link,
+.k-edit-field > .k-scheduler-navigation
+{
+  border-radius: @main-border-radius;
+}
+
+.k-scheduler-toolbar .k-nav-next,
+.k-scheduler-toolbar ul + ul li:last-child,
+.k-scheduler-toolbar .k-nav-next .k-link,
+.k-scheduler-toolbar ul + ul li:last-child .k-link
+{
+  border-top-right-radius: @main-border-radius;
+  border-bottom-right-radius: @main-border-radius;
+}
+
+.k-rtl .k-scheduler-toolbar .k-nav-next,
+.k-rtl .k-scheduler-toolbar ul + ul li:last-child,
+.k-rtl .k-scheduler-toolbar .k-nav-next .k-link,
+.k-rtl .k-scheduler-toolbar ul + ul li:last-child .k-link
+{
+  border-radius: @main-border-radius 0 0 @main-border-radius;
+}
+
+.k-scheduler div.k-scheduler-footer ul li,
+.k-scheduler div.k-scheduler-footer .k-link
+{
+  border-radius: @main-border-radius;
+}
+
+.k-more-events,
+.k-event,
+.k-task-single,
+.k-task-complete,
+.k-event .k-link
+{
+  border-radius: @inner-border-radius;
+}
+
+.k-scheduler-mobile .k-event
+{
+  border-radius: @inner-border-radius - 1;
+}

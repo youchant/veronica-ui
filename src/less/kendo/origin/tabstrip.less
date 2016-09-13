@@ -1,0 +1,67 @@
+.k-tabstrip-items .k-state-hover .k-link {
+  color: @tabstrip-tabs-hover-color;
+}
+
+.k-tabstrip-items .k-state-active .k-link {
+  color: @active-text-color;
+}
+
+.k-tabstrip-items .k-item {
+  background: transparent;
+}
+
+.k-tabstrip-items .k-item.k-state-active {
+  background: @widget-background-color;
+}
+
+.k-tabstrip-items .k-item.k-state-hover {
+  background: @hover-background-color;
+}
+
+.k-tabstrip-items .k-state-focused {
+  border-color: @focused-border-color;
+  .box-shadow(@focused-shadow);
+}
+
+.k-tabstrip-items .k-state-default.k-state-hover {
+  border-color: @hover-background-color;
+}
+.k-tabstrip:focus {
+  .box-shadow(@focused-shadow);
+}
+
+.k-tabstrip-items .k-state-default .k-link,
+.k-panelbar > li.k-state-default > .k-link {
+  color: @tabstrip-tabs-color;
+}
+
+.k-tabstrip-items .k-state-hover .k-link,
+.k-panelbar > li.k-state-hover > .k-link,
+.k-panelbar > li.k-state-default > .k-link.k-state-hover {
+  color: @hover-text-color;
+}
+
+.k-panelbar .k-state-focused.k-state-hover {
+  background: @hover-background-color;
+  .box-shadow(none);
+}
+
+.k-tabstrip-items .k-state-default {
+  border-color: @tabstrip-items-border;
+}
+
+.k-tabstrip-items .k-state-hover {
+  border-color: @hover-border-color;
+}
+
+.k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-items .k-state-active {
+  background-color: @active-background-color;
+  .composite-background(@active-gradient);
+  border-color: @active-border-color;
+}
+
+.k-tabstrip .k-content.k-state-active {
+  background-color: @tabstrip-active-background;
+  color: @widget-text-color;
+}

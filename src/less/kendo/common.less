@@ -1,0 +1,109 @@
+/** 基础设置 */
+.k-in,
+.k-item,
+.k-window-action {
+  border-color: transparent;
+}
+
+/* main colors */
+.k-block,
+.k-widget {
+  border-color: @widget-border-color;
+  background-color: @widget-background-color;
+}
+
+.k-group,
+.k-toolbar,
+.k-grouping-header,
+.k-pager-wrap,
+.k-group-footer td,
+.k-grid-footer,
+.k-footer-template td,
+.k-widget .k-status,
+.k-calendar th,
+.k-dropzone-hovered,
+.k-widget.k-popup {
+  background-color: @group-background-color;
+}
+
+.k-input,
+.k-autocomplete,
+.k-dropdown-wrap,
+.k-picker-wrap,
+.k-numeric-wrap,
+.k-select {
+  border-color: @input-border;
+}
+
+/* Popup */
+
+.k-popup {
+  background-color: @group-background-color;
+  .box-shadow(0 5px 10px @group-border-color);
+
+  &.k-list-container {
+    border-color: @selected-border-color;
+  }
+
+  &.k-state-border-down {
+    border-bottom: 0;
+    margin-top: 3px;
+  }
+
+  &.k-state-border-up {
+    border-top: 0;
+  }
+}
+
+.k-list-container {
+  border-color: @group-border-color;
+  background-color: @select-group-background-color;
+}
+
+.k-icon {
+  opacity: @default-icon-opacity;
+}
+
+.k-icon:hover,
+.k-state-hover .k-icon,
+.k-state-selected .k-icon,
+.k-state-focused .k-icon {
+  opacity: 1;
+}
+
+/* State */
+
+.k-item.k-state-hover {
+  color: @hover-text-color;
+  background-color: @hover-background-color;
+  border-color: @hover-border-color;
+}
+
+.k-state-hover > .k-select {
+  background-color: @hover-background-color;
+}
+
+.k-state-focused,
+.k-state-border-down,
+.k-state-border-up {
+  border-color: @focused-border-color;
+}
+
+.k-state-selected,
+.k-state-selected:hover,
+.k-state-selected:link,
+.k-state-selected:visited {
+  color: @selected-text-color;
+  background-color: @selected-background-color;
+  border-color: @selected-border-color;
+}
+
+.k-combobox .k-select,
+.k-numerictextbox .k-select,
+.k-picker-wrap .k-select {
+  border: transparent;
+}
+
+.k-multiselect-wrap .k-input{
+  height: @input-height-base;
+}

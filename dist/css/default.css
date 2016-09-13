@@ -9921,6 +9921,20 @@ legend {
   background-color: #428bca;
   border-color: #428bca;
 }
+.k-state-focused,
+.k-list > .k-state-focused,
+.k-listview > .k-state-focused,
+.k-grid-header th.k-state-focused,
+td.k-state-focused,
+.k-button.k-state-focused {
+  box-shadow: none;
+}
+.k-state-focused.k-state-selected,
+.k-list > .k-state-focused.k-state-selected,
+.k-listview > .k-state-focused.k-state-selected,
+td.k-state-focused.k-state-selected {
+  box-shadow: none;
+}
 .k-marquee-color {
   background-color: #00b0ff;
   filter: alpha(opacity=60);

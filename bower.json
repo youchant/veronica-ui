@@ -23,6 +23,7 @@
   "devDependencies": {
     "veronica": "veronica-inner#develop",
     "lodash": "^4.15.0",
-    "eonasdan-bootstrap-datetimepicker": "^4.17.42"
+    "eonasdan-bootstrap-datetimepicker": "^4.17.42",
+    "kendo-ui": "2015.3.1111"
   }
 }
