@@ -42,7 +42,7 @@
 
 /* focused state */
 
-@focused-border-color: lighten(@accent, 13%);
+@focused-border-color: @input-border-focus;
 /*@focused-shadow: 0 0 7px 0 lighten(@accent, 13%);*/
 @focused-shadow: none;
 /*@focused-item-shadow: inset 0 0 7px 0 lighten(@accent, 13%);
@@ -141,7 +141,7 @@
 /* drag handle */
 
 @draghandle-border-radius: 13px;
-@draghandle-border-color: @background;
+@draghandle-border-color: @widget-border-color;
 @draghandle-background-color: @background;
 @draghandle-shadow: 0 0 0 1px darken(@background, 23%);
 @draghandle-hover-border-color: darken(@base, 24%);

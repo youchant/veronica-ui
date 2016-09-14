@@ -1,7 +1,7 @@
 define([
     './base/store',
     './base/binders',
-    './base/validation',
+    //'./base/validation',
     './base/culture',
     './ui/dataTable',
     './ui/tree',

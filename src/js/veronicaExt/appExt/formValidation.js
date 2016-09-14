@@ -60,11 +60,67 @@ define(function () {
             }
         });
 
+        function widgetCssFix(elements) {
+
+            function updateCssOnPropertyChange(e) {
+                var element = $(e.target || e.srcElement);
+
+                element.siblings(".k-dropdown-wrap")
+                .add(element.parent(".k-numeric-wrap, .k-multiselect, .k-picker-wrap, .k-autocomplete, .k-slider-wrap"))
+                .toggleClass("k-invalid", element.hasClass("k-invalid"));
+            }
+
+            //correct mutation event detection
+            var hasMutationEvents = ("MutationEvent" in window),
+                MutationObserver = window.WebKitMutationObserver || window.MutationObserver;
+
+            if (MutationObserver) {
+                var observer = new MutationObserver(function (mutations) {
+                    var idx = 0,
+                        mutation,
+                        length = mutations.length;
+
+                    for (; idx < length; idx++) {
+                        mutation = mutations[idx];
+                        if (mutation.attributeName === "class") {
+                            updateCssOnPropertyChange(mutation);
+                        }
+                    }
+                }),
+                    config = { attributes: true, childList: false, characterData: false };
+
+                elements.each(function () {
+                    observer.observe(this, config);
+                });
+            } else if (hasMutationEvents) {
+                elements.bind("DOMAttrModified", updateCssOnPropertyChange);
+            } else {
+                elements.each(function () {
+                    this.attachEvent("onpropertychange", updateCssOnPropertyChange);
+                });
+            }
+
+        }
+
         app.formValidation.add('kendo', {
             init: function ($form) {
                 var me = this;
+                var inputs = $form.find("[data-role=autocomplete],[data-role=combobox]," +
+                    "[data-role=dropdownlist],[data-role=numerictextbox]," +
+                    "[data-role=datepicker],[data-role=timepicker],[data-role=datetimepicker]," +
+                    "[data-role=multiselect], [data-role=slider]");
+                
+                widgetCssFix(inputs);
+
+
+                var errorTemplate = '<div class="k-widget k-tooltip k-tooltip-validation"' +
+                    'style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
+                    '#=message#<div class="k-callout k-callout-n"></div></div>';
+
+                var errorTemplate2 = '<span title="#=message#"><i class="fa fa-exclamation-circle"></i></span>';
+
                 $form.kendoValidator({
-                    errorTemplate: '<span title="#=message#"><i class="fa fa-exclamation-circle"></i></span>',
+                    errorTemplate: errorTemplate,
                     validate: function (e) {
                         var $form = e.sender.element;
                         var errors = $form.find('.k-invalid').length;
@@ -73,7 +129,7 @@ define(function () {
                 });
             },
             getValidator: function ($form) {
-                return this.instance($form);
+                return $form.data('kendoValidator');
             },
             validate: function ($form) {
                 var validator = this.getValidator($form);

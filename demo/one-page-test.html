@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <title></title>
@@ -12,6 +12,7 @@
     <link href="../src/less/kendo/common.css" rel="stylesheet" />
     <link href="../src/less/kendo/kendo.bootstrap.css" rel="stylesheet"/>
     <link href="../src/less/themes/default/index.css" rel="stylesheet" />
+    <link href="../bower_components/kendo-ui/styles/kendo.mobile.common.min.css" rel="stylesheet" />
 </head>
 <body>
     <div id="test" data-ver-role="test">
@@ -56,65 +57,105 @@
         </div>
         <div class="panel">
             <div class="page-header">
-                <h2>Controls</h2>
+                <h2>Form</h2>
             </div>
             <div class="panel-body">
-                <div class="row">
-                    <div class='col-sm-6'>
-                        <input type="text" class="form-control" />
-                        <select class="form-control"></select>
+                <form class="form-horizontal" data-validate-form>
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3 required">AutoComplete:</label>
+                        <div class="col-xs-9">
+                            <input name="autoComplete" data-role="autocomplete" class="form-control" required
+                                   data-text-field="name" data-bind="source: colors, value: autoCompleteValue" />
+                        </div>
                     </div>
-                </div>
-              
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3 required">ComboBox:</label>
+                        <div class="col-xs-9">
+                            <select name="combobox" class="form-control" required data-role="combobox"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3">DatePicker:</label>
+                        <div class="col-xs-9">
+                            <input name="datepicker" type="date" required class="form-control" data-role="datepicker" data-bind="value: data.date" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3 required">TimePicker:</label>
+                        <div class="col-xs-9">
+                            <input name="timepicker" data-role="timepicker" class="form-control" required data-bind="value: timePickerValue" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3 required">DateTimePicker:</label>
+                        <div class="col-xs-9">
+                            <input name="datetimepicker" type="datetime" class="form-control" required data-role="datetimepicker" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3 required">DropDownList:</label>
+                        <div class="col-xs-9">
+                            <select name="dropdownlist" data-role="dropdownlist" required class="form-control" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3 required">NumericTextBox:</label>
+                        <div class="col-xs-9">
+                            <input name="numerictextbox" data-role="numerictextbox" required class="form-control" data-format="c" data-bind="value: numericTextBoxValue" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3 required">MultiSelect:</label>
+                        <div class="col-xs-9">
+                            <select name="multiselect" multiple="multiple" required class="form-control" data-role="multiselect" data-text-field="name" data-value-field="value" data-bind="source: colors, value: multiSelectValue"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3 required">Slider:</label>
+                        <div class="col-xs-9">
+                            <input name="slider" type="range" data-role="slider" required data-bind="value: sliderValue" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-xs-9 col-xs-offset-3">
+                            <button data-action="submit" class="btn btn-primary">提 交</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="page-header">
-            <h2>Binders</h2>
+        <div class="panel">
+            <div class="page-header">
+                <h2>Binders</h2>
+            </div>
+            <div class="panel-body">
+                <span data-bind='date: startDate' data-format='yyyy-MM-dd'></span>
+            </div>
         </div>
-        <div class="panel-body">
-            <span data-bind='date: startDate' data-format='yyyy-MM-dd'></span>
+        <div class="panel">
+            <div class="panel-header">
+                <h2>Button</h2>
+            </div>
+            <div class="panel-body">
+                <button data-role="button" class="btn btn-default">按 钮</button>
+                <button class="btn btn-default">按 钮</button>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Radio 1 (preselected)
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio 2
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
+                    </label>
+                </div>
+            </div>
         </div>
         <div class="demo-section k-content wide">
             <ul class="fieldlist">
-                <li>
-                    <h4>AutoComplete</h4>
-                    <input data-role="autocomplete" class="form-control input-sm" data-text-field="name" data-bind="source: colors, value: autoCompleteValue" />
-                    <input type="text" class="form-control" />
-                </li>
-                <li>
-                    <h4>ComboBox:</h4>
-                    <select data-role="combobox" class="form-control input-sm" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
-                </li>
-                <li>
-                    <h4>DropDownList:</h4>
-                    <select data-role="dropdownlist"  class="form-control" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
-                </li>
-                <li>
-                    <h4>DatePicker:</h4>
-                    <input data-role="datepicker" class="form-control"  data-bind="value: datePickerValue" />
-                </li>
-                <li>
-                    <h4>TimePicker:</h4>
-                    <input data-role="timepicker" class="form-control"  data-bind="value: timePickerValue" />
-                </li>
-                <li>
-                    <h4>NumericTextBox:</h4>
-                    <input data-role="numerictextbox" class="form-control"  data-format="c" data-bind="value: numericTextBoxValue" />
-                </li>
-                <li>
-                    <h4>Slider:</h4>
-                    <input data-role="slider" data-bind="value: sliderValue" />
-                </li>
-            </ul>
-            <ul class="fieldlist">
-                <li>
-                    <h4>MultiSelect:</h4>
-                    <select multiple="multiple" data-role="multiselect" data-text-field="name" data-value-field="value" data-bind="source: colors, value: multiSelectValue"></select>
-                </li>
-                <li>
-                    <h4>Grid</h4>
-                    <div data-role="grid" data-sortable="true" data-editable="true" data-columns='["Name", "Price", "UnitsInStock", {"command": "destroy"}]' data-bind="source: gridSource"></div>
-                </li>
                 <li>
                     <h4>Splitter</h4>
                     <div data-role="splitter" data-panes="[{size:'30%', collapsible:true},{size:'70%'}]">
@@ -124,26 +165,46 @@
                 </li>
                 <li>
                     <h4>TabStrip</h4>
-                    <div data-role="tabstrip" data-animation="false">
-                        <ul class="nav nav-tabs">
-                            <li class="k-state-active active">
-                                <a>First</a>
-                            </li>
-                            <li>
-                                <a>Second</a>
-                            </li>
-                        </ul>
-                        <div>
-                            <h4>First page:</h4>
-                            Pick a time: <input data-role="timepicker" data-bind="value: timePickerValue" />
-                        </div>
-                        <div>
-                            <h4>Second page:</h4>
-                            Time is: <span data-bind="text: displayTimePickerValue"></span>
+                    <div style="width: 400px;">
+                        <div data-role="tabstrip" data-animation="false">
+                            <ul>
+                                <li class="k-state-active">
+                                    Tab 1 with long text
+                                </li>
+                                <li>
+                                    Tab 2 with long text
+                                </li>
+                                <li>
+                                    Tab 3 with long text
+                                </li>
+                                <li>
+                                    Tab 4 with long text
+                                </li>
+                            </ul>
+                            <div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis libero, lobortis ac rutrum quis, varius a velit.</p>
+                            </div>
+                            <div>
+                                <p>Donec lacus erat, cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo diam eget risus.</p>
+                            </div>
+                            <div>
+                                <p>Integer facilisis, justo cursus venenatis vehicula, massa nisl tempor sem, in ullamcorper neque mauris in orci.</p>
+                            </div>
+                            <div>
+                                <p>Ut orci ligula, varius ac consequat in, rhoncus in dolor. Mauris pulvinar molestie accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+                            </div>
                         </div>
                     </div>
                 </li>
             </ul>
+        </div>
+        <div class="panel">
+            <div class="panel-header">
+                <h2>Toolbar</h2>
+            </div>
+            <div class="panel-body">
+                <div id="toolbar"></div>
+            </div>
         </div>
     </div>
     <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -154,10 +215,89 @@
         var app = veronica.createApp();
         app.use(veronicaui);
         app.uiKit.setDefault('keboacy');
+        app.formValidation.setDefault('kendo');
         app.viewEngine.setDefault('kendo');
         app.widget.register('test', {
+            defaults: {
+                autoAction: true,
+                enableValidation: true
+            },
+            submitHandler: function (e) {
+                this.validate();
+            },
+            rendered: function () {
+                $("#toolbar").kendoToolBar({
+                    items: [
+                        { type: "button", text: "Button" },
+                        { type: "button", text: "Toggle Button", togglable: true },
+                        {
+                            type: "splitButton",
+                            text: "Insert",
+                            menuButtons: [
+                                { text: "Insert above", icon: "insert-n" },
+                                { text: "Insert between", icon: "insert-m" },
+                                { text: "Insert below", icon: "insert-s" }
+                            ]
+                        },
+                        { type: "separator" },
+                        { template: "<label>Format:</label>" },
+                        {
+                            template: "<input id='dropdown' style='width: 150px;' />",
+                            overflow: "never"
+                        },
+                        { type: "separator" },
+                        {
+                            type: "buttonGroup",
+                            buttons: [
+                                { spriteCssClass: "k-tool-icon k-justifyLeft", text: "Left", togglable: true, group: "text-align" },
+                                { spriteCssClass: "k-tool-icon k-justifyCenter", text: "Center", togglable: true, group: "text-align" },
+                                { spriteCssClass: "k-tool-icon k-justifyRight", text: "Right", togglable: true, group: "text-align" }
+                            ]
+                        },
+                        {
+                            type: "buttonGroup",
+                            buttons: [
+                                { spriteCssClass: "k-tool-icon k-bold", text: "Bold", togglable: true, showText: "overflow" },
+                                { spriteCssClass: "k-tool-icon k-italic", text: "Italic", togglable: true, showText: "overflow" },
+                                { spriteCssClass: "k-tool-icon k-underline", text: "Underline", togglable: true, showText: "overflow" }
+                            ]
+                        },
+                        {
+                            type: "button",
+                            text: "Action",
+                            overflow: "always"
+                        },
+                        {
+                            type: "button",
+                            text: "Another Action",
+                            overflow: "always"
+                        },
+                        {
+                            type: "button",
+                            text: "Something else here",
+                            overflow: "always"
+                        }
+                    ]
+                });
+
+                $("#dropdown").kendoDropDownList({
+                    optionLabel: "Paragraph",
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: [
+                        { text: "Heading 1", value: 1 },
+                        { text: "Heading 2", value: 2 },
+                        { text: "Heading 3", value: 3 },
+                        { text: "Title", value: 4 },
+                        { text: "Subtitle", value: 5 }
+                    ]
+                });
+            },
             initAttr: function () {
                 this.model({
+                    data: {
+                        date: new Date()
+                    },
                     autoCompleteValue: null,
                     colors: [
                         { name: "Red", value: "#f00" },
