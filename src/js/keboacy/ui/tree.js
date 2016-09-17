@@ -36,7 +36,7 @@
             name: 'Tree',
             focusSelector: '.k-tree-item > .k-tree-inner',
             isSubtree: false,
-            dataTextField: ''
+            dataTextField: 'text'
         },
         init: function (element, options) {
             var that = this;

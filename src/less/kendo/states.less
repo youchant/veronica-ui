@@ -4,11 +4,8 @@
 // Hover
 
 .k-item.k-state-hover,
-td.k-state-hover,
-.k-item.k-state-focused {
-    color: @hover-text-color;
-    background-color: @hover-background-color;
-    border-color: @hover-border-color;
+td.k-state-hover {
+    .hover-style;
 }
 
 .k-state-hover > .k-select,
@@ -18,16 +15,26 @@ td.k-state-hover,
 
 // Focus
 
-.k-state-focused,
+/*.k-state-focused,*/
 .k-state-border-down,
 .k-state-border-up,
+.k-numeric-wrap.k-state-focused,
 .form-control.k-state-focused {
     border-color: @focused-border-color;
 }
 
+
+
 // Selected
 
-.k-state-selected,
+td.k-state-selected{
+    .selected-style;
+    > .k-link {
+        color: @selected-text-color;
+    }
+}
+
+/*.k-state-selected,
 .k-state-selected:hover,
 .k-state-selected:link,
 .k-state-selected:visited,
@@ -39,7 +46,7 @@ td.k-state-hover,
     > .k-link {
         color: @selected-text-color;
     }
-}
+}*/
 
 .k-combobox .k-select,
 .k-numerictextbox .k-select,

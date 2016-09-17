@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title></title>
@@ -11,7 +11,7 @@
     </style>
     <link href="../src/less/kendo/common.css" rel="stylesheet" />
     <link href="../src/less/kendo/kendo.bootstrap.css" rel="stylesheet"/>
-    <link href="../src/less/themes/default/index.css" rel="stylesheet" />
+    <link href="../dist/css/default.css" rel="stylesheet" />
     <link href="../bower_components/kendo-ui/styles/kendo.mobile.common.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -71,7 +71,9 @@
                     <div class="form-group row">
                         <label class="control-label col-xs-3 required">ComboBox:</label>
                         <div class="col-xs-9">
-                            <select name="combobox" class="form-control" required data-role="combobox"></select>
+                            <select name="combobox" class="form-control" required data-role="combobox"
+                                    data-text-field="name" 
+                                     data-bind="value: comboBoxValue, source: colors"></select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -113,10 +115,23 @@
                     <div class="form-group row">
                         <label class="control-label col-xs-3 required">Slider:</label>
                         <div class="col-xs-9">
-                            <input name="slider" type="range" data-role="slider" required data-bind="value: sliderValue" />
+                            <input name="slider" type="range" data-role="slider" class="form-control" required data-bind="value: sliderValue" />
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="control-label col-xs-3 required">File Upload:</label>
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <input type="text" class="form-control" readonly>
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary">
+                                        Browse&hellip; <input type="file" style="display: none;" multiple>
+                                    </span>
+                                </label>
 
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <div class="col-xs-9 col-xs-offset-3">
@@ -154,49 +169,56 @@
                 </div>
             </div>
         </div>
-        <div class="demo-section k-content wide">
-            <ul class="fieldlist">
-                <li>
-                    <h4>Splitter</h4>
-                    <div data-role="splitter" data-panes="[{size:'30%', collapsible:true},{size:'70%'}]">
-                        <div>Pane 1</div>
-                        <div>Pane 2</div>
-                    </div>
-                </li>
-                <li>
-                    <h4>TabStrip</h4>
-                    <div style="width: 400px;">
-                        <div data-role="tabstrip" data-animation="false">
-                            <ul>
-                                <li class="k-state-active">
-                                    Tab 1 with long text
-                                </li>
-                                <li>
-                                    Tab 2 with long text
-                                </li>
-                                <li>
-                                    Tab 3 with long text
-                                </li>
-                                <li>
-                                    Tab 4 with long text
-                                </li>
-                            </ul>
-                            <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis libero, lobortis ac rutrum quis, varius a velit.</p>
+        <div class="panel">
+            <div class="panel-title">
+                <h2>TabStrip</h2>
+            </div>
+            <div class="panel-body">
+                <div class="demo-section k-content wide">
+                    <ul class="fieldlist">
+                        <li>
+                            <h4>Splitter</h4>
+                            <div data-role="splitter" data-panes="[{size:'30%', collapsible:true},{size:'70%'}]">
+                                <div>Pane 1</div>
+                                <div>Pane 2</div>
                             </div>
-                            <div>
-                                <p>Donec lacus erat, cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo diam eget risus.</p>
+                        </li>
+                        <li>
+                            <h4>TabStrip</h4>
+                            <div style="width: 400px;">
+                                <div data-role="tabstrip" data-animation="false">
+                                    <ul>
+                                        <li class="k-state-active">
+                                            Tab 1 with long text
+                                        </li>
+                                        <li>
+                                            Tab 2 with long text
+                                        </li>
+                                        <li>
+                                            Tab 3 with long text
+                                        </li>
+                                        <li>
+                                            Tab 4 with long text
+                                        </li>
+                                    </ul>
+                                    <div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis libero, lobortis ac rutrum quis, varius a velit.</p>
+                                    </div>
+                                    <div>
+                                        <p>Donec lacus erat, cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo diam eget risus.</p>
+                                    </div>
+                                    <div>
+                                        <p>Integer facilisis, justo cursus venenatis vehicula, massa nisl tempor sem, in ullamcorper neque mauris in orci.</p>
+                                    </div>
+                                    <div>
+                                        <p>Ut orci ligula, varius ac consequat in, rhoncus in dolor. Mauris pulvinar molestie accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <p>Integer facilisis, justo cursus venenatis vehicula, massa nisl tempor sem, in ullamcorper neque mauris in orci.</p>
-                            </div>
-                            <div>
-                                <p>Ut orci ligula, varius ac consequat in, rhoncus in dolor. Mauris pulvinar molestie accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="panel">
             <div class="panel-header">
@@ -205,6 +227,17 @@
             <div class="panel-body">
                 <div id="toolbar"></div>
             </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">Tree</div>
+            </div>
+            <div class="panel-body">
+                <div data-role="tree" data-selectable="true" data-bind="source: treeviewSource" data-auto-bind="true" data-text-field="text"></div>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-default" data-action="get">Get</button>
         </div>
     </div>
     <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -224,6 +257,10 @@
             },
             submitHandler: function (e) {
                 this.validate();
+            },
+            getHandler: function(e){
+                debugger;
+              console.log(this.model());
             },
             rendered: function () {
                 $("#toolbar").kendoToolBar({
@@ -348,14 +385,21 @@
                     displayGridSource: function () {
                         return stringify(this.get("gridSource"));
                     },
-                    treeviewSource: kendo.observableHierarchy([
-                        {
-                            text: "Andrew", expanded: true, items: [
-                            { text: "Nancy" },
-                            { text: "Steve" }
+                    treeviewSource: kendo.data.HierarchicalDataSource.create({
+                        data: [
+                            {
+                                text: "Andrew", expanded: true, items: [
+                                { text: "Nancy" },
+                                { text: "Steve" }
                             ]
+                            }
+                        ],
+                        schema: {
+                            model: {
+                                children: 'items'
+                            }
                         }
-                    ]),
+                    }),
                     displayTreeviewSource: function () {
                         return stringify(this.get("treeviewSource").toJSON());
                     }
