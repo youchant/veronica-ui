@@ -61,7 +61,7 @@
 }*/
 .k-invalid,
 .form-control.k-invalid {
-  border-color: #cf4c35;
+  border-color: @state-warning-text;
 }
 
 .form-invalid-tag {
@@ -75,11 +75,46 @@
 
 // Tooltip
 
-.k-widget.k-tooltip-validation {
-  border-color: #fff19d;
-  background-color: #fff19d;
-  color: #6a5b00;
+.k-state-focused,
+.k-state-hover{
+  .k-tooltip-validation{
+    visibility: visible;
+  }
 }
+
+.k-dropdown-wrap{
+  &.k-state-focused,
+  &.k-state-hover{
+    ~ .k-tooltip-validation{
+      visibility: visible;
+    }
+  }
+}
+
+.k-tooltip-validation {
+  border-color: @alert-warning-border;
+  background-color: @alert-warning-bg;
+  color: @alert-warning-text;
+  padding: 3px 8px;
+  font-size: 12px;
+  margin-top: 7px;
+  margin-left: 10px;
+  visibility: hidden;
+
+  .k-callout-n{
+    border: 1px solid @alert-warning-border;
+    border-width: 1px 0 0 1px;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    top: 0;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: @alert-warning-bg;
+    margin-top: -1px;
+  }
+}
+
+
 
 // MultiSelect
 .form-control.k-multiselect {

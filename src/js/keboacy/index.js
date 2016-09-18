@@ -8,7 +8,9 @@ define([
     './ui/dynamicTab',
     './ui/submenu',
     './ui/notify',
-    './ui/confirm'
+    './ui/confirm',
+    './ui/file',
+    'jquery-form'
 ], function (store) {
     return {
         store: store

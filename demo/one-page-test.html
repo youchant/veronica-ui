@@ -60,7 +60,7 @@
                 <h2>Form</h2>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" data-validate-form>
+                <form class="form-horizontal" data-validate-form data-ajax-form>
                     <div class="form-group row">
                         <label class="control-label col-xs-3 required">AutoComplete:</label>
                         <div class="col-xs-9">
@@ -257,6 +257,7 @@
             },
             submitHandler: function (e) {
                 this.validate();
+                this.$('form').ajaxSubmit();
             },
             getHandler: function(e){
                 debugger;

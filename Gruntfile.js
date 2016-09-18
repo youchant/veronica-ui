@@ -24,9 +24,8 @@ module.exports = function (grunt) {
                 'noty': thirdPath + '/noty/js/noty/packaged/jquery.noty.packaged',
                 'qtip2': thirdPath + '/qtip2/dist/jquery.qtip',
                 'bootstrap-datetimepicker': bowerPath + '/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker',
-                'moment': bowerPath + '/moment/moment'
-                //,
-                //'jquery-form': thirdPath + '/jquery-form/jquery.form',
+                'moment': bowerPath + '/moment/moment',
+                'jquery-form': bowerPath + '/jquery-form/jquery.form',
                 //'jquery-inputmask': thirdPath + '/jquery.inputmask/dist/jquery.inputmask.bundle',
                 //'table-to-json': thirdPath + '/table-to-json/lib/jquery.tabletojson',
                 //'form2js': thirdPath + '/form2js/src/form2js',

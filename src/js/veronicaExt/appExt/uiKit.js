@@ -11,6 +11,10 @@ define([
         app.uiKit.add('keboacy', {
             init: function (view, $el) {
                 view.$el.dynamicTab();
+                view.$el.find('[data-ajax-form]').each(function (i, form) {
+                    var options = $(form).data();
+                    $(form).ajaxForm(options);
+                });
             },
             destroy: function (view) {
                 // 销毁该组件下的kendo控件
