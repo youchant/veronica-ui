@@ -13,7 +13,7 @@ module.exports = function (grunt) {
             paths: {
                 "jquery": "empty:",
                 'bootstrap': '../assets/bootstrap-flat/bootstrap',
-                'kendo-ui': bowerPath + '/kendo-ui/js/kendo.ui.core.min',
+                'kendo-ui': '../assets/kendo-ui-core/kendo.ui.core',
                 'kendo-ui-messages': '../assets/kendo-ui-core/kendo.messages.zh-CN',
                 'kendo-ui-culture': '../assets/kendo-ui-core/kendo.culture.zh-CN',
                 'text': thirdPath + '/requirejs-text/text',
