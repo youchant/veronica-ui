@@ -5064,6 +5064,10 @@ input.k-textbox {
 .k-dropdown-wrap.k-state-hover ~ .k-tooltip-validation {
   visibility: visible;
 }
+.form-control.k-invalid:hover ~ .k-tooltip-validation,
+.form-control.k-invalid:focus ~ .k-tooltip-validation {
+  visibility: visible;
+}
 .k-tooltip-validation {
   border-color: #f0c670;
   background-color: #fcf8e3;

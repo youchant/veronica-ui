@@ -95,6 +95,14 @@
     }
   }
 }
+.form-control.k-invalid{
+  &:hover,
+  &:focus{
+    ~ .k-tooltip-validation{
+      visibility: visible;
+    }
+  }
+}
 
 .k-tooltip-validation {
   border-color: @alert-warning-border;
