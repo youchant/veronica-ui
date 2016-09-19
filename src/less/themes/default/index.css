@@ -10505,6 +10505,30 @@ textarea {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
+}
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}
 /** 变量 */
 /* States */
 /* state */
@@ -10866,12 +10890,16 @@ textarea {
 .form-control[data-role=numerictextbox] {
   display: inline-block;
 }
+.k-widget.k-file {
+  border: none;
+}
 .form-control.k-combobox,
 .form-control.k-dropdown,
 .form-control.k-datepicker,
 .form-control.k-timepicker,
 .form-control.k-numerictextbox,
-.form-control.k-datetimepicker {
+.form-control.k-datetimepicker,
+.form-control.k-file {
   border: none;
 }
 /*.k-invalid-msg {
@@ -11052,7 +11080,6 @@ textarea {
 }
 .k-slider-horizontal {
   display: inline-block;
-  width: 200px;
 }
 .k-slider-horizontal .k-slider-wrap {
   height: 26px;

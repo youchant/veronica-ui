@@ -10,6 +10,7 @@ define([
     './ui/notify',
     './ui/confirm',
     './ui/file',
+    './ui/checkboxlist',
     'jquery-form'
 ], function (store) {
     return {

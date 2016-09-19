@@ -31,13 +31,18 @@
   display: inline-block;
 }
 
+.k-widget.k-file{
+  border:none;
+}
+
 .form-control {
   &.k-combobox,
   &.k-dropdown,
   &.k-datepicker,
   &.k-timepicker,
   &.k-numerictextbox,
-  &.k-datetimepicker {
+  &.k-datetimepicker,
+  &.k-file {
     border: none;
   }
 }
@@ -286,7 +291,7 @@
 
 .k-slider-horizontal {
   display: inline-block;
-  width: 200px;
+  //width: 200px;
 
   .k-slider-wrap {
     height: @slider-height;

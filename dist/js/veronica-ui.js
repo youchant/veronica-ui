@@ -9425,6 +9425,155 @@ define('keboacy/ui/confirm',[
 
 }));
 
+// 模板扩展
+define('keboacy/ui/checkboxlist',[], function () {
+    return function (app) {
+        (function ($, kendo) {
+            var NS = ".kendoCheckBoxList";
+
+            var CheckBoxList = kendo.ui.DataBoundWidget.extend({
+                options: {
+                    dataSource: null,
+                    dataValueBind: "",
+                    dataTextField: "",
+                    dataValueType: "string",
+                    dataValueField: "",
+                    name: "CheckBoxList",
+                    orientation: "vertical"
+                },
+
+                events: [
+                    "dataBound",
+                    "select"
+                ],
+                dataSource: null,
+
+                init: function (element, options) {
+
+                    kendo.ui.Widget.fn.init.call(this, element, options);
+
+                    this._dataSource();
+                    this.dataSource.fetch();
+                    this.element.on("click" + NS, ".k-checkbox-label", { sender: this }, this._onCheckBoxSelected);
+
+                    this.element.css({ "display": "inline-block" });
+                },
+
+                destroy: function () {
+                    $(this.element).off(NS);
+                    kendo.ui.Widget.fn.destroy.call(this);
+                },
+
+                _dataSource: function () {
+                    var dataSource = this.options.dataSource;
+                    dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
+
+                    if (this.dataSource && this._refreshHandler) {
+                        this.dataSource.unbind("change", this._refreshHandler);
+                    } else {
+                        this._refreshHandler = $.proxy(this.refresh, this);
+                    }
+
+                    this.dataSource = kendo.data.DataSource.create(dataSource).bind("change", this._refreshHandler);
+                },
+
+                _template: function () {
+
+                    var html = kendo.format(
+                        "<div class='k-ext-checkbox-item {2}' data-uid='#: uid #' data-value='#: {0} #' data-text='#: {1} #'>" +
+                            '<label>' +
+                                "<input type='checkbox' value='#: {0} #' class='k-checkbox' data-type='{4}' data-bind='checked: {3}' />" +
+                                "<span class='k-checkbox-label'>#: {1} #</span>" +
+                            '</label>' +
+                        "</div>",
+                        this.options.dataValueField,
+                        this.options.dataTextField,
+                        this.options.orientation === "vertical" ? "checkbox" : "checkbox-inline",
+                        this.options.dataValueBind,
+                        this.options.dataValueType);
+
+                    return kendo.template(html);
+                },
+
+                _onCheckBoxSelected: function (e) {
+
+                    var $target = $(this),
+                        $checkBoxItem = $target.closest(".k-ext-checkbox-item"),
+                        that = e.data.sender,
+                        isChecked = $checkBoxItem.find(".k-checkbox").is(":checked");
+
+                    $target.prev(".k-checkbox").prop("checked", !isChecked).addClass("k-state-selected");
+
+                    var selectedUid = $checkBoxItem.attr("data-uid");
+                    that.trigger("select", { item: that.dataSource.getByUid(selectedUid), checked: !isChecked });
+                },
+
+                setDataSource: function (dataSource) {
+
+                    this.options.dataSource = dataSource;
+                    this._dataSource();
+                    this.dataSource.fetch();
+                },
+
+                refresh: function (e) {
+
+                    var template = this._template();
+
+                    this.element.empty();
+
+                    for (var idx = 0; idx < e.items.length; idx++) {
+                        this.element.append(template(e.items[idx]));
+                    }
+
+                    this.trigger("dataBound");
+                },
+                items: function () {
+                    return this.element.children();
+                },
+                dataItems: function () {
+
+                    var dataSource = this.dataSource,
+                        list = [],
+                        $items = this.element.find(".k-checkbox:checked").closest(".k-ext-checkbox-item");
+
+                    $.each($items, function () {
+                        var uid = $(this).attr("data-uid");
+                        list.push(dataSource.getByUid(uid));
+                    });
+
+                    return list;
+                },
+
+                value: function () {
+
+                    if (arguments.length === 0) {
+                        var list = [];
+                        var $items = this.element.find(".k-checkbox:checked").closest(".k-ext-checkbox-item");
+
+                        $.each($items, function () {
+                            var value = $(this).attr("data-value");
+                            list.push(value);
+                        });
+                        return list;
+                    } else {
+                        var that = this,
+                            list = $.isArray(arguments[0]) ? arguments[0] : (typeof arguments[0] === "string" ? [arguments[0]] : []);
+
+                        this.element.find(".k-checkbox").prop("checked", false).removeClass("k-state-selected");
+
+                        $.each(list, function () {
+                            var value = this;
+                            that.element.find(kendo.format(".k-ext-checkbox-item[data-value='{0}'] .k-checkbox", value)).click();
+                        });
+                    }
+                }
+            });
+            kendo.ui.plugin(CheckBoxList);
+        })($, window.kendo);
+
+    };
+});
+
 /*!
  * jQuery Form Plugin
  * version: 3.46.0-2013.11.21
@@ -10655,6 +10804,7 @@ define('keboacy/index',[
     './ui/notify',
     './ui/confirm',
     './ui/file',
+    './ui/checkboxlist',
     'jquery-form'
 ], function (store) {
     return {
@@ -10790,18 +10940,327 @@ define('veronicaExt/appExt/windowProvider',[], function () {
     };
 });
 
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        define('veronicaExt/appExt/apiDataSource',[], factory);
+    } else {
+        window.kendo.data.ApiDataSource = factory();
+    }
+}(function () {
+    return function (app) {
+        var _ = app.core._;
+        var kendo = app.core.kendo || window.kendo;
+        var DataSource = kendo.data.DataSource;
+        var $ = app.core.$;
+        var extend = $.extend;
+        var each = $.each;
+        var ajax = $.ajax;
+
+        var ApiDataSource = DataSource.extend({
+            init: function (options) {
+                if (options.api != null && !$.isEmptyObject(options.api)) {
+                    options.transport = extend(true, {}, options.transport, options.api);
+                }
+
+                DataSource.fn.init.call(this, extend(true, {}, options));
+
+                this._customMethods();
+            },
+            options: {
+                name: 'ApiDataSource'
+            },
+            _customMethods: function () {
+                var me = this;
+                each(this.options.api, function (key, api) {
+                    me[key + 'Api'] = function (options) {
+                        return this._accessApi(key, options);
+                    }
+                });
+            },
+            submitForm: function (name, $form, options) {
+                var dfd = $.Deferred();
+                var options = this.transport.setup(options, name);
+                $form.ajaxSubmit($.extend({
+                    success: function (resp) {
+                        dfd.resolve(resp);
+                    },
+                    error: function (resp) {
+                        dfd.reject(resp);
+                    }
+                }, options, {
+                    method: $form.prop('method') || 'post',
+                    contentType: $form.prop('enctype') || 'multipart/form-data'
+                }));
+                
+                return dfd.promise();
+            },
+            _accessApi: function (name, options) {
+                return ajax(this.transport.setup(options, name));
+            }
+        });
+
+        kendo.data.ApiDataSource = ApiDataSource;
+
+        return ApiDataSource;
+    };
+}));
+
+// 模板扩展
+define('veronicaExt/appExt/backendApi',[], function () {
+    return function (app) {
+        var _ = app.core._;
+        var each = _.each;
+        var extend = _.extend;
+        var parentGet = app.providerBase.get;
+
+        app.backendApi = app.provider.create({
+            get: function (name) {  // name eg: 'dashboard.person:stat'
+                var me = this;
+                var groupName, item, result;
+                var nameArr = name.split(':');
+
+                name = nameArr[0];
+                groupName = nameArr[1];
+                item = parentGet.call(this, name);
+
+                if (item != null) {
+                    result = extend({}, item);
+
+                    if (groupName != null) {
+                        var group = item.groups[groupName];
+                        if (group != null) {
+                            if (group.api) {
+                                result.api = me._getGroupApi(item, group.api);
+                            }
+                            if (group.reusable) {
+                                result.reusable = group.reusable;
+                            }
+                            if (group.options) {
+                                result.options = group.options;
+                            }
+                        }
+                    }
+                }
+                
+                return result;
+            },
+            /**
+             * 获取组的 api
+             * @example
+             *  // this._getGrouopApi({ api: {} }, ['readAll=>read', 'test'])
+             */
+            _getGroupApi: function (parent, apiConfig) {
+                var result = {};
+                each(apiConfig, function (item) {
+                    var apiArr = /([\w|-]*)(?:=>)?([\w|-]*)/.exec(item);
+                    var apiName = apiArr[2] || apiArr[1];
+                    var api = parent.api[apiArr[1]];
+                    if (api == null) {
+                        throw Error('The api does not exist: ' + apiArr[1])
+                    }
+                    result[apiName] = api;
+                })
+                return result;
+            },
+            _preprocess: function (data) {
+                _.each(data.api, function (config, key) {
+                    if (_.isString(config)) {
+                        config = {
+                            url: config
+                        }
+                    }
+                    var r = /([\w|-|\\|\/]*)\s?([\w|-|\\|\/]*)\s?([\w|-|\\|\/]*)/.exec(config.url);
+                    config.url = data.domain + r[1];
+                    config.type = config.type || r[2] || 'get';
+                    config.dataType = config.dataType || r[3] || 'json';
+
+                    data.api[key] = config;
+                })
+
+                return data;
+            }
+        });
+
+        app.backendApi.add('default', {
+            domain: '',
+            reusable: false,
+            api: {},
+            options: 'default'
+        });
+
+    };
+});
+
+define('veronicaExt/appExt/methodProvider',[],function () {
+
+    return function (app) {
+        app.methodProvider || (app.methodProvider = app.provider.create());
+    };
+});
+
+define('veronicaExt/appExt/optionsProvider',[],function () {
+
+    return function (app) {
+        var $ = app.core.$;
+
+        app.optionsProvider || (app.optionsProvider = app.provider.create());
+
+        app.methodProvider || (app.methodProvider = app.provider.create());
+
+    };
+});
+
+// 模板扩展
+define('veronicaExt/appExt/store',[], function () {
+    return function (app) {
+
+        var extend = app.core.$.extend;
+        var map = app.core.$.map;
+        var _ = app.core._;
+        var store = app.store;
+        var whenSingleResult = app.core.whenSingleResult;
+
+        store.model.IDFIELD = 'id';
+
+        store.backendApiSource = function (options) {
+            return new kendo.data.ApiDataSource(options);
+        }
+
+        function StoreHandler(stores, view) {
+            this._pool = stores;
+            this._view = view;
+        }
+
+        /**
+         * StoreHandler
+         * @example
+         *  this.store().exec('read')
+         */
+        StoreHandler.prototype = {
+            constructor: StoreHandler,
+            /**
+             * 获取内部的 store
+             */
+            get: function (name) {
+                if (name == null) {
+                    // 如果不传名称，获取第一个 store
+                    return this._pool[_.keys(this._pool)[0]];
+                } else {
+                    return this._pool[name];
+                }
+            },
+            /**
+             * 获取所有内部 store
+             */
+            getAll: function () {
+                return this._pool;
+            },
+            /**
+             * 执行命令
+             */
+            exec: function (cmdName, options) {
+                var me = this;
+                var queue = map(me._pool, function (store, name) {
+                    if (store._config.commands) {
+                        var cmd = store._config.commands[cmdName];
+                        if (typeof cmd === 'string') {
+                            cmd = app.methodProvider.get('store.' + cmd);
+                        }
+                        if (cmd != null) {
+                            return cmd.call(store, me._view, options);
+                        }
+                    }
+                    // 如果未找到命令，则调用 store 本身的方法
+                    return store[cmdName](options);
+                });
+
+                return whenSingleResult.apply(null, queue);
+            }
+        }
+
+        store.createHandler = function (stores, view) {
+            return new StoreHandler(stores, view);
+        }
+    };
+});
+
+// 模板扩展
+define('veronicaExt/appExt/storeProvider',[], function () {
+    return function (app) {
+        var _ = app.core._;
+        var extend = app.core.$.extend;
+
+        var parentGetMethod = app.providerBase.get;
+        app.storeProvider = app.provider.create({
+            get: function (name, context) {
+                var me = this;
+
+                // parse name
+                if (/^@/.test(name)) {
+                    var parent = context + '.';
+                    name = name.substr(1).replace(/^@/, parent).replace('[this]', parent);
+                }
+
+                var store = parentGetMethod.call(me, name);
+
+                // create it
+                if (store == null) {
+
+                    var backendApi = app.backendApi.get(name);
+
+                    if (typeof backendApi.options === 'string') {
+                        backendApi.options =
+                            app.optionsProvider.get('store.' + backendApi.options);
+                    }
+
+                    store = app.store.backendApiSource(extend(true, {}, backendApi.options, {
+                        api: backendApi.api
+                    }));
+
+
+                    if (backendApi.reusable) {
+                        this.add(name, store);
+                    }
+                }
+
+                return store;
+            }
+        });
+
+    };
+});
+
 define('veronicaExt/appExt/_combine',[
     './formValidation',
     './templateEngine',
     './uiKit',
     './viewEngine',
-    './windowProvider'
+    './windowProvider',
+    './apiDataSource',
+    './backendApi',
+    './methodProvider',
+    './optionsProvider',
+    './store',
+    './storeProvider'
 ], function () {
     var args = Array.prototype.slice.call(arguments);
     return function (app) {
         app.use(args);
     }
 });
+define('veronicaExt/viewExt/base',[], function () {
+    return function (base, app) {
+        var _ = app.core._;
+        base._extend({
+            methods: {
+                app: function () {
+                    return this.options.sandbox.app;
+                }
+            }
+        })
+    }
+});
+
 define('veronicaExt/viewExt/ajax',[
 ], function () {
 
@@ -11114,13 +11573,89 @@ define('veronicaExt/viewExt/ui',[
     }
 });
 
+define('veronicaExt/viewExt/store',[
+], function () {
+    return function (base, app) {
+        var _ = app.core._;
+        var extend = app.core._.extend;
+
+        base._extend({
+            options: {
+                //store
+            },
+            configs: {
+                stores: {
+                }
+            },
+            methods: {
+                _getStoreConfig: function () {
+                    return this.stores;
+                },
+                _fillData: function (data) {
+                    this.model('data', data);
+                },
+                store: function () {
+                    var me = this;
+                    var stores = {};
+                    if (me._defaultStore == null) {
+                        throw Error('Not any store in this view');
+                    }
+                    var names = Array.prototype.slice.call(arguments);
+                    if (names.length === 0) {
+                        names.push(this._defaultStore);
+                    }
+                    _.each(names, function (name) {
+                        var m = me.model(name);
+                        if (m != null) {
+                            stores[name] = m;
+                        }
+                    })
+
+                    var handler = app.store.createHandler(stores, me);
+                    return handler;
+                }
+            }
+        });
+
+        base._extendMethod('_initProps', function(){
+            this._defaultStore = null;
+        })
+
+        base._extendMethod('_listen', function () {
+            this.listenTo(this, 'modelInit', function () {
+                var me = this;
+                var keys = _.keys(this.stores);
+
+                if (keys.length === 0) { return; }
+
+                me._defaultStore = keys[0];
+
+                // 创建所有 store
+                _.each(me.stores, function (config, name) {
+                    var store = app.storeProvider.get(config.from, me._getContext());
+                    store._config = config;
+                    if (config.isDefault) {
+                        me._defaultStore = name;
+                    }
+                    // 设置到模型
+                    me.model(name, store);
+                });
+                
+            });
+            // this._store = {};
+        })
+    }
+});
+
 define('veronicaExt/viewExt/_combine',[
+    './base',
     './ajax',
     './form',
     './modelDefine',
     './resize',
     './trigger',
-    './ui'
+    './ui',
+    './store'
 ], function () {
     var args = Array.prototype.slice.call(arguments);
     return function (app) {
