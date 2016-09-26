@@ -12,7 +12,7 @@ define([], function () {
 
         store.backendApiSource = function (options) {
             return new kendo.data.ApiDataSource(options);
-        }
+        };
 
         function StoreHandler(stores, view) {
             this._pool = stores;

@@ -4871,6 +4871,12 @@ input.k-textbox {
 .k-i-warning:before {
   content: "\f071";
 }
+.k-i-minimize:before {
+  content: "\f066";
+}
+.k-i-maximize:before {
+  content: "\f065";
+}
 .k-tabstrip-items {
   margin-bottom: -1px;
 }

@@ -6,6 +6,7 @@
     }
 }(function ($, kendo) {
 
+
     /**
      * kendo ui 普通 date 绑定
      * @example

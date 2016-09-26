@@ -9,6 +9,7 @@
     "bootstrap": "^3.3.7",
     "bootstrap-datetime-picker": "^2.3.10",
     "chai": "~1.5.0",
+    "echarts": "^3.2.3",
     "font-awesome": "^4.6.3",
     "grunt": "^0.4.3",
     "grunt-contrib-clean": "^0.6.0",

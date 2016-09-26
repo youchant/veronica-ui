@@ -9,14 +9,15 @@
         var _ = app.core._;
         var kendo = app.core.kendo || window.kendo;
         var DataSource = kendo.data.DataSource;
+        var HierarchicalDataSource = kendo.data.HierarchicalDataSource;
         var $ = app.core.$;
         var extend = $.extend;
         var each = $.each;
         var ajax = $.ajax;
 
-        var ApiDataSource = DataSource.extend({
+        var ApiDataSource = HierarchicalDataSource.extend({
             init: function (options) {
-                if (options.api != null && !$.isEmptyObject(options.api)) {
+                if (options.transport != null && options.api != null && !$.isEmptyObject(options.api)) {
                     options.transport = extend(true, {}, options.transport, options.api);
                 }
 

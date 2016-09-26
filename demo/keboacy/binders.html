@@ -7,9 +7,16 @@
 <body>
     <span data-bind='date: startDate' data-format='yyyy-MM-dd'></span>
     <script src="../../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../../src/assets/kendo-ui-core/kendo.custom.js"></script>
-    <script src="../../src/js/keboacy/base/binders.js"></script>
+    <script src="../../dist/js/veronica-ui.js"></script>
     <script>
+        kendo.data.binders.widget.options = kendo.data.Binder.extend({
+            init: function (widget, bindings, options) {
+
+            },
+            refresh: function () {
+
+            }
+        });
         kendo.bind('body', {
             startDate: new Date()
         })
