@@ -1,5 +1,4 @@
-define([
-], function () {
+define([], function () {
     return function (base, app) {
         var _ = app.core._;
         var $ = app.core.$;
@@ -22,13 +21,37 @@ define([
                  *   }
                  */
                 instance: function (el) {
-                    return this._uiKit().getInstance(this, this.$(el));
+                    var $el = el instanceof $ ? el : (el.tagName ? $(el) : this.$(el));
+                    return this._uiKit().getInstance(this, $el);
+                },
+                $: function (selector) {
+                    var r = this.$el.find(selector);
+                    this._outerEl.each(function (i, el) {
+                        var isThis = $(el).is(selector);
+                        var r1;
+                        if (isThis) {
+                            r1 = $(el);
+                        } else {
+                            r1 = $(el).find(selector);
+                        }
+                        if (r1.length !== 0) {
+                            $.merge(r, r1);
+                        }
+                    });
+
+                    return r;
                 }
             }
         });
 
         base._extendMethod('_rendered', function () {
+            this._outerEl = this.$('[data-role=window]');
             this._uiKit().init(this, this.$el);
+
+        });
+
+        base._extendMethod('_initProps', function () {
+            this._outerEl = $({});
         });
 
         base._extendMethod('_destroy', function () {

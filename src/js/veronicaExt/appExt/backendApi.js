@@ -1,4 +1,4 @@
-// 模板扩展
+
 define([], function () {
     return function (app) {
         var _ = app.core._;
@@ -31,6 +31,9 @@ define([], function () {
                             if (group.options) {
                                 result.options = group.options;
                             }
+                            if(group.type){
+                                result.type = group.type;
+                            }
                         }
                     }
                 }
@@ -45,7 +48,7 @@ define([], function () {
             _getGroupApi: function (parent, apiConfig) {
                 var result = {};
                 each(apiConfig, function (item) {
-                    var apiArr = /([\w|-]*)(?:=>)?([\w|-]*)/.exec(item);
+                    var apiArr = /([\w\-]*)(?:=>)?([\w\-]*)/.exec(item);
                     var apiName = apiArr[2] || apiArr[1];
                     var api = parent.api[apiArr[1]];
                     if (api == null) {
@@ -62,7 +65,7 @@ define([], function () {
                             url: config
                         }
                     }
-                    var r = /([\w|-|\\|\/]*)\s?([\w|-|\\|\/]*)\s?([\w|-|\\|\/]*)/.exec(config.url);
+                    var r = /([\w\-\\\/]*)\s?([\w\-\\\/]*)\s?([\w\-\\\/]*)/.exec(config.url);
                     config.url = data.domain + r[1];
                     config.type = config.type || r[2] || 'get';
                     config.dataType = config.dataType || r[3] || 'json';
@@ -78,7 +81,8 @@ define([], function () {
             domain: '',
             reusable: false,
             api: {},
-            options: 'default'
+            options: 'default',
+            type: 'multiple'
         });
 
     };

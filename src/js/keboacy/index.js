@@ -1,5 +1,5 @@
 define([
-    './base/store',
+    './base/data',
     './base/binders',
     //'./base/validation',
     './base/culture',

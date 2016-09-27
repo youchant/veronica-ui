@@ -4,7 +4,6 @@ define([
     './uiKit',
     './viewEngine',
     './windowProvider',
-    './apiDataSource',
     './backendApi',
     './methodProvider',
     './optionsProvider',

@@ -6,6 +6,32 @@ define([], function () {
 
         var parentGetMethod = app.providerBase.get;
         app.storeProvider = app.provider.create({
+            create: function (name) {
+                var backendApi = app.backendApi.get(name);
+
+                if (typeof backendApi.options === 'string') {
+                    backendApi.options =
+                        app.optionsProvider.get('store.' + backendApi.options);
+                }
+
+                var options = extend(true, {}, backendApi.options, {
+                    api: backendApi.api
+                });
+
+                var store;
+                if(backendApi.type === 'multiple'){
+                    store = app.store.backendApiSource(options);
+                }
+                if(backendApi.type === 'single'){
+                    store = app.store.backendApiObject(options);
+                }
+
+                if (backendApi.reusable) {
+                    this.add(name, store);
+                }
+
+                return store;
+            },
             get: function (name, context) {
                 var me = this;
 
@@ -19,22 +45,7 @@ define([], function () {
 
                 // create it
                 if (store == null) {
-
-                    var backendApi = app.backendApi.get(name);
-
-                    if (typeof backendApi.options === 'string') {
-                        backendApi.options =
-                            app.optionsProvider.get('store.' + backendApi.options);
-                    }
-
-                    store = app.store.backendApiSource(extend(true, {}, backendApi.options, {
-                        api: backendApi.api
-                    }));
-
-
-                    if (backendApi.reusable) {
-                        this.add(name, store);
-                    }
+                   store = me.create(name);
                 }
 
                 return store;

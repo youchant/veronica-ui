@@ -8,8 +8,14 @@ define([
 
         $.extend(app, keboacy);
 
+        // kendo widget: widget
+
+
+
         app.uiKit.add('keboacy', {
             init: function (view, $el) {
+                // kendo.init($el);
+                // kendo.init($el, kendo.mobile.ui);
                 view.$el.dynamicTab();
                 view.$el.find('[data-ajax-form]').each(function (i, form) {
                     var options = $(form).data();

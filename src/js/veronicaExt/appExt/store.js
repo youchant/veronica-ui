@@ -1,73 +1,97 @@
 // 模板扩展
-define([], function () {
+define([
+    './storeHandler'
+], function (StoreHandler) {
     return function (app) {
 
         var extend = app.core.$.extend;
         var map = app.core.$.map;
         var _ = app.core._;
-        var store = app.store;
         var whenSingleResult = app.core.whenSingleResult;
 
-        store.model.IDFIELD = 'id';
+        var store = app.store = {};
 
-        store.backendApiSource = function (options) {
-            return new kendo.data.ApiDataSource(options);
+
+        // 基础视图模型
+        store.viewModel = function (obj) {
+            return kendo.observable(obj);
         };
 
-        function StoreHandler(stores, view) {
-            this._pool = stores;
-            this._view = view;
-        }
-
-        /**
-         * StoreHandler
-         * @example
-         *  this.store().exec('read')
-         */
-        StoreHandler.prototype = {
-            constructor: StoreHandler,
-            /**
-             * 获取内部的 store
-             */
-            get: function (name) {
-                if (name == null) {
-                    // 如果不传名称，获取第一个 store
-                    return this._pool[_.keys(this._pool)[0]];
-                } else {
-                    return this._pool[name];
-                }
-            },
-            /**
-             * 获取所有内部 store
-             */
-            getAll: function () {
-                return this._pool;
-            },
-            /**
-             * 执行命令
-             */
-            exec: function (cmdName, options) {
-                var me = this;
-                var queue = map(me._pool, function (store, name) {
-                    if (store._config.commands) {
-                        var cmd = store._config.commands[cmdName];
-                        if (typeof cmd === 'string') {
-                            cmd = app.methodProvider.get('store.' + cmd);
-                        }
-                        if (cmd != null) {
-                            return cmd.call(store, me._view, options);
-                        }
-                    }
-                    // 如果未找到命令，则调用 store 本身的方法
-                    return store[cmdName](options);
-                });
-
-                return whenSingleResult.apply(null, queue);
+        // 基础模型
+        store.model = function (options) {
+            if (typeof options === 'string') {
+                options = {
+                    id: options || store.model.IDFIELD
+                };
             }
-        }
+            return kendo.data.Model.define(options);
+        };
+        store.model.IDFIELD = 'id';
+
+        store.source = function (options) {
+            return new kendo.data.DataSource(options);
+        };
+
+        store.remoteSource = function (url) {
+            var param = {
+                pageSize: 20,
+                page: 1,
+                schema: {
+                    model: store.model(),
+                    // type: 'json',
+                    data: 'data',
+                    total: 'total'
+                },
+                transport: {
+                    read: {
+                        url: url,
+                        dataType: 'json'
+                    }
+                }
+            };
+            return store.source(param);
+        };
+
+        store.remoteComplexSource = function (url) {
+            return store.source({
+                pageSize: 20,
+                page: 1,
+                serverPaging: true,
+                serverSorting: true,
+                serverFiltering: true,
+                schema: {
+                    //type: 'json',
+                    model: store.model(),
+                    data: 'data',
+                    total: 'total'
+                },
+                transport: {
+                    read: {
+                        url: url,
+                        type: 'POST',
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8"
+                    },
+                    parameterMap: function (data, type) {
+                        if (type === "read") {
+                            return JSON.stringify(data);
+                        }
+                        return data;
+                    }
+                }
+            });
+        };
+
+        store.backendApiSource = function (options) {
+            return new kendo.data.BackendApiDataSource(options);
+        };
+
+        store.backendApiObject = function(options){
+            return new kendo.data.BackendApiDataObject(options);
+        };
 
         store.createHandler = function (stores, view) {
             return new StoreHandler(stores, view);
-        }
+        };
     };
 });

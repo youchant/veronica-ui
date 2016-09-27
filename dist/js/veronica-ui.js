@@ -53196,87 +53196,169 @@ return window.kendo;
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
-        define('keboacy/base/store',['jquery', 'kendo-ui'], factory);
+        define('keboacy/base/data',['jquery', 'kendo-ui'], factory);
     } else {
-        root.kb_store = factory(jQuery.kendo);
+        factory(jQuery, kendo);
     }
 }(function ($, kendo) {
 
-    var store = {};
-    // 基础视图模型
-    store.viewModel = function (obj) {
-        return kendo.observable(obj);
-    };
+    var DataSource = kendo.data.DataSource;
+    var HierarchicalDataSource = kendo.data.HierarchicalDataSource;
+    var extend = $.extend;
+    var each = $.each;
+    var ajax = $.ajax;
+    var ObservableObject = kendo.data.ObservableObject;
 
-    // 基础模型
-    store.model = function (options) {
-        if (typeof options === 'string') {
-            options = {
-                id: options || store.model.IDFIELD
-            };
-        }
-        return kendo.data.Model.define(options);
-    };
-    store.model.IDFIELD = 'ID';
-
-    store.source = function (options) {
-        return new kendo.data.DataSource(options);
-    };
-
-    store.remoteSource = function (url) {
-        var param = {
-            pageSize: 20,
-            page: 1,
-            schema: {
-                model: store.model(),
-                // type: 'json',
-                data: 'data',
-                total: 'total'
-            },
-            transport: {
-                read: {
-                    url: url,
-                    dataType: 'json'
-                }
+    var BackendApiDataSource = HierarchicalDataSource.extend({
+        init: function (options) {
+            if (options.api != null && !$.isEmptyObject(options.api)) {
+                options.transport = extend(true, {}, options.transport, options.api);
             }
-        };
-        return store.source(param);
-    };
 
-    store.remoteComplexSource = function (url) {
-        return store.source({
-            pageSize: 20,
-            page: 1,
-            serverPaging: true,
-            serverSorting: true,
-            serverFiltering: true,
-            schema: {
-                //type: 'json',
-                model: store.model(),
-                data: 'data',
-                total: 'total'
-            },
-            transport: {
-                read: {
-                    url: url,
-                    type: 'POST',
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8"
+            DataSource.fn.init.call(this, extend(true, {}, options));
+
+            this._customMethods();
+        },
+        options: {
+            name: 'ApiDataSource'
+        },
+        _customMethods: function () {
+            var me = this;
+            each(this.options.api, function (key, api) {
+                me[key + 'Api'] = function (options) {
+                    return this._accessApi(key, options);
+                }
+            });
+        },
+        submitForm: function (name, $form, options) {
+            var dfd = $.Deferred();
+            var options = this.transport.setup(options, name);
+            $form.ajaxSubmit($.extend({
+                success: function (resp) {
+                    dfd.resolve(resp);
                 },
-                parameterMap: function (data, type) {
-                    if (type === "read") {
-                        return JSON.stringify(data);
+                error: function (resp) {
+                    dfd.reject(resp);
+                }
+            }, options, {
+                method: $form.prop('method') || 'post',
+                contentType: $form.prop('enctype') || 'multipart/form-data'
+            }));
+
+            return dfd.promise();
+        },
+        _accessApi: function (name, options) {
+            return ajax(this.transport.setup(options, name));
+        }
+    });
+
+    kendo.data.BackendApiDataObject = ObservableObject.extend({
+        init: function (options) {
+            options || (options = {});
+            options.data || (options.value = {});
+
+            this._initDataSource(options);
+            this._initData();
+            this._bindEvents();
+        },
+        _initDataSource: function (options) {
+            // 处理 options
+            if (options.data != null && !$.isArray(options.data)) {
+                options.data = [options.data];
+            }
+
+            if (options.schema == null) {
+                options.schema = {};
+            }
+
+            var convertArray = function (resp, field) {
+                var data = resp;
+                if (field != null) {
+                    data = resp[field];
+                }
+                if (!$.isArray(data)) {
+                    return [data];
+                }
+                return data;
+            };
+            if (options.schema.data == null) {
+                options.schema.data = convertArray;
+            } else {
+                if (typeof options.schema.data === 'string') {
+                    var field = options.schema.data;
+                    options.schema.data = function (resp) {
+                        return convertArray.call(this, resp, field);
+                    };
+                } else {
+                    var func = options.schema.data;
+                    options.schema.data = function (resp) {
+                        var origin = func.call(this, resp);
+                        return convertArray.call(this, origin);
                     }
-                    return data;
                 }
             }
-        });
-    };
 
-    return store;
+            this._dataSource = new BackendApiDataSource(options);
+        },
+        _bindEvents: function () {
+            var me = this;
+            var dataSource = this._dataSource;
+            dataSource.bind('change', function (e) {
+                if (!e.action) {
+                    var data = dataSource.at(0).toJSON();
+                    $.each(data, function (field, val) {
+                        me.set(field, val);
+                    });
+                }
+            });
+        },
+        _initData: function () {
+            var data = this._dataSource.at(0);
+            if (data == null) {
+                data = {};
+            }
+            this.reset(data);
+        },
+        read: function (options) {
+            return this._dataSource.read(options);
+        },
+        data: function (data) {
+            return this._dataSource.data(data);
+        },
+        reset: function (value) {
+            ObservableObject.fn.init.call(this, value);
+            this.trigger('reset', {
+                value: value
+            });
+        },
+        shouldSerialize: function (field) {
+            var rt = ObservableObject.fn.shouldSerialize.call(this, field);
+            var noSerialize = ['_dataSource'];
+            return rt && noSerialize.indexOf(field) < 0;
+        },
+        dataSource: function () {
+            return this._dataSource;
+        },
+        _backOptions: function (options) {
+            options = $.extend(true, {
+                data: this.toJSON()
+            }, options);
+            return options;
+        },
+        create: function (options) {
+            return this.dataSource().createApi(this._backOptions());
+        },
+        update: function (options) {
+            return this.dataSource().updateApi(this._backOptions());
+        },
+        remove: function (options) {
+            return this.dataSource().removeApi(this._backOptions());
+        },
 
+    });
+
+    kendo.data.BackendApiDataSource = BackendApiDataSource;
 }));
-
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         define('keboacy/base/binders',['jquery', 'kendo-ui'], factory);
@@ -53284,6 +53366,7 @@ return window.kendo;
         factory(jQuery, kendo);
     }
 }(function ($, kendo) {
+
 
     /**
      * kendo ui 普通 date 绑定
@@ -53945,6 +54028,7 @@ define("kendo-ui-culture", ["kendo-ui","kendo-ui-messages"], function() {
         factory(jQuery);
     }
 }(function () {
+    // 设置默认的 culture
     kendo.culture("zh-CN");
 }));
 
@@ -63341,7 +63425,7 @@ function log() {
 
 
 define('keboacy/index',[
-    './base/store',
+    './base/data',
     './base/binders',
     //'./base/validation',
     './base/culture',
@@ -63371,6 +63455,8 @@ define('veronicaExt/appExt/uiKit',[
 
         app.uiKit.add('keboacy', {
             init: function (view, $el) {
+                // kendo.init($el);
+                // kendo.init($el, kendo.mobile.ui);
                 view.$el.dynamicTab();
                 view.$el.find('[data-ajax-form]').each(function (i, form) {
                     var options = $(form).data();
@@ -63488,72 +63574,7 @@ define('veronicaExt/appExt/windowProvider',[], function () {
     };
 });
 
-(function (factory) {
-    if (typeof define === 'function' && define.amd) {
-        define('veronicaExt/appExt/apiDataSource',[], factory);
-    } else {
-        window.kendo.data.ApiDataSource = factory();
-    }
-}(function () {
-    return function (app) {
-        var _ = app.core._;
-        var kendo = app.core.kendo || window.kendo;
-        var DataSource = kendo.data.DataSource;
-        var $ = app.core.$;
-        var extend = $.extend;
-        var each = $.each;
-        var ajax = $.ajax;
 
-        var ApiDataSource = DataSource.extend({
-            init: function (options) {
-                if (options.api != null && !$.isEmptyObject(options.api)) {
-                    options.transport = extend(true, {}, options.transport, options.api);
-                }
-
-                DataSource.fn.init.call(this, extend(true, {}, options));
-
-                this._customMethods();
-            },
-            options: {
-                name: 'ApiDataSource'
-            },
-            _customMethods: function () {
-                var me = this;
-                each(this.options.api, function (key, api) {
-                    me[key + 'Api'] = function (options) {
-                        return this._accessApi(key, options);
-                    }
-                });
-            },
-            submitForm: function (name, $form, options) {
-                var dfd = $.Deferred();
-                var options = this.transport.setup(options, name);
-                $form.ajaxSubmit($.extend({
-                    success: function (resp) {
-                        dfd.resolve(resp);
-                    },
-                    error: function (resp) {
-                        dfd.reject(resp);
-                    }
-                }, options, {
-                    method: $form.prop('method') || 'post',
-                    contentType: $form.prop('enctype') || 'multipart/form-data'
-                }));
-                
-                return dfd.promise();
-            },
-            _accessApi: function (name, options) {
-                return ajax(this.transport.setup(options, name));
-            }
-        });
-
-        kendo.data.ApiDataSource = ApiDataSource;
-
-        return ApiDataSource;
-    };
-}));
-
-// 模板扩展
 define('veronicaExt/appExt/backendApi',[], function () {
     return function (app) {
         var _ = app.core._;
@@ -63586,6 +63607,9 @@ define('veronicaExt/appExt/backendApi',[], function () {
                             if (group.options) {
                                 result.options = group.options;
                             }
+                            if(group.type){
+                                result.type = group.type;
+                            }
                         }
                     }
                 }
@@ -63600,7 +63624,7 @@ define('veronicaExt/appExt/backendApi',[], function () {
             _getGroupApi: function (parent, apiConfig) {
                 var result = {};
                 each(apiConfig, function (item) {
-                    var apiArr = /([\w|-]*)(?:=>)?([\w|-]*)/.exec(item);
+                    var apiArr = /([\w\-]*)(?:=>)?([\w\-]*)/.exec(item);
                     var apiName = apiArr[2] || apiArr[1];
                     var api = parent.api[apiArr[1]];
                     if (api == null) {
@@ -63617,7 +63641,7 @@ define('veronicaExt/appExt/backendApi',[], function () {
                             url: config
                         }
                     }
-                    var r = /([\w|-|\\|\/]*)\s?([\w|-|\\|\/]*)\s?([\w|-|\\|\/]*)/.exec(config.url);
+                    var r = /([\w\-\\\/]*)\s?([\w\-\\\/]*)\s?([\w\-\\\/]*)/.exec(config.url);
                     config.url = data.domain + r[1];
                     config.type = config.type || r[2] || 'get';
                     config.dataType = config.dataType || r[3] || 'json';
@@ -63633,7 +63657,8 @@ define('veronicaExt/appExt/backendApi',[], function () {
             domain: '',
             reusable: false,
             api: {},
-            options: 'default'
+            options: 'default',
+            type: 'multiple'
         });
 
     };
@@ -63659,21 +63684,8 @@ define('veronicaExt/appExt/optionsProvider',[],function () {
 });
 
 // 模板扩展
-define('veronicaExt/appExt/store',[], function () {
+define('veronicaExt/appExt/storeHandler',[], function () {
     return function (app) {
-
-        var extend = app.core.$.extend;
-        var map = app.core.$.map;
-        var _ = app.core._;
-        var store = app.store;
-        var whenSingleResult = app.core.whenSingleResult;
-
-        store.model.IDFIELD = 'id';
-
-        store.backendApiSource = function (options) {
-            return new kendo.data.ApiDataSource(options);
-        }
-
         function StoreHandler(stores, view) {
             this._pool = stores;
             this._view = view;
@@ -63726,9 +63738,107 @@ define('veronicaExt/appExt/store',[], function () {
             }
         }
 
+        return StoreHandler;
+
+
+    };
+});
+
+// 模板扩展
+define('veronicaExt/appExt/store',[
+    './storeHandler'
+], function (StoreHandler) {
+    return function (app) {
+
+        var extend = app.core.$.extend;
+        var map = app.core.$.map;
+        var _ = app.core._;
+        var whenSingleResult = app.core.whenSingleResult;
+
+        var store = app.store = {};
+
+
+        // 基础视图模型
+        store.viewModel = function (obj) {
+            return kendo.observable(obj);
+        };
+
+        // 基础模型
+        store.model = function (options) {
+            if (typeof options === 'string') {
+                options = {
+                    id: options || store.model.IDFIELD
+                };
+            }
+            return kendo.data.Model.define(options);
+        };
+        store.model.IDFIELD = 'id';
+
+        store.source = function (options) {
+            return new kendo.data.DataSource(options);
+        };
+
+        store.remoteSource = function (url) {
+            var param = {
+                pageSize: 20,
+                page: 1,
+                schema: {
+                    model: store.model(),
+                    // type: 'json',
+                    data: 'data',
+                    total: 'total'
+                },
+                transport: {
+                    read: {
+                        url: url,
+                        dataType: 'json'
+                    }
+                }
+            };
+            return store.source(param);
+        };
+
+        store.remoteComplexSource = function (url) {
+            return store.source({
+                pageSize: 20,
+                page: 1,
+                serverPaging: true,
+                serverSorting: true,
+                serverFiltering: true,
+                schema: {
+                    //type: 'json',
+                    model: store.model(),
+                    data: 'data',
+                    total: 'total'
+                },
+                transport: {
+                    read: {
+                        url: url,
+                        type: 'POST',
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8"
+                    },
+                    parameterMap: function (data, type) {
+                        if (type === "read") {
+                            return JSON.stringify(data);
+                        }
+                        return data;
+                    }
+                }
+            });
+        };
+
+        store.backendApiSource = function (options) {
+            return new kendo.data.BackendApiDataSource(options);
+        };
+
+        store.backendApiObject = function(options){
+            return new kendo.data.BackendApiDataObject(options);
+        };
+
         store.createHandler = function (stores, view) {
             return new StoreHandler(stores, view);
-        }
+        };
     };
 });
 
@@ -63740,6 +63850,32 @@ define('veronicaExt/appExt/storeProvider',[], function () {
 
         var parentGetMethod = app.providerBase.get;
         app.storeProvider = app.provider.create({
+            create: function (name) {
+                var backendApi = app.backendApi.get(name);
+
+                if (typeof backendApi.options === 'string') {
+                    backendApi.options =
+                        app.optionsProvider.get('store.' + backendApi.options);
+                }
+
+                var options = extend(true, {}, backendApi.options, {
+                    api: backendApi.api
+                });
+
+                var store;
+                if(backendApi.type === 'multiple'){
+                    store = app.store.backendApiSource(options);
+                }
+                if(backendApi.type === 'single'){
+                    store = app.store.backendApiObject(options);
+                }
+
+                if (backendApi.reusable) {
+                    this.add(name, store);
+                }
+
+                return store;
+            },
             get: function (name, context) {
                 var me = this;
 
@@ -63753,22 +63889,7 @@ define('veronicaExt/appExt/storeProvider',[], function () {
 
                 // create it
                 if (store == null) {
-
-                    var backendApi = app.backendApi.get(name);
-
-                    if (typeof backendApi.options === 'string') {
-                        backendApi.options =
-                            app.optionsProvider.get('store.' + backendApi.options);
-                    }
-
-                    store = app.store.backendApiSource(extend(true, {}, backendApi.options, {
-                        api: backendApi.api
-                    }));
-
-
-                    if (backendApi.reusable) {
-                        this.add(name, store);
-                    }
+                   store = me.create(name);
                 }
 
                 return store;
@@ -63784,7 +63905,6 @@ define('veronicaExt/appExt/_combine',[
     './uiKit',
     './viewEngine',
     './windowProvider',
-    './apiDataSource',
     './backendApi',
     './methodProvider',
     './optionsProvider',
@@ -64082,8 +64202,7 @@ define('veronicaExt/viewExt/trigger',[
     }
 });
 
-define('veronicaExt/viewExt/ui',[
-], function () {
+define('veronicaExt/viewExt/ui',[], function () {
     return function (base, app) {
         var _ = app.core._;
         var $ = app.core.$;
@@ -64106,13 +64225,37 @@ define('veronicaExt/viewExt/ui',[
                  *   }
                  */
                 instance: function (el) {
-                    return this._uiKit().getInstance(this, this.$(el));
+                    var $el = el instanceof $ ? el : (el.tagName ? $(el) : this.$(el));
+                    return this._uiKit().getInstance(this, $el);
+                },
+                $: function (selector) {
+                    var r = this.$el.find(selector);
+                    this._outerEl.each(function (i, el) {
+                        var isThis = $(el).is(selector);
+                        var r1;
+                        if (isThis) {
+                            r1 = $(el);
+                        } else {
+                            r1 = $(el).find(selector);
+                        }
+                        if (r1.length !== 0) {
+                            $.merge(r, r1);
+                        }
+                    });
+
+                    return r;
                 }
             }
         });
 
         base._extendMethod('_rendered', function () {
+            this._outerEl = this.$('[data-role=window]');
             this._uiKit().init(this, this.$el);
+
+        });
+
+        base._extendMethod('_initProps', function () {
+            this._outerEl = $({});
         });
 
         base._extendMethod('_destroy', function () {
