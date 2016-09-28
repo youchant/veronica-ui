@@ -124,6 +124,10 @@ module.exports = function (grunt) {
                     dest: 'dist/fonts/', flatten: true
                 }, {
                     expand: true,
+                    src: ['./bower_components/kendo-ui/styles/fonts/glyphs/*'],
+                    dest: 'dist/fonts/', flatten: true
+                }, {
+                    expand: true,
                     cwd: './src/img/',
                     src: ['**/*'],
                     dest: './dist/img/', flatten: false

@@ -20,7 +20,8 @@
          data-appendTo="#test"
          data-actions="['Minimize', 'Maximize', 'Close']"
          data-height="150"
-         data-bind="visible: isVisible" class="js-wnd">
+         data-bind="visible: isVisible" class="js-wnd" style="display:none;">
+        <select data-role="dropdownlist" name="" id=""></select>
         <div class="sub"></div>
     </div>
 </div>
@@ -88,7 +89,7 @@
 
     app.widget.register('test', {
         defaults: {
-          autoAction: true
+            autoAction: true
         },
         initAttr: function () {
             this.model({
@@ -125,14 +126,14 @@
                 commands: {}
             },
         },
-        initAttr: function () {
-            this.model({
+        staticModel: function () {
+            return {
                 isVisible: false,
                 submitHandler: function (e) {
                     e.preventDefault();
                     this.data.update();
                 }
-            }, false);
+            };
         },
         modelBound: function () {
             this.model('data').read();
