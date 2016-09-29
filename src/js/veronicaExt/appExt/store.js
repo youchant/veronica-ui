@@ -1,14 +1,14 @@
 // 模板扩展
 define([
     './storeHandler'
-], function (StoreHandler) {
+], function (storeHandler) {
     return function (app) {
 
         var extend = app.core.$.extend;
         var map = app.core.$.map;
         var _ = app.core._;
         var whenSingleResult = app.core.whenSingleResult;
-
+        var StoreHandler = storeHandler(app);
         var store = app.store = {};
 
 
@@ -86,7 +86,7 @@ define([
             return new kendo.data.BackendApiDataSource(options);
         };
 
-        store.backendApiObject = function(options){
+        store.backendApiObject = function (options) {
             return new kendo.data.BackendApiDataObject(options);
         };
 
