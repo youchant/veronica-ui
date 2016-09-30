@@ -47,7 +47,7 @@
             options.template = options.template || $(element).find('.tpl-template').html()
                 || this._defaultTemplate(options);
 
-            var $root = $(element).find('.' + ROOT);
+            var $root = $(element).addClass('k-tree').find('.' + ROOT);
             if ($root.length === 0) {
                 $root = $(element);
             }

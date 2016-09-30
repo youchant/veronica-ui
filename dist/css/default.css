@@ -5421,13 +5421,13 @@ input.k-textbox {
   border: 1px solid #c9c9c9;
   box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, 0.18);
 }
-.k-tree-indent {
+.k-tree .k-tree-indent {
   display: inline-block;
   width: 1.5em;
   height: 1px;
 }
-.k-tree-switcher,
-.k-tree-switcher-noop {
+.k-tree .k-tree-switcher,
+.k-tree .k-tree-switcher-noop {
   display: inline-block;
   width: 1.5em;
   height: auto;
@@ -5435,7 +5435,7 @@ input.k-textbox {
   cursor: pointer;
   color: #bbbbbb;
 }
-.k-tree-switcher:before {
+.k-tree .k-tree-switcher:before {
   content: "\f196";
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
@@ -5445,28 +5445,29 @@ input.k-textbox {
   -webkit-font-smoothing: antialiased;
   font-weight: bold;
 }
-.k-tree-subtree {
+.k-tree .k-tree-subtree {
   display: none;
 }
-.k-tree-item.open > .k-tree-subtree {
+.k-tree .k-tree-item.open > .k-tree-subtree {
   display: block;
 }
-.k-tree-item.open > .k-tree-inner > .k-tree-switcher:before {
+.k-tree .k-tree-item.open > .k-tree-inner > .k-tree-switcher:before {
   content: "\f147";
 }
-.k-tree-inner {
+.k-tree .k-tree-inner {
   padding: 3px 5px;
 }
-.k-tree-inner.k-state-selected,
-.k-tree-inner:hover.k-state-selected {
+.k-tree .k-tree-inner.k-state-selected,
+.k-tree .k-tree-inner:hover.k-state-selected {
   background-color: #c7ddef;
+  color: inherit;
 }
-.k-tree-inner:hover {
+.k-tree .k-tree-inner:hover {
   color: #333333;
   background-color: #f5f5f5;
   border-color: #f5f5f5;
 }
-.k-tree-text {
+.k-tree .k-tree-text {
   cursor: default;
 }
 /** 表单 */
@@ -5877,19 +5878,22 @@ td.k-state-selected {
 td.k-state-selected > .k-link {
   color: #fff;
 }
-/*.k-state-selected,
-.k-state-selected:hover,
-.k-state-selected:link,
-.k-state-selected:visited,
-.k-item.k-state-selected {
-    background-color: @selected-background-color;
-    border-color: @selected-border-color;
-    color: @selected-text-color;
-
-    > .k-link {
-        color: @selected-text-color;
-    }
-}*/
+.k-listview .k-state-selected,
+.k-listview .k-state-selected:hover,
+.k-listview .k-state-selected:link,
+.k-listview .k-state-selected:visited,
+.k-listview .k-item.k-state-selected {
+  background-color: #337ab7;
+  border-color: #337ab7;
+  color: #fff;
+}
+.k-listview .k-state-selected > .k-link,
+.k-listview .k-state-selected:hover > .k-link,
+.k-listview .k-state-selected:link > .k-link,
+.k-listview .k-state-selected:visited > .k-link,
+.k-listview .k-item.k-state-selected > .k-link {
+  color: #fff;
+}
 .k-combobox .k-select,
 .k-numerictextbox .k-select,
 .k-picker-wrap .k-select {

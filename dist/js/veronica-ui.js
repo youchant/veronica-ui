@@ -54101,7 +54101,7 @@ define("kendo-ui-culture", ["kendo-ui","kendo-ui-messages"], function() {
         },
         _element: function () {
             ListView.fn._element.call(this);
-            this.element.addClass(this.options.cls);
+            this.element.addClass('k-datatable').addClass(this.options.cls);
 
             if (this.options.header) {
                 var element = this.element;
@@ -54209,7 +54209,7 @@ define("kendo-ui-culture", ["kendo-ui","kendo-ui-messages"], function() {
             options.template = options.template || $(element).find('.tpl-template').html()
                 || this._defaultTemplate(options);
 
-            var $root = $(element).find('.' + ROOT);
+            var $root = $(element).addClass('k-tree').find('.' + ROOT);
             if ($root.length === 0) {
                 $root = $(element);
             }
