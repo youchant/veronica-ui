@@ -1,6 +1,10 @@
 // 模板扩展
 define([], function () {
     return function (app) {
+        var extend = app.core.$.extend;
+        var map = app.core.$.map;
+        var _ = app.core._;
+
         function StoreHandler(stores, view) {
             this._pool = stores;
             this._view = view;
