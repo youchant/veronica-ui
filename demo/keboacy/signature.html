@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <style>
+
+        div {
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+
+        input {
+            padding: .5em;
+            margin: .5em;
+        }
+
+        select {
+            padding: .5em;
+            margin: .5em;
+        }
+
+        #signatureparent {
+            color: darkblue;
+            background-color: darkgrey;
+            /*max-width:600px;*/
+            padding: 20px;
+        }
+
+        /*This is the div within which the signature canvas is fitted*/
+        #signature {
+            border: 2px dotted black;
+            background-color: lightgrey;
+        }
+
+        /* Drawing the 'gripper' for touch-enabled devices */
+        html.touch #content {
+            float: left;
+            width: 92%;
+        }
+
+        html.touch #scrollgrabber {
+            float: right;
+            width: 4%;
+            margin-right: 2%;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAFCAAAAACh79lDAAAAAXNSR0IArs4c6QAAABJJREFUCB1jmMmQxjCT4T/DfwAPLgOXlrt3IwAAAABJRU5ErkJggg==)
+        }
+
+        html.borderradius #scrollgrabber {
+            border-radius: 1em;
+        }
+
+        .signature-canvas {
+            border: 1px solid #ccc;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="signature" data-role="signature" data-bind="value: img"></div>
+<button id="getData">获取数据</button>
+<script src="../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../bower_components/jSignature/libs/jSignature.min.js"></script>
+<script src="../../dist/js/veronica-ui.js"></script>
+<script src="../../src/js/keboacy/ui/signature.js"></script>
+<script>
+    var vm = kendo.observable({img: ''});
+    kendo.bind($('body'), vm);
+    $('#getData').on('click', function () {
+        var inst = kendo.widgetInstance($('[data-role=signature]'));
+        console.log(vm.get('img').toJSON());
+    });
+</script>
+</body>
+</html>
