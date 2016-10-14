@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="css/yutflow.css">
+</head>
+<body>
+<div data-role="flow" data-editable="true" data-bind="value: flow"></div>
+<button id="getData">获取数据</button>
+<button id="removeCon">移除连接线</button>
+<button id="addCon">添加连接线</button>
+<button id="addNode">添加节点</button>
+<button id="updateNode">更改节点</button>
+<script src="../../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../../bower_components/lodash/dist/lodash.min.js"></script>
+<script src="../../../dist/js/veronica-ui.js"></script>
+<script src="../../../bower_components/jsplumb/dist/js/jsPlumb-2.0.7.js"></script>
+<script src="../../../src/js/keboacy/ui/flow.js"></script>
+<script>
+    var data = {
+        nodes: [{
+            id: 'n1',
+            index: 1,
+            left: "200",
+            top: "167",
+            name: "测试",
+            state: 'done'
+        }, {
+            id: 'n2',
+            index: 2,
+            left: "420",
+            top: "53",
+            name: "测试2",
+            state: 'progress'
+        }, {
+            id: 'n3',
+            index: 3,
+            left: "484",
+            top: "245",
+            name: "测试3",
+            state: 'pending'
+        }, {
+            id: '0',
+            index: 0,
+            left: "79",
+            top: "60",
+            name: "开始",
+            state: 'done'
+        }, {
+            id: '-1',
+            index: -1,
+            left: "771",
+            top: "88",
+            name: "结束",
+            state: 'pending'
+        }],
+        connections: [{
+            source: '0',
+            target: 'n1'
+        }, {
+            source: 'n1',
+            target: 'n2'
+        }, {
+            source: 'n2',
+            target: 'n3',
+            text: '审核通过'
+        }, {
+            source: 'n2',
+            target: '-1',
+            text: '审核不通过'
+        }, {
+            source: 'n3',
+            target: '-1',
+            text: '呵呵哒'
+        }]
+    };
+    var vm = kendo.observable({
+        flow: data
+    });
+    kendo.bind($('body'), vm);
+    var instance = kendo.widgetInstance($('[data-role=flow]'));
+    $('#getData').on('click', function () {
+        var val = instance.value().toJSON();
+        console.log(val);
+    });
+
+    $('#removeCon').on('click', function () {
+        var cons = vm.get('flow.connections');
+        cons.splice(0, 1);
+    });
+    $('#addCon').on('click', function () {
+        var cons = vm.get('flow.connections');
+        cons.push({
+            source: '0',
+            target: 'n2'
+        });
+    });
+    $('#addNode').on('click', function(){
+        var nodes = vm.get('flow.nodes');
+        nodes.push({
+            id: 'n5',
+            index: 5,
+            name: '新添加的',
+            state: 'pending',
+            top: 100,
+            left: 300
+
+        })
+    })
+
+
+</script>
+</body>
+</html>

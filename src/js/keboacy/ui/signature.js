@@ -52,7 +52,10 @@
             }
 
             if (value !== '') {
-                this.instance("setData", value, this.options.dataFormat);
+                if(value.join && value.length){
+                    value = "data:" + value.join(",");
+                }
+                this.instance("setData", value);
             }
         }
     });
