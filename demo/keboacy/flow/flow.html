@@ -6,13 +6,17 @@
     <link rel="stylesheet" href="../../../dist/css/default.css">
     <link rel="stylesheet" href="css/yutflow.css">
     <style>
-        .toolbar{
+        .toolbar {
+
         }
-        html, body{
-            height:100%;
+
+        html, body {
         }
-        .flow{
-            height:90%;
+
+        .flow {
+            margin: 20px;
+            height: 500px;
+            border: 1px solid #A9B0B8;
         }
     </style>
 </head>
@@ -22,10 +26,12 @@
     <button id="removeCon">移除连接线</button>
     <button id="addCon">添加连接线</button>
     <button id="addNode">添加节点</button>
-    <button id="updateNode">更改节点</button>
+    <button id="changeNode">更改节点</button>
     <button id="deleteNode">删除选中节点</button>
+    <button id="changeCon">更改连接线</button>
 </div>
-<div class="flow" data-role="flow" data-editable="true" data-draggable="false" data-selectable="true" data-bind="value: flow"></div>
+<div class="flow" data-role="flow" data-editable="true" data-draggable="true" data-selectable="true"
+     data-bind="value: flow"></div>
 
 <script src="../../../bower_components/jquery/dist/jquery.js"></script>
 <script src="../../../bower_components/lodash/dist/lodash.min.js"></script>
@@ -61,14 +67,16 @@
             left: "79",
             top: "60",
             text: "开始",
-            state: 'done'
+            state: 'done',
+            isTarget: false
         }, {
             id: '-1',
             index: -1,
             left: "771",
             top: "88",
             text: "结束",
-            state: 'pending'
+            state: 'pending',
+            isSource: false
         }],
         connections: [{
             source: '0',
@@ -87,11 +95,15 @@
         }, {
             source: 'n3',
             target: '-1',
-            text: '呵呵哒'
+            text: '呵呵哒',
+            delectable: false
         }],
         types: [{
+            type: 'application',
+            text: '申请'
+        },{
             type: 'audit',
-            text: '审核'
+            text: '审批'
         }]
     };
     var vm = kendo.observable({
@@ -115,7 +127,7 @@
             target: 'n2'
         });
     });
-    $('#addNode').on('click', function(){
+    $('#addNode').on('click', function () {
         var nodes = vm.get('flow.nodes');
         nodes.push({
             id: 'n5',
@@ -125,10 +137,18 @@
             top: 100,
             left: 300
         })
-    })
-    $('#deleteNode').on('click', function(){
+    });
+    $('#deleteNode').on('click', function () {
         var nodes = vm.get('flow.nodes');
         nodes.remove(instance.select());
+    });
+    $('#changeNode').on('click', function(){
+        var nodes = vm.get('flow.nodes');
+        nodes[1].set('text', '更改的文本');
+    })
+    $('#changeCon').on('click', function(){
+        var cons = vm.get('flow.connections');
+        cons[1].set('text', '更改的连接文本');
     })
 </script>
 </body>

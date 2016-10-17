@@ -22,7 +22,7 @@
 @wf-node-active-handle-border-color: @wf-node-active-border-color;
 @wf-node-active-handle-color: #FFF;
 
-
+@wf-toolbox-width: 200px;
 
 .k-wf.editable {
   .jsplumb-connector.jsplumb-hover {
@@ -30,13 +30,14 @@
   }
 
   .wf-container {
-    margin-right: 155px;
+    margin-right: @wf-toolbox-width + 5;
   }
   .wf-toolbox {
+    position: relative;
     float: right;
-    width: 150px;
+    width: @wf-toolbox-width;
     height: 100%;
-    background: grey;
+    background: #ebebeb;
   }
 
   .wf-node {
@@ -50,6 +51,14 @@
   position: relative;
   background: url(../img/wf_canvas_bg.png) repeat;
   height: 100%;
+}
+
+.wf-toolbox {
+  .wf-node_type {
+    margin-top: 20px;
+    margin-left: -40px;
+    left: 50%;
+  }
 }
 
 .wf-node {
@@ -66,8 +75,11 @@
   white-space: nowrap;
 
   &.wf-node_type {
-    cursor: move;
+    box-sizing: border-box;
+    width: 80px;
     padding: 0 20px;
+    cursor: move;
+    text-align: center;
   }
 
   &.pending {

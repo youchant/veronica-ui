@@ -14,8 +14,8 @@
     var Flow = kendo.ui.DataBoundWidget.extend({
         options: {
             name: 'Flow',
-            nodeTemplate: '<div class="#: cls #" id="#: uuid #" ' +
-            'data-id="#= id #" style="top: #: top #px; left: #: left #px;"> ' +
+            nodeTemplate: '<div class="#: cls #" id="#: domId #" ' +
+            'data-id="#: id #" data-uid="#: uid #" style="top: #: top #px; left: #: left #px;"> ' +
             '<span class="wf-handle"> <i></i> #: index # </span>' +
             '<span class="wf-node_text"> #: text # </span>' +
             ' </div>',
@@ -26,9 +26,10 @@
             onNodeClick: function () {
             },
             onConnection: function (info, wf) {
+                // 设置 connection 状态
                 var conn = info.connection;
                 var $target = $(info.target);
-                var data = wf.getNodeData(wf._getNodeId($target));
+                var data = wf.findNodeData(wf._getNodeId($target));
                 if (data) {
                     if (data.state === 'done' || data.state === 'progress') {
                         conn.toggleType("done");
@@ -225,8 +226,8 @@
         },
         // 判断连接器是否是直接从开始节点指向结束节点
         _isFromStartToEnd: function (param) {
-            return param.sourceId === this._getNodeUid(this.options.beginNodeId)
-                && param.targetId === this._getNodeUid(this.options.endNodeId);
+            return param.sourceId === this._getNodeDomId(this.options.beginNodeId)
+                && param.targetId === this._getNodeDomId(this.options.endNodeId);
         },
         // 判断连接步骤是否重复
         _stepIsRepeat: function (param) {
@@ -264,8 +265,8 @@
                 // TODO: 将数据添加到视图模型中，但不引起UI改变
                 me._lockUIExec(function () {
                     me.addConnectionData({
-                        source: me._getNodeIdFromUid(param.sourceId),
-                        target: me._getNodeIdFromUid(param.targetId)
+                        source: me._getNodeIdFromDomId(param.sourceId),
+                        target: me._getNodeIdFromDomId(param.targetId)
                     });
                 });
 
@@ -278,15 +279,15 @@
             });
 
             instance.bind("connectionDetached", function (con) {
-                if (con && con.connection) {
-                    me.removeConnectionData(con.sourceId, con.targetId);
-                }
+                // if (con && con.connection) {
+                //     me.removeConnectionDataByDomId(con.sourceId, con.targetId);
+                // }
             });
 
             if (this.options.nodeOptions.detach) {
                 // 删除连接线
                 instance.bind('click', function (con) {
-                    me.removeConnectionDataByUid(con.sourceId, con.targetId);
+                    me.removeConnectionDataByDomId(con.sourceId, con.targetId);
                 });
             }
         },
@@ -315,6 +316,12 @@
                     });
                     return;
                 }
+                if (e.action === 'itemchange') {
+                    _.each(e.items, function (item) {
+                        me._addConnection(item);
+                    });
+                    return;
+                }
                 me.refresh();
             });
             value.nodes.bind('change', function (e) {
@@ -332,6 +339,16 @@
                     });
                     return;
                 }
+
+                // TODO: 这里直接更改 node，还需要更新所有相关的 connection
+                // if (e.action === 'itemchange') {
+                //     _.each(e.items, function (item) {
+                //         var $oldNode = me.$container.find('[data-uid="' + item.uid + '"]');
+                //         me._updateNode($oldNode, item);
+                //     });
+                //     return;
+                // }
+
                 me.refresh();
             });
         },
@@ -404,7 +421,7 @@
             return $el.hasClass(nodeOptions.startCls) || $el.hasClass(nodeOptions.endCls);
         },
         _createNodeEl: function (data) {
-            return $(this._nodeTemplate(data)).appendTo(this.$container);
+            return $(this._nodeTemplate(data));
         },
         _getMaxIndex: function () {
             var max = 0;
@@ -420,17 +437,16 @@
             callback.call(this);
             this._lockUI = false;
         },
-        _getNodeUid: function (id) {
+        _getNodeDomId: function (id) {
             return this.options.nodeIdPrefix + id;
         },
-        _addNode: function (data) {
+        _preprocessNodeData: function (data) {
             var defaults = this.options.nodeOptions;
-            var instance = this.instance;
             data = $.extend({}, defaults, data);
 
             data.state || (data.state = 'none');
             data.cls || (data.cls = '');
-            data.uuid || (data.uuid = this._getNodeUid(data.id));
+            data.domId || (data.domId = this._getNodeDomId(data.id));
 
             if (data.index == null) {
                 data.index = this._getMaxIndex() + 1;
@@ -453,33 +469,62 @@
             if (data.state) {
                 data.cls += ' ' + data.state;
             }
+            return data;
+        },
+        _updateNode: function ($node, data) {
+            data = this._preprocessNodeData(data);
+            var $newNode = this._createNodeEl(data);
+            $node.replaceWith($newNode);
+            this._attachNodeBehavior($newNode, data);
+        },
+        _addNode: function (data) {
+            data = this._preprocessNodeData(data);
 
+            var $node = this._createNodeEl(data);
 
-            var $nodeEl = this._createNodeEl(data);
+            $node.appendTo(this.$container);
 
+            this._attachNodeBehavior($node, data);
+
+            return $node;
+        },
+        _attachNodeBehavior: function ($node, data) {
+            var me = this;
+            var instance = this.instance;
             // 初始化拖拽
             if (data.draggable !== false) {
-                var drag = instance.draggable($nodeEl, {
-                    containment: "parent"
+                var drag = instance.draggable($node, {
+                    containment: "parent",
+                    stop: function (e) {
+
+                        var id = me._getNodeId($(e.el));
+                        var data = me.findNodeData(id);
+                        me._lockUIExec(function () {
+                            data.set('top', e.pos[1]);
+                            data.set('left', e.pos[0]);
+                        });
+                    }
                 });
             }
             // 初始化连接源
             if (data.isSource !== false) {
-                instance.makeSource($nodeEl, data.sourceOptions);
+                instance.makeSource($node, data.sourceOptions);
             }
 
             // 初始化连接目标
             if (data.isTarget !== false) {
-                instance.makeTarget($nodeEl, data.targetOptions);
+                instance.makeTarget($node, data.targetOptions);
             }
-
-            return $nodeEl;
         },
-        _addConnection: function (options) {
+        _addConnection: function (data) {
             var instance = this.instance;
-            var data = $.extend({}, options);
-            data.source = this._getNodeUid(options.source);
-            data.target = this._getNodeUid(options.target);
+            data = $.extend({}, data);
+            var oldCon = this.findConnection(data.source, data.target);
+            if (oldCon) {
+                this.instance.detach(oldCon);
+            }
+            data.source = this._getNodeDomId(data.source);
+            data.target = this._getNodeDomId(data.target);
 
             data.overlays = [];
 
@@ -495,22 +540,15 @@
                     // }
                 }]);
             }
-            var connection = instance.connect(data);
-            return connection;
+            instance.connect(data);
         },
-        _addNodes: function (nodes, options) {
-            if (!$.isArray(nodes)) {
-                nodes = [nodes];
-            }
+        _addNodes: function (nodes) {
             var me = this;
             $.each(nodes, function (index, node) {
-                me._addNode(node, options);
+                me._addNode(node);
             });
         },
         _addConnections: function (connects) {
-            if (!$.isArray(connects)) {
-                connects = [connects];
-            }
             var me = this;
             $.each(connects, function (index, item) {
                 me._addConnection(item);
@@ -519,25 +557,25 @@
         getNodes: function () {
             return this.value().nodes;
         },
-        getConnections: function (toJSON) {
+        getConnections: function () {
             return this.value().connections;
         },
         // 根据序号找到 node data
-        getNodeData: function (id) {
+        findNodeData: function (id) {
             var nodes = this.getNodes();
             return _.find(nodes, function (node) {
                 return node.id === id;
             });
         },
         findConnection: function (sourceId, targetId) {
-            var sourceUid = this._getNodeUid(sourceId);
-            var targetUid = this._getNodeUid(targetId);
+            var sourceDomId = this._getNodeDomId(sourceId);
+            var targetDomId = this._getNodeDomId(targetId);
             var cons = this.instance.getConnections();
             return _.find(cons, function (con) {
-                return con.sourceId === sourceUid && con.targetId === targetUid;
+                return con.sourceId === sourceDomId && con.targetId === targetDomId;
             });
         },
-        findConnectionsData: function(id){
+        findConnectionsData: function (id) {
             var connections = this.getConnections();
             return connections.filter(function (conn) {
                 return conn.source === id || conn.target === id;
@@ -563,15 +601,17 @@
             var con = me.findConnection(sourceId, targetId);
             me.instance.detach(con);
         },
-        removeConnectionDataByUid: function (sourceUid, targetUid) {
-            var sourceId = this._getNodeIdFromUid(sourceUid);
-            var targetId = this._getNodeIdFromUid(targetUid);
+        removeConnectionDataByDomId: function (sourceDomId, targetDomId) {
+            var sourceId = this._getNodeIdFromDomId(sourceDomId);
+            var targetId = this._getNodeIdFromDomId(targetDomId);
             this.removeConnectionData(sourceId, targetId);
         },
         removeConnectionData: function (sourceId, targetId) {
             var connections = this.getConnections();
             var item = this.findConnectionData(sourceId, targetId);
-            connections.remove(item);
+            if (item.delectable !== false) {
+                connections.remove(item);
+            }
         },
         removeNodeData: function (id) {
             var value = this.value();
@@ -591,7 +631,7 @@
             var id = this._getNodeId($node);
             var cons = this.getConnections();
             var deleteCons = this.findConnectionsData(id);
-            $.each(deleteCons, function(i, con){
+            $.each(deleteCons, function (i, con) {
                 cons.remove(con);
             });
 
@@ -632,15 +672,15 @@
 
             this._setToolboxData(data.types);
             this.instance.batch(function () {
-                me._addNodes(data.nodes.toJSON());
-                me._addConnections(data.connections.toJSON());
+                me._addNodes(data.nodes);
+                me._addConnections(data.connections);
             });
         },
         select: function ($node) {
             if ($node == null) {
                 var $active = $(this.element).find('.wf-node-active');
                 var id = this._getNodeId($active);
-                return this.getNodeData(id);
+                return this.findNodeData(id);
             } else {
                 this.element.find('.wf-node-active').removeClass('wf-node-active');
                 $node.addClass('wf-node-active');
@@ -652,8 +692,8 @@
             if (id == null) return void 0;
             return id;
         },
-        _getNodeIdFromUid: function (uid) {
-            return uid.replace(this.options.nodeIdPrefix, '');
+        _getNodeIdFromDomId: function (domId) {
+            return domId.replace(this.options.nodeIdPrefix, '');
         },
         save: function () {
             var value = this.value();

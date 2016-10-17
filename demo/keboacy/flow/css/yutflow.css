@@ -2,13 +2,14 @@
   cursor: url(../img/scissor.cur), auto;
 }
 .k-wf.editable .wf-container {
-  margin-right: 155px;
+  margin-right: 205px;
 }
 .k-wf.editable .wf-toolbox {
+  position: relative;
   float: right;
-  width: 150px;
+  width: 200px;
   height: 100%;
-  background: grey;
+  background: #ebebeb;
 }
 .k-wf.editable .wf-node .wf-handle {
   cursor: pointer;
@@ -17,6 +18,11 @@
   position: relative;
   background: url(../img/wf_canvas_bg.png) repeat;
   height: 100%;
+}
+.wf-toolbox .wf-node_type {
+  margin-top: 20px;
+  margin-left: -40px;
+  left: 50%;
 }
 .wf-node {
   box-shadow: 0 1px 1px rgba(88, 88, 92, 0.1);
@@ -32,8 +38,11 @@
   white-space: nowrap;
 }
 .wf-node.wf-node_type {
-  cursor: move;
+  box-sizing: border-box;
+  width: 80px;
   padding: 0 20px;
+  cursor: move;
+  text-align: center;
 }
 .wf-node.pending {
   opacity: .6;
