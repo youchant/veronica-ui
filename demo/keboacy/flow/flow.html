@@ -3,15 +3,30 @@
 <head>
     <title></title>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../../../dist/css/default.css">
     <link rel="stylesheet" href="css/yutflow.css">
+    <style>
+        .toolbar{
+        }
+        html, body{
+            height:100%;
+        }
+        .flow{
+            height:90%;
+        }
+    </style>
 </head>
 <body>
-<div data-role="flow" data-editable="true" data-bind="value: flow"></div>
-<button id="getData">获取数据</button>
-<button id="removeCon">移除连接线</button>
-<button id="addCon">添加连接线</button>
-<button id="addNode">添加节点</button>
-<button id="updateNode">更改节点</button>
+<div class="toolbar">
+    <button id="getData">获取数据</button>
+    <button id="removeCon">移除连接线</button>
+    <button id="addCon">添加连接线</button>
+    <button id="addNode">添加节点</button>
+    <button id="updateNode">更改节点</button>
+    <button id="deleteNode">删除选中节点</button>
+</div>
+<div class="flow" data-role="flow" data-editable="true" data-draggable="false" data-selectable="true" data-bind="value: flow"></div>
+
 <script src="../../../bower_components/jquery/dist/jquery.js"></script>
 <script src="../../../bower_components/lodash/dist/lodash.min.js"></script>
 <script src="../../../dist/js/veronica-ui.js"></script>
@@ -24,35 +39,35 @@
             index: 1,
             left: "200",
             top: "167",
-            name: "测试",
+            text: "测试",
             state: 'done'
         }, {
             id: 'n2',
             index: 2,
             left: "420",
             top: "53",
-            name: "测试2",
+            text: "测试2",
             state: 'progress'
         }, {
             id: 'n3',
             index: 3,
             left: "484",
             top: "245",
-            name: "测试3",
+            text: "测试3",
             state: 'pending'
         }, {
             id: '0',
             index: 0,
             left: "79",
             top: "60",
-            name: "开始",
+            text: "开始",
             state: 'done'
         }, {
             id: '-1',
             index: -1,
             left: "771",
             top: "88",
-            name: "结束",
+            text: "结束",
             state: 'pending'
         }],
         connections: [{
@@ -73,6 +88,10 @@
             source: 'n3',
             target: '-1',
             text: '呵呵哒'
+        }],
+        types: [{
+            type: 'audit',
+            text: '审核'
         }]
     };
     var vm = kendo.observable({
@@ -105,11 +124,12 @@
             state: 'pending',
             top: 100,
             left: 300
-
         })
     })
-
-
+    $('#deleteNode').on('click', function(){
+        var nodes = vm.get('flow.nodes');
+        nodes.remove(instance.select());
+    })
 </script>
 </body>
 </html>

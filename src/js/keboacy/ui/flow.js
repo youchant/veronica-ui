@@ -14,10 +14,10 @@
     var Flow = kendo.ui.DataBoundWidget.extend({
         options: {
             name: 'Flow',
-            nodeTemplate: '<div class="#= cls #" id="#= uid #" ' +
-            'data-id="#= id #" style="top: #= top #px; left: #= left #px;"> ' +
-            '<span class="wf-handle"> <i></i> #= index # </span>' +
-            '<span class="wf-node_text"> #= name # </span>' +
+            nodeTemplate: '<div class="#: cls #" id="#: uuid #" ' +
+            'data-id="#= id #" style="top: #: top #px; left: #: left #px;"> ' +
+            '<span class="wf-handle"> <i></i> #: index # </span>' +
+            '<span class="wf-node_text"> #: text # </span>' +
             ' </div>',
             contextMenu: false,  // 指定一个选择器
             editable: false,
@@ -46,7 +46,6 @@
                 prefix: 'wf_node_',
                 startCls: 'wf-node wf-node-start',
                 endCls: 'wf-node wf-node-end',
-                autoNamePrefix: '步骤',
                 activeCls: "wf-node-active",
                 draggable: true,
                 isSource: true,
@@ -57,7 +56,7 @@
             },
             instanceOptions: {
                 Endpoint: "Blank",
-                Connector: ["Flowchart", { gap: 2 }],
+                Connector: ["Flowchart", {gap: 2}],
                 ConnectionOverlays: [
                     ["Arrow", {
                         location: 1,
@@ -99,26 +98,91 @@
             // 数据缓存
             this._value = {
                 nodes: [],
-                connections: []
+                connections: [],
+                types: []
             };
             this._lockUI = false;
 
             this._template();
             this._bindEvents();
-            this._initContainer();
+
+            this._initElements();
             this._bindDOMEvents();
+
+            this._initToolbox();
+
             this._initInstance();
             this._bindInstanceEvents();
+
             this._initContextMenu();
 
         },
         _template: function () {
             this._nodeTemplate = kendo.template(this.options.nodeTemplate);
         },
-        _initContainer: function () {
+        _initElements: function () {
+            var me = this;
+            this.element.addClass('k-wf');
+            this.$toolbox = $('<div class="wf-toolbox"></div>').appendTo(this.element);
             this.$container = $('<div class="wf-container"></div>').appendTo(this.element);
             if (this.options.editable) {
-                this.$container.addClass('editable');
+                this.element.addClass('editable');
+            }
+
+            // this.selectable = new kendo.ui.Selectable(this.$container, {
+            //     aria: true,
+            //     multiple: true,
+            //     filter: '>*:not(.k-loading-mask)',
+            //     change: function() {
+            //         me.trigger('select');
+            //     }
+            // });
+        },
+        _initToolbox: function () {
+            var me = this;
+            if (this.options.editable === false) {
+                return;
+            }
+            this.$toolbox.kendoListView({
+                template: '<div class="wf-node_type wf-node" data-type="#: type #">#: text #</div>',
+                autoBind: false
+            }).kendoDraggable({
+                filter: ".wf-node_type",
+                hint: function (element) {
+                    return element.clone().css({
+                        "opacity": 0.6,
+                        "background-color": "#0cf"
+                    });
+                }
+            });
+
+            //create dropTarget
+            this.$container.kendoDropTarget({
+                // dragenter: addStyling, //add visual indication
+                // dragleave: resetStyling, //remove the visual indication
+                drop: function (e) {
+                    var $target = $(e.target);
+                    var myOffset = $target.offset();
+                    var parentOffset = me.$container.offset();
+                    var left = myOffset.left - parentOffset.left;
+                    var top = myOffset.top - parentOffset.top;
+                    var type = $target.data('type');
+                    var data = me.findTypeData(type);
+                    me.addNodeData($.extend({}, data, {
+                        id: Date.now().toString(),
+                        index: me._getMaxIndex() + 1,
+                        top: top,
+                        left: left
+                    }));
+                }
+            });
+
+        },
+        _setToolboxData: function (data) {
+            var listview = kendo.widgetInstance(this.$toolbox);
+            if (listview != null) {
+                listview.setDataSource(data);
+                listview.dataSource.fetch();
             }
         },
         _initInstance: function () {
@@ -144,7 +208,7 @@
             // 注册 type
             var doneType = {
                 paintStyle: {
-                    strokeStyle: "#EE8C0C"
+                    strokeStyle: "#ee8c0c"
                 }
             };
             var pendingType = {
@@ -161,7 +225,8 @@
         },
         // 判断连接器是否是直接从开始节点指向结束节点
         _isFromStartToEnd: function (param) {
-            return param.sourceId === this.options.beginNodeId && param.targetId === this.options.endNodeId;
+            return param.sourceId === this._getNodeUid(this.options.beginNodeId)
+                && param.targetId === this._getNodeUid(this.options.endNodeId);
         },
         // 判断连接步骤是否重复
         _stepIsRepeat: function (param) {
@@ -214,7 +279,6 @@
 
             instance.bind("connectionDetached", function (con) {
                 if (con && con.connection) {
-                    console.log(con);
                     me.removeConnectionData(con.sourceId, con.targetId);
                 }
             });
@@ -241,7 +305,7 @@
                 if (me._lockUI) return;
                 if (e.action === 'remove') {
                     _.each(e.items, function (item) {
-                        me.removeConnection(item.source, item.target);
+                        me._removeConnection(item.source, item.target);
                     });
                     return;
                 }
@@ -257,7 +321,8 @@
                 if (me._lockUI) return;
                 if (e.action === 'remove') {
                     _.each(e.items, function (item) {
-                        me.removeNode(me.$container.find('[data-id="'+ item +'"]'));
+                        var $node = me.$container.find('[data-id="' + item.id + '"]');
+                        me._removeNode($node);
                     });
                     return;
                 }
@@ -365,13 +430,13 @@
 
             data.state || (data.state = 'none');
             data.cls || (data.cls = '');
-            data.uid || (data.uid = this._getNodeUid(data.id));
+            data.uuid || (data.uuid = this._getNodeUid(data.id));
 
             if (data.index == null) {
                 data.index = this._getMaxIndex() + 1;
             }
-            if (data.name == null) {
-                data.name = data.autoNamePrefix + " " + data.index;
+            if (data.text == null) {
+                data.text = '';
             }
 
             // 特殊步骤处理, (开始结束)
@@ -452,11 +517,10 @@
             });
         },
         getNodes: function () {
-            return this.value().nodes.toJSON();
+            return this.value().nodes;
         },
         getConnections: function (toJSON) {
-            var result = this.value().connections;
-            return toJSON ? result.toJSON() : result;
+            return this.value().connections;
         },
         // 根据序号找到 node data
         getNodeData: function (id) {
@@ -473,16 +537,28 @@
                 return con.sourceId === sourceUid && con.targetId === targetUid;
             });
         },
+        findConnectionsData: function(id){
+            var connections = this.getConnections();
+            return connections.filter(function (conn) {
+                return conn.source === id || conn.target === id;
+            });
+        },
         findConnectionData: function (sourceId, targetId) {
             var connections = this.getConnections();
             return connections.find(function (conn) {
                 return conn.source === sourceId && conn.target === targetId;
             });
         },
+        findTypeData: function (type) {
+            var list = this.value().types;
+            return list.find(function (item) {
+                return item.type === type;
+            });
+        },
         addConnectionData: function (data) {
             this.value().connections.push(data);
         },
-        removeConnection: function (sourceId, targetId) {
+        _removeConnection: function (sourceId, targetId) {
             var me = this;
             var con = me.findConnection(sourceId, targetId);
             me.instance.detach(con);
@@ -507,17 +583,21 @@
             value.nodes = nodes;
             this.value(value, true);
         },
-        addNode: function (options) {
-            this._addNode({
-                id: new Date().getTime(),  // TODO: 这里的id应该是外部传进来，而不是自己随便设置的一个
-                top: options.top,
-                left: options.left,
-            });
+        addNodeData: function (data) {
+            this.value().nodes.push(data);
         },
-        removeNode: function ($node) {
-            $node && this.instance.remove($node);
+        _removeNode: function ($node) {
+            // 先删除边，不然边会被自动删除
             var id = this._getNodeId($node);
-            this.removeNodeData(id);
+            var cons = this.getConnections();
+            var deleteCons = this.findConnectionsData(id);
+            $.each(deleteCons, function(i, con){
+                cons.remove(con);
+            });
+
+            // 后删除节点
+            $node && this.instance.remove($node);
+
         },
         _addNodeHandler: function (e) {
             var containerOffset = this.$container.offset();
@@ -532,12 +612,12 @@
                 this.removeNode($node);
             }
         },
-        value: function (value, fromUI) {
+        value: function (value) {
             var origin = this._value;
             if (value !== undefined && origin !== value) {
                 this._value = value;
                 this._bindModelEvents();
-                this.trigger('change', fromUI);
+                this.trigger('change');
             }
 
             return this._value;
@@ -550,15 +630,22 @@
 
             this.empty();
 
+            this._setToolboxData(data.types);
             this.instance.batch(function () {
                 me._addNodes(data.nodes.toJSON());
                 me._addConnections(data.connections.toJSON());
             });
         },
-        select: function () {
-            var $active = $(this.element).find('.wf-node-active');
-            var id = this._getNodeId($active);
-            return this.getNodeData(id);
+        select: function ($node) {
+            if ($node == null) {
+                var $active = $(this.element).find('.wf-node-active');
+                var id = this._getNodeId($active);
+                return this.getNodeData(id);
+            } else {
+                this.element.find('.wf-node-active').removeClass('wf-node-active');
+                $node.addClass('wf-node-active');
+            }
+
         },
         _getNodeId: function ($node) {
             var id = $node.attr('data-id');

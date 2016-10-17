@@ -1,10 +1,22 @@
+.k-wf.editable .jsplumb-connector.jsplumb-hover {
+  cursor: url(../img/scissor.cur), auto;
+}
+.k-wf.editable .wf-container {
+  margin-right: 155px;
+}
+.k-wf.editable .wf-toolbox {
+  float: right;
+  width: 150px;
+  height: 100%;
+  background: grey;
+}
+.k-wf.editable .wf-node .wf-handle {
+  cursor: pointer;
+}
 .wf-container {
   position: relative;
-  width: 100%;
+  background: url(../img/wf_canvas_bg.png) repeat;
   height: 100%;
-}
-.wf-container.editable .jsplumb-connector.jsplumb-hover {
-  cursor: url(../img/scissor.cur), auto;
 }
 .wf-node {
   box-shadow: 0 1px 1px rgba(88, 88, 92, 0.1);
@@ -18,6 +30,10 @@
   /*overflow: hidden;*/
   cusor: default;
   white-space: nowrap;
+}
+.wf-node.wf-node_type {
+  cursor: move;
+  padding: 0 20px;
 }
 .wf-node.pending {
   opacity: .6;

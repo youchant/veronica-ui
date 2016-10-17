@@ -22,16 +22,34 @@
 @wf-node-active-handle-border-color: @wf-node-active-border-color;
 @wf-node-active-handle-color: #FFF;
 
-.wf-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
 
-.wf-container.editable {
+
+.k-wf.editable {
   .jsplumb-connector.jsplumb-hover {
     cursor: @cursor-url, auto;
   }
+
+  .wf-container {
+    margin-right: 155px;
+  }
+  .wf-toolbox {
+    float: right;
+    width: 150px;
+    height: 100%;
+    background: grey;
+  }
+
+  .wf-node {
+    .wf-handle {
+      cursor: pointer;
+    }
+  }
+}
+
+.wf-container {
+  position: relative;
+  background: url(../img/wf_canvas_bg.png) repeat;
+  height: 100%;
 }
 
 .wf-node {
@@ -46,6 +64,11 @@
   /*overflow: hidden;*/
   cusor: default;
   white-space: nowrap;
+
+  &.wf-node_type {
+    cursor: move;
+    padding: 0 20px;
+  }
 
   &.pending {
     opacity: .6;
