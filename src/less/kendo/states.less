@@ -24,6 +24,11 @@ td.k-state-hover {
 
 // Selected
 
+// 选中时样式
+//
+// Markup: markups/kendoui-selected.html
+//
+// Styleguide patches.kendoui.selectable
 td.k-state-selected {
   .selected-style;
   > .k-link {
@@ -51,4 +56,34 @@ td.k-state-selected {
 .k-numerictextbox .k-select,
 .k-picker-wrap .k-select {
   border: transparent;
+}
+
+// 多选时遮罩样式
+//
+// Markup: markups/kendoui-marquee.html
+//
+// Styleguide patches.kendoui.marquee
+
+.k-marquee-color {
+  background-color: lighten(@selected-background-color, 20%);
+  filter: alpha(opacity=60);
+  opacity: .6;
+}
+
+.k-marquee-text {
+  color: @selected-text-color;
+}
+
+.k-marquee {
+  position: absolute;
+  z-index: 100000;
+}
+
+.k-marquee-color,
+.k-marquee-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

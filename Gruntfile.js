@@ -208,6 +208,6 @@ module.exports = function (grunt) {
     grunt.registerTask('script', ['requirejs', 'clean:script']);
     grunt.registerTask('style', ['less', 'copy:style', 'concat:style']);
     grunt.registerTask('release', ['style', 'script']);
-    grunt.registerTask('styleguide', ['copy:styleguide', 'pug', 'kss']);
+    grunt.registerTask('styleguide', ['release', 'copy:styleguide', 'pug', 'kss']);
     grunt.registerTask('default', ['release']);
 };
