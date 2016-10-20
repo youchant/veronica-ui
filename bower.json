@@ -22,9 +22,12 @@
   },
   "devDependencies": {
     "veronica": "veronica#feature/ver2",
-    "lodash": "^4.15.0",
+    "keboacy": "keboacy#master",
+    "lodash": "^4.16.4",
     "kendo-ui": "2015.3.1111",
-    "blueimp-file-upload": "jquery-file-upload#^9.12.5",
-    "jSignature": "^2.1.0"
+    "jSignature": "^2.1.0",
+    "jsPlumb": "2.1.7",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3"
   }
 }
