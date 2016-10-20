@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <style>
+        #test {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+    </style>
+    <link href="../dist/css/default.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="test" data-ver-role="test">
+    <button data-action="open">Open</button>
+    <div data-role="window"
+         data-title="About Alvar Aalto"
+         data-width="300"
+         data-appendTo="#test"
+         data-actions="['Minimize', 'Maximize', 'Close']"
+         data-height="150"
+         data-bind="visible: isVisible" class="js-wnd" style="display:none;">
+        <select data-role="dropdownlist" name="" id=""></select>
+        <div class="sub"></div>
+    </div>
+</div>
+<script type="text/template" id="tpl">
+    <form action="" class="form-horizontal">
+        <div class="form-group row">
+            <label for="" class="control-label col-xs-3">Name:</label>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" name="name" data-bind="value: data.name">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-offset-3">
+                <button class="btn btn-default" data-bind="events: { click: submitHandler }">Submit</button>
+            </div>
+        </div>
+    </form>
+</script>
+<script src="../node_modules/sinon/pkg/sinon.js"></script>
+<script src="../node_modules/sinon/pkg/sinon-server.js"></script>
+
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/lodash/dist/lodash.js"></script>
+<script src="../bower_components/veronica/dist/veronica.js"></script>
+<script src="../dist/js/veronica-ui.js"></script>
+<script>
+    var app = veronica.createApp();
+    app.use(veronicaui);
+    app.uiKit.setDefault('keboacy');
+    app.formValidation.setDefault('kendo');
+    app.viewEngine.setDefault('kendo');
+
+    //    var fake = sinon.useFakeXMLHttpRequest();
+    //    fake.onCreate = function (xhr) {
+    //        xhr.respond(200, {'Content-Type': 'application/json'}, JSON.stringify([{
+    //            id: 1, name: "Johe Doe"
+    //        }]));
+    //    };
+    var server = sinon.fakeServer.create();
+    server.respondWith('GET', '/Test',
+            [200, {'Content-Type': 'application/json'}, JSON.stringify({
+                data: {
+                    id: 1, name: "Johe Doe"
+                }
+            })]);
+
+
+    app.backendApi.add('test', {
+        api: {
+            detail: '/Test',
+            update: '/Test2'
+        },
+        groups: {
+            detail: {
+                type: 'single',
+                api: ['detail=>read', 'update'],
+                options: {
+                    schema: {
+                        data: 'data'
+                    }
+                }
+            }
+        }
+    });
+
+    app.widget.register('test', {
+        defaults: {
+            autoAction: true
+        },
+        initAttr: function () {
+            this.model({
+                isVisible: false
+            }, false);
+        },
+        rendered: function () {
+        },
+        modelBound: function () {
+            var me = this;
+            this.instance('[data-role=window]').bind('open', function () {
+                me.startWidgets({
+                    name: 'sub',
+                    options: {
+                        host: me.$('.sub')
+                    }
+                });
+            });
+        },
+        openHandler: function () {
+            this.instance('.js-wnd').open();
+        }
+    });
+
+    app.widget.register('sub', {
+        template: $('#tpl').html(),
+        defaults: {
+            autoAction: true,
+            enableValidation: true
+        },
+        stores: {
+            'data': {
+                from: '@test:detail',
+                commands: {}
+            },
+        },
+        staticModel: function () {
+            return {
+                isVisible: false,
+                submitHandler: function (e) {
+                    e.preventDefault();
+                    this.data.update();
+                }
+            };
+        },
+        modelBound: function () {
+            this.model('data').read();
+            server.respond();
+        },
+
+    });
+    app.parser.parse();
+</script>
+</body>
+</html>

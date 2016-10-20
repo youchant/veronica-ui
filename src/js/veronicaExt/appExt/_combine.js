@@ -3,7 +3,12 @@ define([
     './templateEngine',
     './uiKit',
     './viewEngine',
-    './windowProvider'
+    './windowProvider',
+    './backendApi',
+    './methodProvider',
+    './optionsProvider',
+    './store',
+    './storeProvider'
 ], function () {
     var args = Array.prototype.slice.call(arguments);
     return function (app) {

@@ -1,0 +1,59 @@
+@k-pager-border-width: 2px;
+@k-pager-padding-vertical: @padding-base-vertical - @k-pager-border-width;
+@k-pager-padding-horizontal: @padding-base-horizontal;
+
+// 分页条样式
+//
+// Markup: markups/kendoui-pager.html
+//
+// Styleguide patches.kendoui.pager
+
+.k-pager-wrap {
+
+  text-align: center;
+
+  > .k-link,
+  .k-pager-numbers .k-link,
+  .k-pager-numbers .k-state-selected {
+    display: inline-block;
+    padding: @k-pager-padding-vertical @k-pager-padding-horizontal;
+    line-height: @line-height-base;
+    height: auto;
+    min-width: 1em;
+    border: 1px solid transparent;
+    border-width: @k-pager-border-width 0;
+  }
+
+  .k-pager-numbers:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+
+  .k-pager-input,
+  .k-pager-nav,
+  .k-pager-numbers,
+  .k-pager-numbers li {
+    float: left;
+  }
+
+  .k-pager-nav {
+
+  }
+
+  .k-pager-numbers .k-state-selected {
+    border-top-color: @selected-border-color;
+  }
+
+  .k-pager-numbers {
+    .k-current-page {
+      display: none;
+    }
+  }
+
+  .k-pager-info {
+    float: right;
+    padding: 0 1.3em;
+    color: @text-muted;
+  }
+}

@@ -1,0 +1,71 @@
+/* Popup */
+
+.k-popup {
+  background-color: @group-background-color;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .18);
+  .k-list {
+    .k-state-hover {
+      padding: 4px 0 4px 24px;
+    }
+
+    .k-item {
+      padding: 4px 0 4px 24px;
+      position: relative;
+      border-width: 1px;
+      border-style: solid;
+
+      &.k-state-selected {
+        &:before {
+          .kendoUIGlyphs;
+          position: absolute;
+          left: 5px;
+          content: "\e61e";
+          line-height: 1.6em;
+        }
+      }
+
+      &.k-state-focused {
+        color: @component-active-bg;
+      }
+    }
+  }
+
+  &.k-list-container {
+    border-color: @input-border-focus;
+  }
+
+  &.k-state-border-down {
+    .box-shadow(0 -2px 5px @group-border-color);
+  }
+
+  &.k-state-border-up {
+    .box-shadow(0 2px 5px @group-border-color);
+  }
+}
+
+.k-list-container {
+  border-color: @group-border-color;
+  background-color: @select-group-background-color;
+
+  &.k-state-border-down {
+    border-bottom: 0;
+    margin-top: 3px;
+  }
+
+  &.k-state-border-up {
+    margin-top: -1px;
+    border-top: 0;
+  }
+}
+
+.k-popup.k-calendar-container,
+.k-popup.k-list-container {
+  padding: 0;
+}
+
+.k-tooltip {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #c9c9c9;
+  box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, .18);
+}

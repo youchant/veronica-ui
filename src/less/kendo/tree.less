@@ -1,0 +1,52 @@
+.k-tree{
+    .k-tree-indent {
+        display: inline-block;
+        width: 1.5em;
+        height: 1px;
+    }
+
+    .k-tree-switcher,
+    .k-tree-switcher-noop {
+        display: inline-block;
+        width: 1.5em;
+        height: auto;
+        font-weight: bold;
+        cursor: pointer;
+        color: darken(@base, 20%);
+    }
+
+    .k-tree-switcher:before {
+        content: "\f196";
+        .fontAwesome;
+        font-weight:bold;
+    }
+
+    .k-tree-subtree{
+        display:none;
+    }
+    .k-tree-item.open > .k-tree-subtree{
+        display:block;
+    }
+
+    .k-tree-item.open > .k-tree-inner > .k-tree-switcher:before {
+        content: "\f147";
+    }
+    .k-tree-inner{
+        padding: 3px 5px;
+
+        &.k-state-selected,
+        &:hover.k-state-selected{
+            background-color: lighten(@selected-background-color, 40%);
+            color: inherit;
+        }
+
+        &:hover{
+            .hover-style;
+        }
+    }
+
+    .k-tree-text{
+        cursor: default;
+    }
+}
+

@@ -17,10 +17,9 @@ define([
                 validate: function () {
                     var me = this;
                     var result = true;
-                    var $ = this.options.sandbox.app.core.$;
                     var deferred = $.Deferred();
                     this.$('[data-validate-form]').each(function (i, el) {
-                        result = me._validateEngine().validate($(el));
+                        result = me._validateEngine().validate($(el), me);
                     });
                     if (result) {
                         deferred.resolve();
@@ -47,7 +46,7 @@ define([
             var me = this;
             if (this.options.enableValidation) {
                 this.$('[data-validate-form]').each(function (i, form) {
-                    me._validateEngine().init($(form));
+                    me._validateEngine().init($(form), me);
                 });
             }
         });

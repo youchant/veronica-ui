@@ -1,225 +1,231 @@
-// KendoUI
-//
-// 因为仅用了 kendo ui core 里的少量 widget，因此自定义 kendo ui 的样式，
-// 如果已经引用了 kendo ui 自带的样式表，则不要引用这些样式
-//
-// Styleguide patches.kendoui
 
-// 选中时样式
-//
-// Markup: markups/kendoui-selected.html
-//
-// Styleguide patches.kendoui.selectable
 
 .selected,
 .k-state-selected,
-.table > tbody > tr.k-state-selected {  // 修复 .table hover 的样式冲突
-    color: @k-selected-color;
-    background-color: @k-selected-bg-color;
-    border-color: @k-selected-border-color;
+.table > tbody > tr.k-state-selected { // 修复 .table hover 的样式冲突
+  color: @k-selected-color;
+  background-color: @k-selected-bg-color;
+  border-color: @k-selected-border-color;
+}
+
+.k-state-focused,
+.k-list > .k-state-focused,
+.k-listview > .k-state-focused,
+.k-grid-header th.k-state-focused,
+td.k-state-focused,
+.k-button.k-state-focused {
+  box-shadow: none;
+}
+
+.k-state-focused.k-state-selected,
+.k-list > .k-state-focused.k-state-selected,
+.k-listview > .k-state-focused.k-state-selected,
+td.k-state-focused.k-state-selected {
+  box-shadow: none;
 }
 
 
-// 多选时遮罩样式
-//
-// Markup: markups/kendoui-marquee.html
-//
-// Styleguide patches.kendoui.marquee
+
 
 .k-marquee-color {
-    background-color: @k-marquee-bg-color;
-    filter: alpha(opacity=60);
-    opacity: .6;
+  background-color: @k-marquee-bg-color;
+  filter: alpha(opacity=60);
+  opacity: .6;
 }
 
 .k-marquee-text {
-    color: @k-marquee-color;
+  color: @k-marquee-color;
 }
 
 .k-marquee {
-    position: absolute;
-    z-index: 100000;
+  position: absolute;
+  z-index: 100000;
 }
 
 .k-marquee-color,
 .k-marquee-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-// 加载时样式
-//
-// Markup: markups/kendoui-loading.html
-//
-// Styleguide patches.kendoui.loading
+
 
 .k-loading,
 .k-loading-image {
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-position: center center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .k-loading-mask,
 .k-loading-image,
 .k-loading-text {
-    position: absolute;
+  position: absolute;
 }
 
 .k-loading-mask {
-    z-index: 100;
+  z-index: 100;
 }
 
 .k-loading-text {
-    text-indent: -4000px;
-    text-align: center;
+  text-indent: -4000px;
+  text-align: center;
 }
 
 .k-loading-image, .k-loading-color {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .k-loading-image {
-    top: 0;
-    left: 0;
-    z-index: 2;
+  top: 0;
+  left: 0;
+  z-index: 2;
 }
 
 .k-loading-color {
-    filter: alpha(opacity=30);
-    opacity: .3;
+  filter: alpha(opacity=30);
+  opacity: .3;
 }
 
 
 
 .k-loading,
 .k-state-hover .k-loading {
-    background-image: url('@{image-path}loading.gif');
-    background-position: 50% 50%;
+  background-image: url('@{image-path}loading.gif');
+  background-position: 50% 50%;
 }
 
 .k-loading-image {
-    background-image: url('@{image-path}loading-image.gif');
+  background-image: url('@{image-path}loading-image.gif');
 }
 
 .k-loading-color {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 
-// 分页条样式
-//
-// Markup: markups/kendoui-pager.html
-//
-// Styleguide patches.kendoui.pager
+
 
 @pager-height: 30px;
 
 .k-pager-wrap {
-    height: @pager-height;
-    line-height: @pager-height;
+  height: @pager-height;
+  line-height: @pager-height;
+  padding: 0 5px;
+
+  .k-pager-numbers:before, .k-pager-numbers:after,
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+
+  ul, li {
+    list-style: none;
+  }
+
+  .k-pager-numbers:after,
+  &:after {
+    clear: both;
+  }
+
+
+
+  .k-pager-nav,
+  .k-pager-numbers,
+  .k-pager-numbers li {
+    float: left;
     padding: 0 5px;
+    margin-bottom: 0;
+  }
 
-    .k-pager-numbers:before, .k-pager-numbers:after,
-    &:before, &:after {
-        content: " ";
-        display: table;
+  .k-pager-numbers li {
+    span {
+      padding: 0 10px;
+      display: inline-block;
+      background-color: transparent;
+      border-bottom: 2px solid #428bca;
+      color: #428bca;
+    }
+  }
+
+  .k-pager-numbers li > a {
+    display: inline-block;
+    padding: 0 10px;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
     }
 
-    ul, li {
-        list-style: none;
+    &:hover {
+      background: #C6C6C6;
+      border-bottom: 2px solid #C6C6C6;
     }
-
-    .k-pager-numbers:after,
-    &:after {
-        clear: both;
-    }
+  }
 
 
+  .k-pager-nav,
+  .k-pager-numbers li {
+    min-width: 16px;
+  }
 
-    .k-pager-nav,
-    .k-pager-numbers,
-    .k-pager-numbers li {
-        float: left;
-        padding: 0 5px;
-        margin-bottom: 0;
-    }
+  .k-pager-info {
+    float: right;
+  }
 
-    .k-pager-numbers li {
-        span {
-            padding: 0 10px;
-            display: inline-block;
-            background-color: transparent;
-            border-bottom: 2px solid #428bca;
-            color: #428bca;
-        }
-    }
-
-    .k-pager-numbers li > a {
-        display: inline-block;
-        padding: 0 10px;
-
-        &:hover,
-        &:focus {
-            text-decoration: none;
-        }
-
-        &:hover {
-            background: #C6C6C6;
-            border-bottom: 2px solid #C6C6C6;
-        }
-    }
-
-
-    .k-pager-nav,
-    .k-pager-numbers li {
-        min-width: 16px;
-    }
-
-    .k-pager-info {
-        float: right;
-    }
-
-    .k-pager-numbers .k-current-page {
-        display: none;
-    }
+  .k-pager-numbers .k-current-page {
+    display: none;
+  }
 }
 
 .k-icon {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    line-height: normal;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 0;
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  line-height: normal;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0;
 }
 
 .k-state-disabled .k-icon {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .k-icon:before {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .k-i-seek-w:before {
-    content: "\f100";
+  content: "\f100";
 }
 
 .k-i-arrow-w:before {
-    content: "\f104";
+  content: "\f104";
 }
 
 .k-i-seek-e:before {
-    content: "\f101";
+  content: "\f101";
 }
 
 .k-i-arrow-e:before {
-    content: "\f105";
+  content: "\f105";
+}
+
+.k-i-arrow-s:before {
+  content: "\f0d7";
+}
+.k-i-arrow-n:before{
+  content: "\f0d8";
+}
+
+.k-i-clock:before {
+  content: "\f017";
+}
+.k-i-calendar:before {
+  content: "\f073";
 }

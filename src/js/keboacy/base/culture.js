@@ -5,5 +5,6 @@
         factory(jQuery);
     }
 }(function () {
+    // 设置默认的 culture
     kendo.culture("zh-CN");
 }));

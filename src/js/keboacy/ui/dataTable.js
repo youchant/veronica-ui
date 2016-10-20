@@ -67,7 +67,7 @@
         },
         _element: function () {
             ListView.fn._element.call(this);
-            this.element.addClass(this.options.cls);
+            this.element.addClass('k-datatable').addClass(this.options.cls);
 
             if (this.options.header) {
                 var element = this.element;

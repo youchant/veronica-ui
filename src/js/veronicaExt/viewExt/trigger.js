@@ -16,8 +16,8 @@ define([
             },
             methods: {
                 /**
-                 * ÉèÖÃ´¥·¢Æ÷
-                 * @param {string} [toolbarTpl=options.defaultToolbarTpl] - ¹¤¾ßÌõÑ¡ÔñÆ÷
+                 * è®¾ç½®è§¦å‘å™¨
+                 * @param {string} [toolbarTpl=options.defaultToolbarTpl] - å·¥å…·æ¡é€‰æ‹©å™¨
                  * @returns void
                  * @fires View#setTriggers
                  */
@@ -25,11 +25,11 @@ define([
                     toolbarTpl || (toolbarTpl = this.options.defaultToolbarTpl);
 
                     /**
-                     * **ÏûÏ¢£º** ÉèÖÃ´¥·¢Æ÷
+                     * **æ¶ˆæ¯ï¼š** è®¾ç½®è§¦å‘å™¨
                      * @event View#setTriggers
-                     * @param {string} html - ¹¤¾ßÌõÄ£°å
-                     * @param {string} name - Ä¿±êÃû³Æ
-                     * @param {View} view - µ±Ç°ÊÓÍ¼
+                     * @param {string} html - å·¥å…·æ¡æ¨¡æ¿
+                     * @param {string} name - ç›®æ ‡åç§°
+                     * @param {View} view - å½“å‰è§†å›¾
                      */
                     this.pub('setTriggers', this.$(toolbarTpl).html(),
                         this.options.toolbar || this._name, this);

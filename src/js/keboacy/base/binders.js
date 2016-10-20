@@ -6,8 +6,9 @@
     }
 }(function ($, kendo) {
 
+
     /**
-     * kendo ui ÆÕÍ¨ date °ó¶¨
+     * kendo ui æ™®é€š date ç»‘å®š
      * @example
      *  <span data-bind='date: startDate' data-format='yyyy-MM-dd'></span>
      */

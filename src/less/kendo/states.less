@@ -1,0 +1,89 @@
+/* State */
+
+// Hover
+
+.k-item.k-state-hover,
+td.k-state-hover {
+  .hover-style;
+}
+
+.k-state-hover > .k-select,
+.k-state-hover.k-dropdown-wrap {
+  background-color: @hover-background-color;
+}
+
+// Focus
+
+/*.k-state-focused,*/
+.k-state-border-down,
+.k-state-border-up,
+.k-numeric-wrap.k-state-focused,
+.form-control.k-state-focused {
+  border-color: @focused-border-color;
+}
+
+// Selected
+
+// 选中时样式
+//
+// Markup: markups/kendoui-selected.html
+//
+// Styleguide patches.kendoui.selectable
+td.k-state-selected {
+  .selected-style;
+  > .k-link {
+    color: @selected-text-color;
+  }
+}
+
+.k-listview {
+  .k-state-selected,
+  .k-state-selected:hover,
+  .k-state-selected:link,
+  .k-state-selected:visited,
+  .k-item.k-state-selected {
+    background-color: @selected-background-color;
+    border-color: @selected-border-color;
+    color: @selected-text-color;
+
+    > .k-link {
+      color: @selected-text-color;
+    }
+  }
+}
+
+.k-combobox .k-select,
+.k-numerictextbox .k-select,
+.k-picker-wrap .k-select {
+  border: transparent;
+}
+
+// 多选时遮罩样式
+//
+// Markup: markups/kendoui-marquee.html
+//
+// Styleguide patches.kendoui.marquee
+
+.k-marquee-color {
+  background-color: lighten(@selected-background-color, 20%);
+  filter: alpha(opacity=60);
+  opacity: .6;
+}
+
+.k-marquee-text {
+  color: @selected-text-color;
+}
+
+.k-marquee {
+  position: absolute;
+  z-index: 100000;
+}
+
+.k-marquee-color,
+.k-marquee-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

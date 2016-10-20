@@ -4,7 +4,7 @@
   "destination": "../docs/styleguide",
   "template": "../bower_components/kss-node-template-tiny",
   "css": [
-    "assets/veronica-ui/css/veronica-ui.css"
+    "assets/veronica-ui/css/default.css"
   ],
   "js": [
     "assets/jquery/dist/jquery.min.js",

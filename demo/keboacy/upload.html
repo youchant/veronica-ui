@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <link rel="stylesheet" href="../../dist/css/default.css">
+    <link rel="stylesheet" href="../../bower_components/blueimp-file-upload/css/jquery.fileupload.css">
+</head>
+<body>
+<div class="container well">
+    <form enctype="multipart/form-data" action="/" METHOD="post" id="fileupload">
+        <div class="input-group">
+            <label class="input-group-btn">
+                <span class="btn btn-primary  fileinput-button">
+                    Browse&hellip;
+                    <input type="file" name="xxx">
+                </span>
+            </label>
+            <input type="text" class="form-control" readonly>
+        </div>
+        <input type="file" name="xsdf" id="">
+        <button class="btn btn-primary" id="sub">文件上传</button>
+        <button class="btn btn-primary" id="btnSubmit">提 交</button>
+    </form>
+<div id="bind">
+    <input type="file" data-role="file" name="te">
+</div>
+</div>
+
+<!--<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>-->
+<script src="../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="../../bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="../../bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="../../dist/js/veronica-ui.js"></script>
+<script>
+    kendo.bind($('#bind'), {});
+    $('#fileupload').fileupload({
+//        url: '/test/test',
+        dataType: 'json',
+        autoUpload: false
+        //,
+//            done: function (e, data) {
+//                $.each(data.result.files, function (index, file) {
+//                    $('<p/>').text(file.name).appendTo(document.body);
+//                });
+//            }
+    }).on('fileuploadadd', function (e, data) {
+       var $file = data.fileInput;
+//data.submit();
+ //       return;
+        var $input = $file.closest('.input-group').find('.form-control');
+        $input.val(data.files[0].name);
+
+        var files = $(this).data('uploadFiles');
+        if(files == null){
+            $(this).data('uploadFiles', {});
+        }
+        files = $(this).data('uploadFiles');
+
+        if($file.prop('multiple')){
+            files[data.paramName] || (files[data.paramName] = []);
+            files[data.paramName].concat(data.files);
+        }else{
+            files[data.paramName] = data.files[0];
+        }
+
+    })
+
+    $('#sub').on('click', function (e) {
+        e.preventDefault();
+        //  $('#fileupload')
+        var files = $.map($('#fileupload').data('uploadFiles'), function(item){ return item; });
+        var paramName =  $.map($('#fileupload').data('uploadFiles'), function(item, key){ return key; });
+        $('#fileupload').fileupload('send', { files: files });
+    });
+    $('#btnSubmit').on('click', function () {
+        $(this).submit();
+    });
+</script>
+</body>
+</html>

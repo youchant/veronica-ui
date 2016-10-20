@@ -1,0 +1,99 @@
+/* Adaptive Grid */
+
+.k-grid-mobile .k-column-active + th.k-header {
+  border-left-color: @widget-text-color;
+}
+
+html .km-pane-wrapper .km-widget,
+.k-ie .km-pane-wrapper .k-widget,
+.k-ie .km-pane-wrapper .k-group,
+.k-ie .km-pane-wrapper .k-content,
+.k-ie .km-pane-wrapper .k-header,
+.k-ie .km-pane-wrapper .k-popup-edit-form .k-edit-field .k-button,
+.km-pane-wrapper .k-mobile-list .k-item,
+.km-pane-wrapper .k-mobile-list .k-edit-label,
+.km-pane-wrapper .k-mobile-list .k-edit-field {
+  color: @widget-text-color;
+}
+
+@media screen and (-ms-high-contrast: active) and (-ms-high-contrast: none) {
+  div.km-pane-wrapper a {
+    color: @widget-text-color;
+  }
+
+  .km-pane-wrapper .k-icon {
+    background-image: url('@{image-folder}/sprite_2x.png');
+    background-size: 21.2em 21em;
+  }
+}
+
+.km-pane-wrapper .k-mobile-list .k-item,
+.km-pane-wrapper .k-mobile-list .k-edit-field,
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check {
+  background-color: @widget-background-color;
+  border-top: 1px solid @cell-border-color;
+}
+
+.km-pane-wrapper .k-mobile-list .k-edit-field textarea {
+  outline-width: 0;
+}
+
+.km-pane-wrapper .k-mobile-list .k-item.k-state-selected {
+  background-color: @selected-background-color;
+  border-top-color: @selected-border-color;
+}
+
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check:first-child {
+  border-top-color: transparent;
+}
+
+.km-pane-wrapper .k-mobile-list .k-item:last-child {
+  .box-shadow(inset 0 -1px 0 @cell-border-color);
+}
+
+.km-pane-wrapper .k-mobile-list > ul > li > .k-link,
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-label:nth-child(3),
+.km-pane-wrapper #recurrence .km-scroll-container > .k-edit-label:first-child {
+  color: darken(@cell-border-color, 30);
+}
+
+.km-pane-wrapper .k-mobile-list > ul > li > .k-link {
+  border-bottom: 1px solid @cell-border-color;
+}
+
+.km-pane-wrapper .k-mobile-list .k-edit-field {
+  .box-shadow(0 1px 1px @cell-border-color);
+}
+
+.km-actionsheet .k-grid-delete,
+.km-actionsheet .k-scheduler-delete,
+.km-pane-wrapper .k-scheduler-delete,
+.km-pane-wrapper .k-filter-menu .k-button[type=reset] {
+  color: #fff;
+  border-color: @error-border-color;
+  background-color: red;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,.15));
+}
+
+.km-actionsheet .k-grid-delete:active,
+.km-actionsheet .k-scheduler-delete:active,
+.km-pane-wrapper .k-scheduler-delete:active,
+.km-pane-wrapper .k-filter-menu .k-button[type=reset]:active {
+  background-color: darken(red, 20);
+}
+
+
+
+/* IE will ignore the above selectors if these are added too */
+.k-mobile-list .k-check:checked,
+.k-mobile-list .k-edit-field [type=checkbox]:checked,
+.k-mobile-list .k-edit-field [type=radio]:checked {
+  background-image: @sprite-image;
+  border-color: transparent;
+}
+/* this selector should be used separately, otherwise old IEs ignore the whole rule */
+.k-mobile-list .k-scheduler-timezones .k-edit-field:nth-child(2):active {
+  color: @hover-text-color;
+  background-color: @hover-background-color;
+  border-color: @hover-border-color;
+}

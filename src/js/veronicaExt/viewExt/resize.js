@@ -10,8 +10,8 @@ define([
             },
             methods: {
                 /**
-                 * **`��д`** ��д�÷�����ʹ��ͼ����Ӧ���֣������� `autoResize` �󣬴��ڴ�С�仯ʱ���÷����ᱻ���ã�
-                 * ����б�Ҫ���ڸ÷�����Ӧ��д���ڴ�С�仯ʱ������ͼ��Ӧ�Ĵ����߼�
+                 * **`重写`** 重写该方法，使视图自适应布局，当开启 `autoResize` 后，窗口大小变化时，该方法会被调用，
+                 * 如果有必要，在该方法中应编写窗口大小变化时，该视图对应的处理逻辑
                  * @type {function}
                  */
                 resize: function () {
@@ -33,7 +33,7 @@ define([
         });
 
         base._extendMethod('_destroy', function () {
-            // ������ȫ��ע����¼�������
+            // 清理在全局注册的事件处理器
             this.options.autoResize && $(window).off('resize', this.resize);
         });
 

@@ -1,0 +1,194 @@
+/** 变量 */
+
+@accent: @brand-primary;
+@base: @gray-lighter;
+@background: @body-bg;
+@border-radius: @border-radius-base;
+
+/* States */
+
+@normal-background: @body-bg;
+@normal-text-color: @text-color;
+@normal-gradient: none;
+
+@hover-background: @gray-lighter;
+@hover-text-color: @text-color;
+@hover-gradient: none;
+
+@selected-background: lighten(@component-active-bg, 30%);
+@selected-text-color: @component-active-color;
+@selected-gradient: none;
+
+@error: @brand-danger;
+@warning: @brand-warning;
+@success: @brand-success;
+@info: @brand-info;
+
+/* state */
+
+/* hover state */
+
+@hover-background-color: @dropdown-link-hover-bg;
+@hover-border-color: @dropdown-link-hover-bg;
+/*@hover-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);*/
+@hover-shadow: none;
+
+/* selected state */
+
+@selected-background-color: @accent;
+@selected-border-color: @accent;
+/*@selected-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;*/
+@selected-shadow: none;
+
+/* focused state */
+
+@focused-border-color: @input-border-focus;
+/*@focused-shadow: 0 0 7px 0 lighten(@accent, 13%);*/
+@focused-shadow: none;
+/*@focused-item-shadow: inset 0 0 7px 0 lighten(@accent, 13%);
+@focused-active-item-shadow: inset 0 0 10px 3px darken(@accent, 8%);*/
+@focused-item-shadow: none;
+@focused-active-item-shadow: none;
+
+
+/* widget */
+
+@widget-text-color: @normal-text-color;
+@widget-background-color: @background;
+@inverse-text-color: @background;
+@widget-border-color: @panel-default-border; /*darken(@base, 12%);*/
+@widget-gradient: none;
+
+@default-icon-opacity: .7;
+
+/* textboxes */
+
+@input-background-color: @input-bg;
+@input-text-color: @input-color;
+@form-widget-color: @normal-text-color;
+@form-widgets-border-color: darken(@base, 12%);
+@form-widgets-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+
+/* popups */
+
+@group-background-color: @dropdown-bg;
+@group-border-color: @dropdown-border;
+
+/* dropdownlist */
+
+@select-background-color: @base;
+@select-border-color: darken(@base, 24%);
+@select-hover-background-color: @base;
+@select-group-background-color: @background;
+
+
+/* checkboxes */
+
+@checkbox-border-color-before: transparent;
+@checkbox-border-color-after: darken(@base, 12%);
+@checkbox-border-radius-before: 3px;
+@checkbox-background-color: @background;
+@checkbox-hover-border-color: darken(@base, 24%);
+@checkbox-hover-box-shadow: none;
+@checkbox-checked-border-color-after: darken(@base, 12%);
+@checkbox-checked-border-radius-after: 3px;
+@checkbox-checked-background-color-after: @background;
+@checkbox-checked-color-after: @accent;
+@checkbox-active-border-color-before: transparent;
+@checkbox-active-border-color-after: lighten(@accent, 13%);
+@checkbox-active-border-radius: 3px;
+@checkbox-active-border-radius-after: 3px;
+@checkbox-active-box-shadow: 0 0 2px 0 lighten(@accent, 13%);
+@checkbox-checked-active-border-radius-before: 3px;
+@checkbox-checked-active-box-shadow: 0 0 2px 0 lighten(@accent, 13%);
+@checkbox-checked-disabled-color-after: darken(@base, 29%);
+@checkbox-disabled-background-color-after: @background;
+@checkbox-disabled-color: darken(@base, 29%);
+@checkbox-disabled-box-shadow: none;
+@checkbox-disabled-border-color-before: darken(@base, 12%);
+
+/* radio buttons */
+
+@radio-border-color-before: darken(@base, 12%);
+@radio-background-color: @background;
+@radio-border-width-before: 1px;
+@radio-hover-border-color: darken(@base, 24%);
+@radio-hover-box-shadow: none;
+@radio-checked-border-color-before: darken(@base, 12%);
+@radio-checked-background-color-after: @accent;
+@radio-active-border-color-before: lighten(@accent, 13%);
+@radio-active-box-shadow: 0 0 2px 0 lighten(@accent, 13%);
+@radio-checked-active-border-color-before: lighten(@accent, 13%);
+@radio-checked-active-box-shadow: 0 0 2px 0 lighten(@accent, 13%);
+@radio-disabled-background-color-after: @background;
+@radio-disabled-color: darken(@background, 27%);
+@radio-disabled-box-shadow: none;
+@radio-disabled-background-color-before: @background;
+
+/* Calendar */
+
+@calendar-content-text-color: @normal-text-color;
+@calendar-footer-background: lighten(@base, 4%);
+@calendar-footer-text-decoration: none;
+@calendar-footer-hover-text-decoration: underline;
+@calendar-footer-hover-background: @background;
+@calendar-header-hover-text-decoration: none;
+@calendar-header-hover-background: @base;
+@calendar-footer-active-background: @background;
+@calendar-group-background-color: lighten(@base, 4%);
+@calendar-border-radius: @border-radius;
+
+/* drag handle */
+
+@draghandle-border-radius: 13px;
+@draghandle-border-color: @widget-border-color;
+@draghandle-background-color: @background;
+@draghandle-shadow: 0 0 0 1px darken(@background, 23%);
+@draghandle-hover-border-color: darken(@base, 24%);
+@draghandle-hover-background-color: @base;
+@draghandle-hover-shadow: none;
+
+/* buttons */
+
+@button-border-color: @btn-default-border;
+@button-text-color: @btn-default-color;
+@button-background-color: @background;
+
+@primary-button-text-color: @btn-primary-color;
+@primary-button-background-color: @btn-primary-bg;
+@primary-button-border-color: @btn-primary-border;
+@primary-gradient: none;
+@primary-shadow: none;
+
+@primary-hover-text-color: @background;
+@primary-hover-background-color: darken(@accent, 8%);
+@primary-hover-border-color: darken(@accent, 17%);
+@primary-hover-gradient: none;
+@primary-hover-shadow: none;
+
+@primary-focused-color: @background;
+@primary-focused-border-color: lighten(@info, 2%);
+@primary-focused-gradient: none;
+@primary-focused-active-item-shadow: 0 0 8px 0 darken(@info, 6%);
+
+@primary-active-text-color: @background;
+@primary-active-background-color: darken(@accent, 8%);
+@primary-active-gradient: none;
+@primary-active-border-color: darken(@accent, 17%);
+@primary-active-shadow: inset 0 0 8px 0 lighten(@accent, 13%);
+
+@primary-disabled-text-color: @background;
+@primary-disabled-background-color: lighten(@accent, 16%);
+@primary-disabled-border-color: lighten(@accent, 14%);
+@primary-disabled-gradient: none;
+
+@button-hover-text-color: @normal-text-color;
+@button-hover-background-color: @base;
+@button-hover-border-color: darken(@base, 24%);
+
+@button-active-background: @base;
+@button-active-border-color: @accent;
+
+@button-focused-border-color: lighten(@accent, 13%);
+@button-focused-shadow: 0 0 7px 0 lighten(@accent, 13%);
+@button-focused-active-shadow: inset 0 0 5px 3px darken(@base, 9%);

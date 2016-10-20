@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>simpe page</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" href="../../dist/css/default.css">
+    <style>
+        .k-tree-indent {
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+        }
+
+        .k-tree-switcher,
+        .k-tree-switcher-noop {
+            display: inline-block;
+            width: 20px;
+            height: auto;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .k-tree-switcher:before {
+            content: "+";
+        }
+
+        .k-tree-subtree{
+            display:none;
+        }
+        .k-tree-item.open > .k-tree-subtree{
+            display:block;
+        }
+
+        .k-tree-item.open > .k-tree-inner > .k-tree-switcher:before {
+            content: "-";
+        }
+    </style>
+</head>
+
+<body>
+<div id="tree" data-role="tree" data-bind="source: tree" data-text-field="title" data-selectable="true"
+     data-auto-bind="false"></div>
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../dist/js/veronica-ui.js"></script>
+<script>
+
+    var datasource = new kendo.data.HierarchicalDataSource({
+        data: [
+            {
+                title: "SciFi",
+                movies: [
+                    {
+                        title: "Star Wars: A New Hope", year: 1977, cast: [
+                        {
+                            title: "Mark Hamill", character: "Luke Skywalker", cast: [
+                            {title: "Mark Hamill", character: "Luke Skywalker"},
+                            {title: "Harrison Ford", character: "Han Solo"},
+                            {title: "Carrie Fisher", character: "Princess Leia Organa"},
+                            {title: "Billy Dee Williams", character: "Lando Calrissian"}
+                        ]
+                        },
+                        {title: "Harrison Ford", character: "Han Solo"},
+                        {title: "Carrie Fisher", character: "Princess Leia Organa"}
+                    ]
+                    },
+                    {
+                        title: "Star Wars: The Empire Strikes Back", year: 1980, cast: [
+                        {title: "Mark Hamill", character: "Luke Skywalker"},
+                        {title: "Harrison Ford", character: "Han Solo"},
+                        {title: "Carrie Fisher", character: "Princess Leia Organa"},
+                        {title: "Billy Dee Williams", character: "Lando Calrissian"}
+                    ]
+                    }
+                ]
+            },
+            {
+                title: "SciFi",
+                movies: [
+                    {
+                        title: "Star Wars: A New Hope", year: 1977, cast: [
+                        {title: "Mark Hamill", character: "Luke Skywalker"},
+                        {title: "Harrison Ford", character: "Han Solo"},
+                        {title: "Carrie Fisher", character: "Princess Leia Organa"}
+                    ]
+                    },
+                    {
+                        title: "Star Wars: The Empire Strikes Back", year: 1980, cast: [
+                        {title: "Mark Hamill", character: "Luke Skywalker"},
+                        {title: "Harrison Ford", character: "Han Solo"},
+                        {title: "Carrie Fisher", character: "Princess Leia Organa"},
+                        {title: "Billy Dee Williams", character: "Lando Calrissian"}
+                    ]
+                    }
+                ]
+            }
+        ],
+        schema: {
+            model: {
+                children: { // define options for second level
+                    schema: {
+                        data: "movies",
+                        model: {
+                            children: "cast" // third level is defined by the field "cast"
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    kendo.bind($('body'), {
+        tree: datasource
+    })
+
+    var tree = kendo.widgetInstance($('#tree'))
+    tree.bind('change', function (e) {
+        console.log(e);
+    });
+    datasource.read();
+</script>
+</body>
+
+</html>

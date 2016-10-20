@@ -1,5 +1,4 @@
-define([
-], function () {
+define([], function () {
     return function (base, app) {
         var _ = app.core._;
         var $ = app.core.$;
@@ -13,7 +12,7 @@ define([
                     return app.uiKit.get(this.options.uiKit);
                 },
                 /**
-                 * 根据元素获取该元素上创建的界面控件的实例
+                 * 鏍规嵁鍏冪礌鑾峰彇璇ュ厓绱犱笂鍒涘缓鐨勭晫闈㈡帶浠剁殑瀹炰緥
                  * @type {function}
                  * @returns {object}
                  * @example
@@ -22,13 +21,37 @@ define([
                  *   }
                  */
                 instance: function (el) {
-                    return this._uiKit().getInstance(this, this.$(el));
+                    var $el = el instanceof $ ? el : (el.tagName ? $(el) : this.$(el));
+                    return this._uiKit().getInstance(this, $el);
+                },
+                $: function (selector) {
+                    var r = this.$el.find(selector);
+                    this._outerEl.each(function (i, el) {
+                        var isThis = $(el).is(selector);
+                        var r1;
+                        if (isThis) {
+                            r1 = $(el);
+                        } else {
+                            r1 = $(el).find(selector);
+                        }
+                        if (r1.length !== 0) {
+                            $.merge(r, r1);
+                        }
+                    });
+
+                    return r;
                 }
             }
         });
 
         base._extendMethod('_rendered', function () {
+            this._outerEl = this.$('[data-role=window]');
             this._uiKit().init(this, this.$el);
+
+        });
+
+        base._extendMethod('_initProps', function () {
+            this._outerEl = $({});
         });
 
         base._extendMethod('_destroy', function () {

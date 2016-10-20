@@ -34,9 +34,9 @@
     var Tree = ListView.extend({
         options: {
             name: 'Tree',
-            focusSelector: '.k-tree-item',
+            focusSelector: '.k-tree-item > .k-tree-inner',
             isSubtree: false,
-            dataTextField: ''
+            dataTextField: 'text'
         },
         init: function (element, options) {
             var that = this;
@@ -47,7 +47,7 @@
             options.template = options.template || $(element).find('.tpl-template').html()
                 || this._defaultTemplate(options);
 
-            var $root = $(element).find('.' + ROOT);
+            var $root = $(element).addClass('k-tree').find('.' + ROOT);
             if ($root.length === 0) {
                 $root = $(element);
             }
@@ -69,7 +69,7 @@
                                 '<span class="k-tree-switcher-noop"></span>' +
                             '# } #' +
                             '<span class="k-tree-text">' +
-                                ' #: level() #  #: ' + options.dataTextField + ' #' +
+                                '#: ' + options.dataTextField + ' #' +
                             '</span>' +
                         '</div>' +
                         '# if(hasChildren){ #' +
@@ -127,8 +127,8 @@
                     filter: this.options.focusSelector,
                     change: function (e) {
 
-                        return false;
-                        // that.trigger(CHANGE);
+                        // return false;
+                        that.trigger(CHANGE);
                     }
                 });
 
@@ -160,8 +160,8 @@
             ListView.fn.refresh.call(this, e);
 
         },
-        select: function () {
-
+        select: function (items) {
+            return ListView.fn.select.call(this, items);
         }
     });
 

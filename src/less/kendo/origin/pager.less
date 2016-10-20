@@ -1,0 +1,79 @@
+.k-pager-wrap
+{
+    background-color: @header-background-color;
+    color: @header-text-color;
+      color: @pager-text-color;
+}
+
+.k-pager-wrap > .k-link,
+.k-pager-numbers .k-link,
+.k-pager-numbers .k-state-selected {
+  border-radius: 0;
+}
+
+
+.k-pager-wrap .k-link {
+  background: @button-background-color;
+  border-color: @secondary-border-color;
+  border-right: none;
+}
+
+.k-pager-wrap .k-pager-refresh {
+  background: @header-background-color;
+}
+
+.k-pager-wrap .k-link:hover {
+  color: @pager-hover-color;
+  border-color: @secondary-border-color;
+  background: @hover-background-color;
+}
+
+// Pager
+.k-pager-numbers .k-link,
+.k-pager-numbers .k-state-selected {
+  margin-right: 0;
+}
+
+.k-grid .k-pager-numbers,
+.k-pager-wrap > .k-link {
+  margin: 0;
+}
+
+.k-pager-wrap .k-link {
+  border-right: none;
+}
+
+.k-pager-wrap .k-link.k-pager-last {
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+.k-pager-wrap .k-pager-nav.k-pager-last {
+  border-radius: 0 4px 4px 0;
+  border-right-color: @secondary-border-color;
+}
+
+.k-rtl .k-pager-wrap .k-pager-nav.k-pager-last {
+  border-radius: 4px 0 0 4px;
+  border-right-width: 0;
+}
+
+.k-pager-nav.k-pager-first {
+  border-radius: 4px 0 0 4px;
+}
+
+.k-rtl .k-pager-nav.k-pager-first {
+  border-radius: 0 4px 4px 0;
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-right-color: @secondary-border-color;
+  margin-right: 6px;
+}
+
+.km-pane-wrapper .k-mobile-list input:not([type="checkbox"]):not([type="radio"]),
+.km-pane-wrapper .km-pane .k-mobile-list select:not([multiple]),
+.km-pane-wrapper .k-mobile-list textarea,
+.k-dropdown .k-state-focused .k-input
+{
+    color: @widget-text-color;
+}

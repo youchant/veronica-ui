@@ -1,0 +1,38 @@
+/* ImageBrowser */
+
+.k-tile
+{
+  border-color: @content-background-color;
+}
+
+.k-textbox:hover,
+.k-tiles li.k-state-hover
+{
+  border-color: @hover-border-color;
+}
+
+.k-tiles li.k-state-selected
+{
+  border-color: @selected-border-color;
+}
+
+.k-filebrowser .k-tile .k-folder,
+.k-filebrowser .k-tile .k-file
+{
+  background-image: url('@{image-folder}/imagebrowser.png');
+  background-size: auto auto;
+}
+
+/* TreeMap */
+
+.k-leaf,
+.k-leaf.k-state-hover:hover
+{
+  color: #fff;
+}
+
+.k-leaf.k-inverse,
+.k-leaf.k-inverse.k-state-hover:hover
+{
+  color: #000;
+}

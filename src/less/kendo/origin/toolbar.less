@@ -1,0 +1,19 @@
+
+.k-column-menu,
+.k-column-menu .k-item,
+.k-overflow-container .k-overflow-group {
+  border-color: @secondary-border-color;
+}
+
+.k-overflow-container .k-overflow-group {
+  box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%), 0 1px 0 lighten(@secondary-border-color, 30%);
+}
+
+.k-toolbar-first-visible.k-overflow-group,
+.k-overflow-container .k-overflow-group + .k-overflow-group {
+  box-shadow: 0 1px 0 lighten(@secondary-border-color, 30%);
+}
+
+.k-toolbar-last-visible.k-overflow-group {
+  box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
+}

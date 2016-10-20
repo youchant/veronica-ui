@@ -1,0 +1,110 @@
+.k-wf.editable .jsplumb-connector.jsplumb-hover {
+  cursor: url(../img/scissor.cur), auto;
+}
+.k-wf.editable .wf-container {
+  margin-right: 205px;
+}
+.k-wf.editable .wf-toolbox {
+  position: relative;
+  float: right;
+  width: 200px;
+  height: 100%;
+  background: #ebebeb;
+}
+.k-wf.editable .wf-node .wf-handle {
+  cursor: pointer;
+}
+.wf-container {
+  position: relative;
+  background: url(../img/wf_canvas_bg.png) repeat;
+  height: 100%;
+}
+.wf-toolbox .wf-node_type {
+  margin-top: 20px;
+  margin-left: -40px;
+  left: 50%;
+}
+.wf-node {
+  box-shadow: 0 1px 1px rgba(88, 88, 92, 0.1);
+  position: absolute;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px 0 40px;
+  font-size: 15px;
+  border: 1px solid #DADFE6;
+  background-color: #FBFBFB;
+  /*overflow: hidden;*/
+  cusor: default;
+  white-space: nowrap;
+}
+.wf-node.wf-node_type {
+  box-sizing: border-box;
+  width: 80px;
+  padding: 0 20px;
+  cursor: move;
+  text-align: center;
+}
+.wf-node.pending {
+  opacity: .6;
+}
+.wf-node.progress {
+  border-color: #EE8C0C;
+}
+.wf-node.jsplumb-draggable {
+  cursor: move;
+}
+.wf-node.jsplumb-droppable .handle {
+  cursor: pointer;
+}
+.wf-node .wf-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  bottom: 0;
+  background-color: #FFF;
+  border-right: 1px solid #DADFE6;
+  font: 700 16px/40px Arial;
+  text-align: center;
+  overflow: hidden;
+}
+.wf-node_text {
+  cursor: default;
+}
+.wf-connection_label {
+  background-color: white;
+  padding: 2px 4px;
+  font-size: 12px;
+  color: #444;
+  z-index: 21;
+  opacity: 0.8;
+}
+.wf-node-hover {
+  background-color: #FFF;
+  border-color: #D96F23;
+  color: #EE8C0C;
+}
+.wf-node-start .wf-handle,
+.wf-node-end .wf-handle {
+  text-indent: -9999px;
+}
+.wf-node-start .wf-handle {
+  background-color: #A7D85A;
+  border-color: #91CE31;
+  color: #FFF;
+}
+.wf-node-end .wf-handle {
+  background-color: #4C5054;
+  border-color: #383C41;
+  color: #FFF;
+}
+.wf-node-active {
+  background-color: #FFF;
+  border-color: #238DD9;
+  color: #3497DB;
+}
+.wf-node-active .wf-handle {
+  background-color: #238DD9;
+  border-color: #238DD9;
+  color: #FFF;
+}

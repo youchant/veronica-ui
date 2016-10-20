@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>simpe page</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="../../dist/css/default.css">
+</head>
+
+<body>
+    <div data-role="datatable" data-bind="source: data" style="height:200px;">
+        <script type="text/template" class="tpl-header">
+            <tr>
+                <th></th>
+                <th>名称</th>
+            </tr>
+        </script>
+        <script type="text/template" class="tpl-row">
+            <tr>
+                <td colspan="2">#= value #</td>
+            </tr>
+            # for(var i = 0, len = items.length; i < len; i ++){ #
+            <tr class="k-master-row">
+                <td class="k-hierarchy-cell">
+                    <i class="glyphicon glyphicon-circle-arrow-right"></i>
+                </td>
+                <td>#= items[i].name #</td>
+            </tr>
+            # } #
+        </script>
+    </div>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../dist/js/veronica-ui.js"></script>
+    <script>
+        kendo.bind('body', {
+            data: [
+                { value: 'group1', items: [{ name: 'tt1' }, { name: 'tt2' }] },
+                { value: 'group2', items: [{ name: 'tt1' }, { name: 'tt2' }] }
+            ]
+        })
+    </script>
+</body>
+
+</html>

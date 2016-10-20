@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+</head>
+<body>
+<input type="text" data-bind="value: text" />
+<script src="../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../src/assets/kendo-ui-core/kendo.ui.core.js"></script>
+<script>
+    var vm = kendo.observable({
+        text: 'zhang'
+    })
+    kendo.bind($('body'), vm)
+</script>
+</body>
+</html>

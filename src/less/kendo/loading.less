@@ -1,0 +1,33 @@
+// 加载时样式
+//
+// Markup: markups/kendoui-loading.html
+//
+// Styleguide patches.kendoui.loading
+
+.k-loading,
+.k-loading-image {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.k-loading-color {
+    filter: alpha(opacity=30);
+    opacity: .3;
+}
+
+
+
+.k-loading,
+.k-state-hover .k-loading {
+    background-image: url('@{image-path}loading.gif');
+    background-position: 50% 50%;
+}
+
+.k-loading-image {
+    background-image: url('@{image-path}loading-image.gif');
+}
+
+.k-loading-color {
+    background-color: #fff;
+}

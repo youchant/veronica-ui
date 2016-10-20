@@ -1,0 +1,247 @@
+.k-in,
+.k-item,
+.k-window-action
+{
+  border-color: transparent;
+}
+
+/* main colors */
+.k-block,
+.k-widget
+{
+  background-color: @widget-background-color;
+}
+
+.k-block,
+.k-widget,
+.k-input,
+.k-textbox,
+.k-group,
+.k-content,
+.k-header,
+.k-filter-row > th,
+.k-editable-area,
+.k-separator,
+.k-colorpicker .k-i-arrow-s,
+.k-textbox > input,
+.k-autocomplete,
+.k-dropdown-wrap,
+.k-toolbar,
+.k-group-footer td,
+.k-grid-footer,
+.k-footer-template td,
+.k-state-default,
+.k-state-default .k-select,
+.k-state-disabled,
+.k-grid-header,
+.k-grid-header-wrap,
+.k-grid-header-locked,
+.k-grid-footer-locked,
+.k-grid-content-locked,
+.k-grid td,
+.k-grid td.k-state-selected,
+.k-grid-footer-wrap,
+.k-pager-wrap,
+.k-pager-wrap .k-link,
+.k-pager-refresh,
+.k-grouping-header,
+.k-grouping-header .k-group-indicator,
+.k-panelbar > .k-item > .k-link,
+.k-panel > .k-item > .k-link,
+.k-panelbar .k-panel,
+.k-panelbar .k-content,
+.k-treemap-tile,
+.k-calendar th,
+.k-slider-track,
+.k-splitbar,
+.k-dropzone-active,
+.k-tiles,
+.k-toolbar,
+.k-tooltip,
+.k-button-group .k-tool,
+.k-upload-files
+{
+  border-color: @widget-border-color;
+}
+
+.k-group,
+.k-toolbar,
+.k-grouping-header,
+.k-pager-wrap,
+.k-group-footer td,
+.k-grid-footer,
+.k-footer-template td,
+.k-widget .k-status,
+.k-calendar th,
+.k-dropzone-hovered,
+.k-widget.k-popup
+{
+  background-color: @group-background-color;
+}
+
+.k-grouping-row td,
+td.k-group-cell,
+.k-resize-handle-inner
+{
+  background-color: @header-background-color;
+}
+
+.k-list-container
+{
+  border-color: @group-border-color;
+  background-color: @select-group-background-color;
+}
+
+.k-content,
+.k-editable-area,
+.k-panelbar > li.k-item,
+.k-panel > li.k-item,
+.k-tiles
+{
+  background-color: @content-background-color;
+}
+
+.k-alt,
+.k-separator,
+.k-resource.k-alt,
+.k-pivot-layout > tbody > tr:first-child > td:first-child
+{
+  background-color: @alt-background-color;
+}
+
+.k-pivot-rowheaders .k-alt .k-alt,
+.k-header.k-alt
+{
+  background-color: @nested-alt-background-color;
+}
+
+.k-textbox,
+.k-autocomplete.k-header,
+.k-dropdown-wrap.k-state-active,
+.k-picker-wrap.k-state-active,
+.k-numeric-wrap.k-state-active
+{
+  border-color: @widget-border-color;
+  background-color: @select-background-color;
+}
+
+.k-textbox > input,
+.k-autocomplete .k-input,
+.k-dropdown-wrap .k-input,
+.k-autocomplete.k-state-focused .k-input,
+.k-dropdown-wrap.k-state-focused .k-input,
+.k-picker-wrap.k-state-focused .k-input,
+.k-numeric-wrap.k-state-focused .k-input
+{
+  border-color: @widget-border-color;
+}
+
+input.k-textbox,
+textarea.k-textbox,
+input.k-textbox:hover,
+textarea.k-textbox:hover,
+.k-textbox > input
+{
+  background: none;
+}
+
+.k-input,
+input.k-textbox,
+textarea.k-textbox,
+input.k-textbox:hover,
+textarea.k-textbox:hover,
+.k-textbox > input,
+.k-multiselect-wrap
+{
+  background-color: @input-background-color;
+  color: @input-text-color;
+}
+
+// Bootstrap readonly input styling has more specificity than ours.
+.k-input[readonly]
+{
+  background-color: @input-background-color;
+  color: @input-text-color;
+}
+
+.k-block,
+.k-widget,
+.k-popup,
+.k-content,
+.k-toolbar,
+.k-dropdown .k-input
+{
+  color: @widget-text-color;
+}
+
+.k-inverse
+{
+  color: @inverse-text-color;
+}
+
+.k-block
+{
+  color: @header-text-color;
+}
+
+.k-link:link,
+.k-link:visited,
+.k-nav-current.k-state-hover .k-link
+{
+  color: @link-text-color;
+}
+
+.k-tabstrip-items .k-link,
+.k-panelbar > li > .k-link
+{
+  color: @widget-text-color;
+}
+
+.k-header,
+.k-treemap-title,
+.k-grid-header .k-header > .k-link
+{
+  color: @header-text-color;
+}
+
+.k-header,
+.k-grid-header,
+.k-toolbar,
+.k-dropdown-wrap,
+.k-picker-wrap,
+.k-numeric-wrap,
+.k-grouping-header,
+.k-pager-wrap,
+.k-textbox,
+.k-button,
+.k-progressbar,
+.k-draghandle,
+.k-autocomplete,
+.k-state-highlight,
+.k-tabstrip-items .k-item,
+.k-panelbar .k-tabstrip-items .k-item,
+.km-pane-wrapper > .km-pane > .km-view > .km-content
+{
+  .composite-background(@widget-gradient);
+  background-position: 50% 50%;
+  background-color: @header-background-color;
+}
+
+.k-widget.k-tooltip
+{
+  background-image: @tooltip-texture;
+}
+
+.k-block,
+.k-header,
+.k-grid-header,
+.k-toolbar,
+.k-grouping-header,
+.k-pager-wrap,
+.k-button,
+.k-draghandle,
+.k-treemap-tile,
+html .km-pane-wrapper .k-header
+{
+  background-color: @header-background-color;
+}
