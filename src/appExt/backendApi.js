@@ -80,9 +80,27 @@ define([], function () {
         app.backendApi.add('default', {
             domain: '',
             reusable: false,
-            api: {},
+            api: {
+                test: '/xx/xx get json'
+            },
             options: 'default',
-            type: 'multiple'
+            type: 'multiple',
+            groups: {
+                test: {
+                    type: 'single',
+                    reusable: true,
+                    api: ['test=>read'],
+                    options: {
+                        schema: { },
+                        transport: {
+                            read: {
+
+                            },
+                            parameterMap: function(){ }
+                        }
+                    }
+                }
+            }
         });
 
     };
