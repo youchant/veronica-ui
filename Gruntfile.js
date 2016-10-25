@@ -12,7 +12,7 @@ module.exports = function (grunt) {
             dir: './dist/js',
             paths: {
                 "jquery": "empty:",
-                "keboacy2": "../../bower_components/keboacy/dist/js/keboacy",
+                "keboacy": "../../bower_components/keboacy/dist/js/keboacy",
                 'bootstrap': '../../assets/bootstrap/js/bootstrap',
                 'kendo-ui': '../../assets/kendo-ui/kendo.ui.core',
                 'kendo-ui-messages': '../../assets/kendo-ui/kendo.messages.zh-CN',
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
                     deps: ['kendo-ui']
                 },
                 'kendo-ui-culture': {
-                    deps: ['kendo-ui', 'kendo-ui-messages']
+                    deps: ['kendo-ui-messages']
                 }
             },
             wrapShim: true,

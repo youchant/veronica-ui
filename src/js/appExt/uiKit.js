@@ -1,9 +1,11 @@
 define([
-    'keboacy2',
+    'keboacy',
+    'bootstrap',
     'kendo-ui-culture'
-], function (kk) {
+], function () {
 
     //window.kendo = kendo;
+    kendo.culture('zh-CN');
 
     return function (app) {
 

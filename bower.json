@@ -11,7 +11,7 @@
     "assets",
     "docs",
     "src",
-    "tools"
+    "build"
   ],
   "repository": {
     "type": "https",
@@ -21,7 +21,7 @@
     "jquery": "^1.11.x"
   },
   "devDependencies": {
-    "veronica": "veronica#feature/ver2",
+    "veronica": "veronica#develop",
     "keboacy": "keboacy#master",
     "lodash": "^4.16.4",
     "kendo-ui": "2015.3.1111",

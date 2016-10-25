@@ -69,6 +69,16 @@ define(function () {
                         var $form = e.sender.element;
                         var errors = $form.find('.k-invalid').length;
                         me.onValidate($form, errors, e);
+                    },
+                    messages: {
+                        "required": "该项为必填项",
+                        "pattern": "该项格式非法",
+                        "min": "{0} 应该大于或等于 {1}",
+                        "max": "{0} 应该小于或等于 {1}",
+                        "step": "{0} 非法",
+                        "email": "该项不是合法的邮件地址",
+                        "url": "该项不是合法的URL",
+                        "date": "该项不是合法的日期"
                     }
                 });
             },
