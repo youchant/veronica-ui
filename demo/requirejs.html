@@ -2,23 +2,46 @@
 <html>
 <head>
     <title>simpe page</title>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 </head>
 
 <body>
 
-    <script src="../bower_components/requirejs/require.js"></script>
-    <script>
-        require.config({
-            paths: {
-                'jquery': '../bower_components/jquery/dist/jquery',
-                'jquery-validation': '../bower_components/jquery-validation/dist/jquery.validate'
+<script src="../node_modules/requirejs/require.js"></script>
+<script>
+    require.config({
+        paths: {
+            'jquery': '../bower_components/jquery/dist/jquery',
+            'underscore': '../bower_components/lodash/dist/lodash',
+            'veronica': '../bower_components/veronica/dist/veronica',
+            'veronica-ui': '../dist/js/veronica-ui',
+            "keboacy": "../bower_components/keboacy/dist/js/keboacy",
+            'bootstrap': '../assets/bootstrap/js/bootstrap',
+            'kendo-ui': '../assets/kendo-ui/kendo.ui.core',
+            'kendo-ui-messages': '../assets/kendo-ui/kendo.messages.zh-CN',
+            'kendo-ui-culture': '../assets/kendo-ui/kendo.culture.zh-CN',
+        },
+        shim: {
+            'kendo-ui-messages': {
+                deps: ['kendo-ui']
+            },
+            'kendo-ui-culture': {
+                deps: ['kendo-ui', 'kendo-ui-messages']
+            },
+            'keboacy': {
+                deps: ['kendo-ui', 'jquery']
             }
-        });
-        require(['jquery',
-            'jquery-validation'], function (v, vv) {
-            debugger;
-        });
-    </script>
+        },
+        packages: [{
+            name: 'veronica-ui',
+            location: '../src/js',
+            main: 'veronica-ui'
+        }]
+    });
+    require(['veronica', 'veronica-ui'], function (veronica, veronicaui) {
+        var app = veronica.createApp();
+        debugger;
+    });
+</script>
 </body>
 </html>

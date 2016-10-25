@@ -1,16 +1,15 @@
 define([
-    '../../keboacy/index'
-], function (keboacy) {
+    'keboacy2',
+    'kendo-ui-culture'
+], function (kk) {
+
+    //window.kendo = kendo;
 
     return function (app) {
 
         var $ = app.core.$;
 
-        $.extend(app, keboacy);
-
         // kendo widget: widget
-
-
 
         app.uiKit.add('keboacy', {
             init: function (view, $el) {
