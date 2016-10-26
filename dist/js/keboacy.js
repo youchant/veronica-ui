@@ -1,4 +1,4 @@
-/*! keboacy - v0.1.0 - 2016-10-25 */
+/*! keboacy - v0.1.0 - 2016-10-26 */
 (function (f, define) {
     define(['jquery', 'kendo-ui'], f);
 })(function ($, kendo) {
@@ -554,12 +554,13 @@
             '<span class="wf-handle"> <i></i> #: index # </span>' +
             '<span class="wf-node_text"> #: text # </span>' +
             ' </div>',
-            contextMenu: false,  // 指定一个选择器
+            contextMenu: false,  // 指定一个选择器，暂未使用
+            /**
+             * 是否可编辑
+             */
             editable: false,
             draggable: false,
             selectable: false,
-            onNodeClick: function () {
-            },
             onConnection: function (info, wf) {
                 // 设置 connection 状态
                 var conn = info.connection;
@@ -898,12 +899,9 @@
 
             var me = this;
 
-            $container.on('click', normalStepSelector, $.proxy(options.onNodeClick, this));
-
             // 设置点击时选中
             if (options.selectable) {
                 $container.on('click', normalStepSelector, function (e) {
-                    console.log('click!!');
                     var $node = $(e.currentTarget);
                     var id = $node.attr('data-id');
 
@@ -918,6 +916,11 @@
                         }
                     });
 
+                    me.trigger('select', {
+                        id: id,
+                        target: $node,
+                        originEvent: e
+                    });
                 });
             }
         },

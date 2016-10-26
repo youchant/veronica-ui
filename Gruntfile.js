@@ -87,6 +87,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('release', ['copy','requirejs', 'clean:script']);
+    grunt.registerTask('release', ['copy','requirejs', 'clean:script', 'uglify']);
     grunt.registerTask('default', ['release']);
 };

@@ -12,7 +12,7 @@
 
 
 /**
- * @license almond 0.3.2 Copyright jQuery Foundation and other contributors.
+ * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
  * Released under MIT license, http://github.com/requirejs/almond/LICENSE
  */
 //Going sloppy to avoid 'use strict' string cost, but strict practices should
@@ -208,32 +208,39 @@ var requirejs, require, define;
         return [prefix, name];
     }
 
+    //Creates a parts array for a relName where first part is plugin ID,
+    //second part is resource ID. Assumes relName has already been normalized.
+    function makeRelParts(relName) {
+        return relName ? splitPrefix(relName) : [];
+    }
+
     /**
      * Makes a name map, normalizing the name, and using a plugin
      * for normalization if necessary. Grabs a ref to plugin
      * too, as an optimization.
      */
-    makeMap = function (name, relName) {
+    makeMap = function (name, relParts) {
         var plugin,
             parts = splitPrefix(name),
-            prefix = parts[0];
+            prefix = parts[0],
+            relResourceName = relParts[1];
 
         name = parts[1];
 
         if (prefix) {
-            prefix = normalize(prefix, relName);
+            prefix = normalize(prefix, relResourceName);
             plugin = callDep(prefix);
         }
 
         //Normalize according
         if (prefix) {
             if (plugin && plugin.normalize) {
-                name = plugin.normalize(name, makeNormalize(relName));
+                name = plugin.normalize(name, makeNormalize(relResourceName));
             } else {
-                name = normalize(name, relName);
+                name = normalize(name, relResourceName);
             }
         } else {
-            name = normalize(name, relName);
+            name = normalize(name, relResourceName);
             parts = splitPrefix(name);
             prefix = parts[0];
             name = parts[1];
@@ -280,13 +287,14 @@ var requirejs, require, define;
     };
 
     main = function (name, deps, callback, relName) {
-        var cjsModule, depName, ret, map, i,
+        var cjsModule, depName, ret, map, i, relParts,
             args = [],
             callbackType = typeof callback,
             usingExports;
 
         //Use name if no relName
         relName = relName || name;
+        relParts = makeRelParts(relName);
 
         //Call the callback to define the module, if necessary.
         if (callbackType === 'undefined' || callbackType === 'function') {
@@ -295,7 +303,7 @@ var requirejs, require, define;
             //Default to [require, exports, module] if no deps
             deps = !deps.length && callback.length ? ['require', 'exports', 'module'] : deps;
             for (i = 0; i < deps.length; i += 1) {
-                map = makeMap(deps[i], relName);
+                map = makeMap(deps[i], relParts);
                 depName = map.f;
 
                 //Fast path CommonJS standard dependencies.
@@ -351,7 +359,7 @@ var requirejs, require, define;
             //deps arg is the module name, and second arg (if passed)
             //is just the relName.
             //Normalize module name, if it contains . or ..
-            return callDep(makeMap(deps, callback).f);
+            return callDep(makeMap(deps, makeRelParts(callback)).f);
         } else if (!deps.splice) {
             //deps is a config object, not an array.
             config = deps;
@@ -53140,7 +53148,7 @@ function pad(number, digits, end) {
 return window.kendo;
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
-/*! keboacy - v0.1.0 - 2016-10-25 */
+/*! keboacy - v0.1.0 - 2016-10-26 */
 (function (f, define) {
     define('keboacy',['jquery', 'kendo-ui'], f);
 })(function ($, kendo) {
@@ -53696,12 +53704,13 @@ return window.kendo;
             '<span class="wf-handle"> <i></i> #: index # </span>' +
             '<span class="wf-node_text"> #: text # </span>' +
             ' </div>',
-            contextMenu: false,  // 指定一个选择器
+            contextMenu: false,  // 指定一个选择器，暂未使用
+            /**
+             * 是否可编辑
+             */
             editable: false,
             draggable: false,
             selectable: false,
-            onNodeClick: function () {
-            },
             onConnection: function (info, wf) {
                 // 设置 connection 状态
                 var conn = info.connection;
@@ -54040,12 +54049,9 @@ return window.kendo;
 
             var me = this;
 
-            $container.on('click', normalStepSelector, $.proxy(options.onNodeClick, this));
-
             // 设置点击时选中
             if (options.selectable) {
                 $container.on('click', normalStepSelector, function (e) {
-                    console.log('click!!');
                     var $node = $(e.currentTarget);
                     var id = $node.attr('data-id');
 
@@ -54060,6 +54066,11 @@ return window.kendo;
                         }
                     });
 
+                    me.trigger('select', {
+                        id: id,
+                        target: $node,
+                        originEvent: e
+                    });
                 });
             }
         },
@@ -58218,6 +58229,7 @@ define('appExt/storeHandler',[], function () {
         var extend = app.core.$.extend;
         var map = app.core.$.map;
         var _ = app.core._;
+        var whenSingleResult = app.core.whenSingleResult;
 
         function StoreHandler(stores, view) {
             this._pool = stores;

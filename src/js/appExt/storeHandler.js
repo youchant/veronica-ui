@@ -4,6 +4,7 @@ define([], function () {
         var extend = app.core.$.extend;
         var map = app.core.$.map;
         var _ = app.core._;
+        var whenSingleResult = app.core.whenSingleResult;
 
         function StoreHandler(stores, view) {
             this._pool = stores;
