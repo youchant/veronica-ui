@@ -80,7 +80,10 @@
                 api: ['detail=>read', 'update'],
                 options: {
                     schema: {
-                        data: 'data'
+                        data: 'data',
+                        parse: function(e){
+                            console.log(e)
+                        }
                     }
                 }
             }
